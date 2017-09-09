@@ -9,13 +9,12 @@ import CourseInfo from './Course/CourseInfo';
 
 const MyNavigator = () => (
   <Router>
-    <Scene key="root" headerMode="none">
-      <Scene key="home" component={Home} />
-        <Scene key="courseInfo" component={CourseInfo} />
-        <Scene key="tracking" component={Tracking} />
-    </Scene>
+      <Scene key="root" headerMode="none">
+          <Scene key="home" component={Home} />
+          <Scene key="courseInfo" component={CourseInfo} />
+          <Scene key="tracking" component={Tracking} />
+      </Scene>
   </Router>
-)
+);
 
-//export default SimpleStack;
 export default MyNavigator;
