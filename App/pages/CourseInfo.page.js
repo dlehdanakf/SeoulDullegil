@@ -1,7 +1,7 @@
 import React, { Component } from 'React'
 import {
     Animated, Image, ScrollView,
-    StyleSheet, Text, View,
+    StyleSheet, Text, View, TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-native-nav'
@@ -23,18 +23,6 @@ export default class CourseInfo extends React.Component{
         this.state = {
             scrollY: new Animated.Value(0),
         };
-    }
-    _renderScrollViewContent() {
-        const data = Array.from({length: 30});
-        return (
-            <View style={styles.scrollViewContent}>
-                {data.map((_, i) =>
-                    <View key={i} style={styles.row}>
-                        <Text>{i}</Text>
-                    </View>
-                )}
-            </View>
-        );
     }
     render() {
         const actionBarOpacity = this.state.scrollY.interpolate({
@@ -83,13 +71,113 @@ export default class CourseInfo extends React.Component{
                 </NavBar>
                 <View style={styles.fill}>
                     <ScrollView
-                        style={styles.fill}
+                        style={[styles.fill, {backgroundColor: '#FFF'}]}
                         scrollEventThrottle={16}
-                        onScroll={Animated.event(
-                            [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}]
-                        )}
+                        onScroll={Animated.event([{nativeEvent: {contentOffset: {y: this.state.scrollY}}}])}
                     >
-                        {this._renderScrollViewContent()}
+                        <View style={styles.scrollViewContent}>
+                            <View style={contentStyles.section}>
+                                <Text style={contentStyles.sectionTitle}>코스정보</Text>
+                                <Text style={contentStyles.infoText}>서울 둘레길의 1코스로서 수락산과 불암산을 통과하는 노선이다. 서울의 대표적인 수락산과 불암산을 트래킹하며 숙련된 트래킹기술을 요하지는 않도록 정상을 통과하는 것이 아닌 불암산을 둘러 통과하는 노선으로 대체적으로 완만하다. 이 코스는 수락산과 함께 연계되어 태릉까지 이어지며 노선주변으로 수락산역, 당고개역, 상계역, 화랑대역 등이 인접한다.</Text>
+                            </View>
+                            <View style={contentStyles.section}>
+                                <Text style={contentStyles.sectionTitle}>코스안내도</Text>
+                            </View>
+                            <View style={contentStyles.sectionRoad}>
+                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
+                                    <View style={contentStyles.roadItemWrap}>
+                                        <View style={contentStyles.roadItemIconWrap}>
+                                            <View style={{flex: 1}} />
+                                            <View style={contentStyles.roadItemLine}>
+                                                <View style={{flex: 1, backgroundColor: 'transparent'}} />
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                            </View>
+                                            <View style={contentStyles.roadItemIcon}>
+                                                <Icon name="expand-more" size={12} color="#888" />
+                                            </View>
+                                            <View style={{width: 20}} />
+                                        </View>
+                                        <View style={contentStyles.roadItemInfoWrap}>
+                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>태릉</Text>
+                                        </View>
+                                    </View>
+                                </TouchableHighlight>
+                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
+                                    <View style={contentStyles.roadItemWrap}>
+                                        <View style={contentStyles.roadItemIconWrap}>
+                                            <View style={{flex: 1}} />
+                                            <View style={contentStyles.roadItemLine}>
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                            </View>
+                                            <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: '#4D8000'}]}>
+                                                <Icon name="directions-subway" size={20} color="#4D8000" />
+                                            </View>
+                                            <View style={{width: 20}} />
+                                        </View>
+                                        <View style={contentStyles.roadItemInfoWrap}>
+                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>도봉산역</Text>
+                                            <Text style={{fontSize: 12, color: '#999'}}>지하철 7호선 도봉산역 2번출구</Text>
+                                        </View>
+                                    </View>
+                                </TouchableHighlight>
+                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
+                                    <View style={contentStyles.roadItemWrap}>
+                                        <View style={contentStyles.roadItemIconWrap}>
+                                            <View style={{flex: 1}} />
+                                            <View style={contentStyles.roadItemLine}>
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                            </View>
+                                            <View style={contentStyles.roadItemIcon}>
+                                                <Icon name="expand-more" size={12} color="#888" />
+                                            </View>
+                                            <View style={{width: 20}} />
+                                        </View>
+                                        <View style={contentStyles.roadItemInfoWrap}>
+                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>넓쩍바위</Text>
+                                        </View>
+                                    </View>
+                                </TouchableHighlight>
+                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
+                                    <View style={contentStyles.roadItemWrap}>
+                                        <View style={contentStyles.roadItemIconWrap}>
+                                            <View style={{flex: 1}} />
+                                            <View style={contentStyles.roadItemLine}>
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                            </View>
+                                            <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: '#f7941f'}]}>
+                                                <Icon name="nature" size={20} color="#f7941f" />
+                                            </View>
+                                            <View style={{width: 20}} />
+                                        </View>
+                                        <View style={contentStyles.roadItemInfoWrap}>
+                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>창포원.관리사무소 앞</Text>
+                                            <Text style={{fontSize: 12, color: '#999'}}>스탬프 획득지점</Text>
+                                        </View>
+                                    </View>
+                                </TouchableHighlight>
+                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
+                                    <View style={contentStyles.roadItemWrap}>
+                                        <View style={contentStyles.roadItemIconWrap}>
+                                            <View style={{flex: 1}} />
+                                            <View style={contentStyles.roadItemLine}>
+                                                <View style={{flex: 1, backgroundColor: '#888'}} />
+                                                <View style={{flex: 1, backgroundColor: 'transparent'}} />
+                                            </View>
+                                            <View style={contentStyles.roadItemIcon}>
+                                                <Icon name="expand-more" size={12} color="#888" />
+                                            </View>
+                                            <View style={{width: 20}} />
+                                        </View>
+                                        <View style={contentStyles.roadItemInfoWrap}>
+                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>학도암</Text>
+                                        </View>
+                                    </View>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
                     </ScrollView>
                     <Animated.View style={[headerStyles.container, {height: headerHeight}]}>
                         <Animated.View style={[headerStyles.content, {opacity: headerOpacity}]}>
@@ -119,15 +207,9 @@ const styles = StyleSheet.create({
     fill: {
         flex: 1,
     },
-    row: {
-        height: 40,
-        margin: 16,
-        backgroundColor: '#D3D3D3',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     scrollViewContent: {
-        paddingTop: HEADER_MAX_HEIGHT,
+        paddingTop: HEADER_MAX_HEIGHT + 7,
+        paddingBottom: 7,
     },
     actionBarButtons: {
         flexDirection: 'row',
@@ -180,5 +262,80 @@ const headerStyles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 6,
         borderRadius: 28,
+    },
+});
+const contentStyles = StyleSheet.create({
+    section: {
+        paddingVertical: 7,
+        paddingHorizontal: 14,
+    },
+    sectionRoad: {
+        backgroundColor: '#F9F9F9',
+        borderTopWidth: 1,
+        borderTopColor: '#E6E6E6',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E6E6E6',
+    },
+    sectionTitle: {
+        fontSize: 16,
+        color: '#999',
+        marginBottom: 2,
+    },
+    infoText: {
+        fontSize: 14,
+        lineHeight: 23,
+        color: '#444',
+    },
+    roadItemWrap: {
+        flexDirection: 'row',
+    },
+    roadItemIconWrap: {
+        width: 60,
+        height: 60,
+        flexDirection: 'row',
+    },
+    roadItemIcon: {
+        width: 16,
+        height: 16,
+        borderWidth: 1,
+        borderColor: '#888',
+        borderRadius: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+        position: 'absolute',
+        right: 14,
+        top: 22
+    },
+    bigIcon: {
+        width: 28,
+        height: 28,
+        borderWidth: 2,
+        top: 16,
+        right: 8
+    },
+    roadItemLine: {
+        width: 3,
+    },
+    roadItemDefaultIcon: {
+        width: 16,
+        height: 16,
+        borderWidth: 1,
+        borderColor: '#888',
+        borderRadius: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+        position: 'absolute',
+        right: 14,
+        top: 32
+    },
+    roadItemInfoWrap: {
+        flex: 1,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#E1E1E1',
+        marginRight: 14,
+        paddingLeft: 7,
+        justifyContent: 'center',
     },
 });
