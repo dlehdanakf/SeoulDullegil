@@ -77,11 +77,45 @@ export default class CourseInfo extends React.Component{
                     >
                         <View style={styles.scrollViewContent}>
                             <View style={contentStyles.section}>
-                                <Text style={contentStyles.sectionTitle}>코스정보</Text>
+                                <Text style={contentStyles.sectionTitle}>소개</Text>
                                 <Text style={contentStyles.infoText}>서울 둘레길의 1코스로서 수락산과 불암산을 통과하는 노선이다. 서울의 대표적인 수락산과 불암산을 트래킹하며 숙련된 트래킹기술을 요하지는 않도록 정상을 통과하는 것이 아닌 불암산을 둘러 통과하는 노선으로 대체적으로 완만하다. 이 코스는 수락산과 함께 연계되어 태릉까지 이어지며 노선주변으로 수락산역, 당고개역, 상계역, 화랑대역 등이 인접한다.</Text>
                             </View>
                             <View style={contentStyles.section}>
-                                <Text style={contentStyles.sectionTitle}>코스안내도</Text>
+                                <Text style={contentStyles.sectionTitle}>스탬프</Text>
+                            </View>
+                            <View style={[contentStyles.sectionRoad, {marginBottom: 10}]}>
+                                <ScrollView
+                                    contentContainerStyle={{padding: 14, paddingRight: 0, flexDirection: 'row'}}
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                >
+                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 4, marginRight: 14, padding: 14}}>
+                                        <View style={{width: 111, height: 111, borderColor: '#D1D1D1', borderWidth: 1, borderRadius: 111, borderStyle: 'dashed'}}>
+                                            <Image
+                                                style={{width: 110, height: 110, tintColor:'#D1D1D1'}}
+                                                source={require('./assets/stamps/stamp_test.png')}
+                                            />
+                                        </View>
+                                        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+                                            <Text style={{fontSize: 13, color: '#BBB'}}>미획득</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 4, marginRight: 14, padding: 14}}>
+                                        <View style={{width: 111, height: 111, borderColor: '#f9931f', borderWidth: 1, borderRadius: 111, borderStyle: 'solid'}}>
+                                            <Image
+                                                style={{width: 110, height: 110, tintColor:'#f9931f'}}
+                                                source={require('./assets/stamps/stamp_test.png')}
+                                            />
+                                        </View>
+                                        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+                                            <Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 4, marginRight: 14,}}/>
+                                </ScrollView>
+                            </View>
+                            <View style={contentStyles.section}>
+                                <Text style={contentStyles.sectionTitle}>코스정보</Text>
                             </View>
                             <View style={contentStyles.sectionRoad}>
                                 <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
