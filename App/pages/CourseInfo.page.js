@@ -54,7 +54,7 @@ export default class CourseInfo extends React.Component{
                     </View>
                     <Animated.View style={{opacity: actionBarOpacity}}>
                         <NavGroup>
-                            <NavButton onPress={() => {}}>
+                            <NavButton onPress={() => {alert('AAA')}}>
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="map" size={24} color="#FFF" style={{marginRight: 4,}} />
                                     <Text style={{color: '#FFF', fontSize: 13}}>지도</Text>
@@ -83,16 +83,16 @@ export default class CourseInfo extends React.Component{
                             <View style={contentStyles.section}>
                                 <Text style={contentStyles.sectionTitle}>스탬프</Text>
                             </View>
-                            <View style={[contentStyles.sectionRoad, {marginBottom: 10}]}>
+                            <View style={{marginTop: -14}}>
                                 <ScrollView
                                     contentContainerStyle={{padding: 14, paddingRight: 0, flexDirection: 'row'}}
                                     horizontal={true}
                                     showsHorizontalScrollIndicator={false}
                                 >
-                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 4, marginRight: 14, padding: 14}}>
-                                        <View style={{width: 111, height: 111, borderColor: '#D1D1D1', borderWidth: 1, borderRadius: 111, borderStyle: 'dashed'}}>
+                                    <View style={contentStyles.stampItemWrap}>
+                                        <View style={contentStyles.stampIconWrap}>
                                             <Image
-                                                style={{width: 110, height: 110, tintColor:'#D1D1D1'}}
+                                                style={contentStyles.stampIcon}
                                                 source={require('./assets/stamps/stamp_test.png')}
                                             />
                                         </View>
@@ -100,10 +100,10 @@ export default class CourseInfo extends React.Component{
                                             <Text style={{fontSize: 13, color: '#BBB'}}>미획득</Text>
                                         </View>
                                     </View>
-                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 4, marginRight: 14, padding: 14}}>
-                                        <View style={{width: 111, height: 111, borderColor: '#f9931f', borderWidth: 1, borderRadius: 111, borderStyle: 'solid'}}>
+                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}}>
+                                        <View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>
                                             <Image
-                                                style={{width: 110, height: 110, tintColor:'#f9931f'}}
+                                                style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}
                                                 source={require('./assets/stamps/stamp_test.png')}
                                             />
                                         </View>
@@ -111,8 +111,40 @@ export default class CourseInfo extends React.Component{
                                             <Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>
                                         </View>
                                     </View>
-                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#EFEFEF', borderRadius: 4, marginRight: 14,}}/>
+                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14,}}/>
                                 </ScrollView>
+                            </View>
+                            <View style={contentStyles.section}>
+                                <Text style={contentStyles.sectionTitle}>교통편</Text>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>출발지</Text>
+                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                        <Text style={{borderColor: '#00498B', color: '#00498B', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>1</Text>
+                                        <Text style={{borderColor: '#4D8000', color: '#4D8000', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>7</Text>
+                                        <Text style={{marginLeft: 4, color: '#444'}}>도봉산역 2번 출입구</Text>
+                                    </View>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>진입로 1</Text>
+                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                        <Text style={{borderColor: '#4D8000', color: '#4D8000', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>7</Text>
+                                        <Text style={{marginLeft: 4, color: '#444'}}>수락산역 3번 출입구</Text>
+                                    </View>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>진입로 2</Text>
+                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                        <Text style={{borderColor: '#00A2D1', color: '#00A2D1', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>4</Text>
+                                        <Text style={{marginLeft: 4, color: '#444'}}>당고개역 4번 출입구</Text>
+                                    </View>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>도착지</Text>
+                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                        <Text style={{borderColor: '#CC660D', color: '#CC660D', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>6</Text>
+                                        <Text style={{marginLeft: 4, color: '#444'}}>화랑대역 3번 출입구</Text>
+                                    </View>
+                                </View>
                             </View>
                             <View style={contentStyles.section}>
                                 <Text style={contentStyles.sectionTitle}>코스정보</Text>
@@ -243,7 +275,6 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
         paddingTop: HEADER_MAX_HEIGHT + 7,
-        paddingBottom: 7,
     },
     actionBarButtons: {
         flexDirection: 'row',
@@ -307,8 +338,6 @@ const contentStyles = StyleSheet.create({
         backgroundColor: '#F9F9F9',
         borderTopWidth: 1,
         borderTopColor: '#E6E6E6',
-        borderBottomWidth: 1,
-        borderBottomColor: '#E6E6E6',
     },
     sectionTitle: {
         fontSize: 16,
@@ -319,6 +348,29 @@ const contentStyles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 23,
         color: '#444',
+    },
+    stampItemWrap: {
+        width: 140,
+        height: 170,
+        backgroundColor: '#FFF',
+        borderWidth: 1,
+        borderColor: '#E3E3E3',
+        borderRadius: 4,
+        marginRight: 14,
+        padding: 14
+    },
+    stampIconWrap: {
+        width: 111,
+        height: 111,
+        borderColor: '#D1D1D1',
+        borderWidth: 1,
+        borderRadius: 111,
+        borderStyle: 'dashed'
+    },
+    stampIcon: {
+        width: 110,
+        height: 110,
+        tintColor:'#D1D1D1'
     },
     roadItemWrap: {
         flexDirection: 'row',
