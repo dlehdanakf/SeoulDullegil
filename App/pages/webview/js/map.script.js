@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(){
     let polyline = null;
+
+
+    let coursePath = [];
     let myLocationMarker = null;
 
     const map = new naver.maps.Map('map', {
@@ -7,7 +10,9 @@ document.addEventListener("DOMContentLoaded", function(){
         zoom: 8
     });
 
-    window.RNMessagesChannel.on('setMyLocation', e => {
+    window.RNMessagesChannel.on('setMyLocationPin', e => {
+        if(myLocationMarker !== null) myLocationMarker.setMap(null);
+
         myLocationMarker = new naver.maps.Marker({
             position: new naver.maps.LatLng(e.y, e.x),
             map: map,
@@ -23,24 +28,29 @@ document.addEventListener("DOMContentLoaded", function(){
         );
     });
     window.RNMessagesChannel.on('setMapPath', e => {
-        if(polyline !== null) polyline.setMap(null);
-
-        let linePath = [];
-        e.map((v, i)=>{
-            linePath.push(new naver.maps.LatLng(v[1], v[0]));
+        coursePath.map((v, i)=>{
+            v.setMap(null);
         });
 
-        polyline = new naver.maps.Polyline({
-            map: map,
-            path: linePath,
-            strokeColor: '#037fff',
-            strokeOpacity: 0.9,
-            strokeWeight: 6
+        e.map((v, i)=>{
+            let path = [];
+            v.map((val, idx)=>{
+                path.push(new naver.maps.LatLng(val[1], val[0]));
+            });
+
+            coursePath.push(new naver.maps.Polyline({
+                map: map,
+                path: path,
+                strokeColor: '#037fff',
+                strokeOpacity: 0.9,
+                strokeWeight: 6
+            }));
         });
     });
     window.RNMessagesChannel.on('removeMapPath', () => {
         polyline.setMap(null);
     });
+
 
     window.RNMessagesChannel.on('center', ()=>{
         alert(map.getCenter().toString());
