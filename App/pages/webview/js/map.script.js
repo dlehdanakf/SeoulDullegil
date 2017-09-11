@@ -22,12 +22,12 @@ document.addEventListener("DOMContentLoaded", function(){
             },
         });
     });
-    window.RNMessagesChannel.on('setMapCenter', e => {
+    window.RNMessagesChannel.on('moveMapCenter', e => {
         map.setCenter(
             new naver.maps.LatLng(e.y, e.x)
         );
     });
-    window.RNMessagesChannel.on('setMapPath', e => {
+    window.RNMessagesChannel.on('setCoursePath', e => {
         coursePath.map((v, i)=>{
             v.setMap(null);
         });
@@ -47,10 +47,19 @@ document.addEventListener("DOMContentLoaded", function(){
             }));
         });
     });
-    window.RNMessagesChannel.on('removeMapPath', () => {
-        polyline.setMap(null);
+    window.RNMessagesChannel.on('removeCoursePath', () => {
+        coursePath.map((v, i)=>{
+            v.setMap(null);
+        });
     });
-
+    window.RNMessagesChannel.on('setCourseEnterancePath', ()=>{});
+    window.RNMessagesChannel.on('removeCourseEnterancePath', ()=>{});
+    window.RNMessagesChannel.on('setCourseEnterancePin', ()=>{});
+    window.RNMessagesChannel.on('removeCourseEnterancePin', ()=>{});
+    window.RNMessagesChannel.on('setCourseMajorPin', ()=>{});
+    window.RNMessagesChannel.on('removeCourseMajorPin', ()=>{});
+    window.RNMessagesChannel.on('setCourseSafetyPin', ()=>{});
+    window.RNMessagesChannel.on('setCourseSafetyPin', ()=>{});
 
     window.RNMessagesChannel.on('center', ()=>{
         alert(map.getCenter().toString());

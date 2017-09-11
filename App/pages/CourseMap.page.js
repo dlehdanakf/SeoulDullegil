@@ -4501,7 +4501,7 @@ export default class CourseMap extends React.Component {
     }
 
     onWebViewLoaded(){
-        this.webview.emit('setMapCenter', {
+        this.webview.emit('moveMapCenter', {
             x: 127.0677877,
             y: 37.6560945,
         });
