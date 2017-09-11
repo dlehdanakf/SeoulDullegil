@@ -3288,12 +3288,23 @@ export default class CourseMap extends React.Component {
             ]];
 
         this.onWebViewLoaded = this.onWebViewLoaded.bind(this);
+        this.getMapCenter = this.getMapCenter.bind(this);
+    }
+
+    getMapCenter(){
+        this.webview.emit('center');
     }
 
     onWebViewLoaded(){
-        this.webview.emit('setMapCenter', {
-            x: 127.047269,
-            y: 37.689475,
+        // this.webview.emit('setMapCenter', {
+        //     x: 127.0677877,
+        //     y: 37.6560945,
+        // });
+        // this.webview.emit('setMapPath', this.pathData);
+
+        this.webview.emit('setMyLocation', {
+            x: 126.978399,
+            y: 37.566621
         });
     }
     render(){
@@ -3301,7 +3312,7 @@ export default class CourseMap extends React.Component {
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
-                        <NavButton style={{marginHorizontal: 14}} onPress={this.onWebViewLoaded}>
+                        <NavButton style={{marginHorizontal: 14}} onPress={this.getMapCenter}>
                             <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
@@ -3313,6 +3324,7 @@ export default class CourseMap extends React.Component {
                     <WebView
                         ref={ webview => { this.webview = webview; }}
                         source={MapSource}
+                        onLoadEnd={this.onWebViewLoaded}
                     />
                 </View>
                 <View style={{height: 90, borderTopWidth: 1, borderTopColor: '#D1D1D1', padding: 20, justifyContent: 'center'}}>
