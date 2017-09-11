@@ -93,7 +93,7 @@ export default class CourseInfo extends React.Component{
                                         <View style={contentStyles.stampIconWrap}>
                                             <Image
                                                 style={contentStyles.stampIcon}
-                                                source={require('./assets/stamps/stamp_test.png')}
+                                                source={require('./assets/stamps/stamp01.png')}
                                             />
                                         </View>
                                         <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -104,7 +104,7 @@ export default class CourseInfo extends React.Component{
                                         <View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>
                                             <Image
                                                 style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}
-                                                source={require('./assets/stamps/stamp_test.png')}
+                                                source={require('./assets/stamps/stamp01.png')}
                                             />
                                         </View>
                                         <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
