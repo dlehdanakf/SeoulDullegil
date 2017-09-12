@@ -9,3 +9,19 @@ html, body { margin: 0; padding: 0; height: 100%; }
 .myLocPin { position: relative; display: inline-block; width: 14px; height: 14px; background-color: #f23a44; border: 1px solid #a12836; border-radius: 14px; box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.45); }
 .myLocPin::before { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 1; border-radius: 14px; box-shadow: inset 0px 2px 1px 1px rgba(255,255,255,0.1); }
 .myLocPin::after { content: ''; display: block; position: absolute; top: -1px; left: -1px; bottom: -1px; right: -1px; z-index: 2; border-radius: 16px; animation-name: blinker; animation-iteration-count: infinite; animation-timing-function: ease; animation-duration: 1s; }
+
+.pin { display: block; width: 24px; height: 24px; background-color: #eb8b2e; border-radius: 24px; position: relative; box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2); z-index: 1; }
+.pin::before { content: ''; display: block; position: absolute; width: 0; height: 0; border: 11px solid transparent; border-top-width: 20px; border-top-color: #eb8b2e; top: 17px; left: 1px; z-index: 1; }
+.pin::after { content: 'P'; display: block; width: 16px; height: 15px; position: absolute; background-color: #FFF; border-radius: 16px; z-index: 2; top: 4px; left: 4px; text-align: center; font-size: 12px; font-weight: bold; white-space: nowrap; padding-top: 1px; color: #eb8b2e; }
+
+.pin.major { background-color: #3d70f8; }
+.pin.major::before { border-top-color: #3d70f8; }
+.pin.major::after { content: ' '; color: #3d70f8; font-family: xeicon; padding-top: 3px; height: 13px; }
+
+.pin.stamp { background-color: #eb8b2e; }
+.pin.stamp::before { border-top-color: #eb8b2e; }
+.pin.stamp::after { content: ' '; color: #eb8b2e; font-family: xeicon; padding-top: 3px; height: 13px; }
+
+.pin.safety { background-color: #fd556e; }
+.pin.safety::before { border-top-color: #fd556e; }
+.pin.safety::after { content: '안'; color: #fd556e; }

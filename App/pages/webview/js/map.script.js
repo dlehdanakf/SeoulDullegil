@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function(){
-    let polyline = null;
-
-
-    let coursePath = [];
-    let myLocationMarker = null;
+    const HOME_PATH = window.HOME_PATH || '.';
+    let coursePath = [],
+        enterancePath = [],
+        enterancePin = [],
+        majorPin = [],
+        safetyPin = [],
+        myLocationMarker = null;
 
     const map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(37.566621, 126.978399),
@@ -56,12 +58,28 @@ document.addEventListener("DOMContentLoaded", function(){
     window.RNMessagesChannel.on('removeCourseEnterancePath', ()=>{});
     window.RNMessagesChannel.on('setCourseEnterancePin', ()=>{});
     window.RNMessagesChannel.on('removeCourseEnterancePin', ()=>{});
-    window.RNMessagesChannel.on('setCourseMajorPin', ()=>{});
+    window.RNMessagesChannel.on('setCourseMajorPin', (e)=>{
+        majorPin.map((v, i) => { v.setMap(null) });
+
+        e.map((v, i) => {
+            majorPin.push(new naver.maps.Marker({
+                position: new naver.maps.LatLng(v.COT_COORD_Y, v.COT_COORD_X),
+                icon: {
+                    content: "<span class='pin stamp'></span>",
+                    size: new naver.maps.Size(24, 37),
+                    anchor: new naver.maps.Point(12, 37)
+                },
+                map: map,
+            }))
+        });
+    });
     window.RNMessagesChannel.on('removeCourseMajorPin', ()=>{});
     window.RNMessagesChannel.on('setCourseSafetyPin', ()=>{});
     window.RNMessagesChannel.on('setCourseSafetyPin', ()=>{});
 
     window.RNMessagesChannel.on('center', ()=>{
-        alert(map.getCenter().toString());
+        alert(HOME_PATH);
+
+        // alert(map.getCenter().toString());
     });
 });
