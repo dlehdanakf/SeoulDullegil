@@ -2,7 +2,7 @@ import React, { Component } from 'React'
 import {
     Animated, Image, ScrollView,
     StyleSheet, Text, View, TouchableHighlight,
-    Platform
+    Platform, TouchableNativeFeedback, StatusBar
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-native-nav'
@@ -16,10 +16,11 @@ import {Constants, Location, Permissions, Notifications} from 'expo';
 import Geolib from 'geolib';
 
 import {MessageBar, MessageBarManager} from 'react-native-message-bar';
+import Timer from 'react-native-timer';
 
-const navBarStyles = navBarStylesModule("#564339");
+const navBarStyles = navBarStylesModule("#3ABF00");
 
-export default class CourseMap extends React.Component {
+export default class Tracking extends React.Component {
     constructor(props){
       super(props);
 
@@ -5154,6 +5155,7 @@ export default class CourseMap extends React.Component {
 
     componentWillUnMount(){
       MessageBarManager.unregisterMessageBar();
+      clearTimeout(this);
     }
 
     componentDidMount(){
@@ -5176,10 +5178,7 @@ export default class CourseMap extends React.Component {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
         }});
-        console.log('yo: '+location.coords.latitude + ', ' + location.coords.longitude);
         this.webview.emit('setMyLocationPin', {y: location.coords.latitude, x: location.coords.longitude});
-
-        console.log('searchStamp: ' + this.state.isStartTracking);
         if(this.state.isStartTracking){
           this.searchStamp(this.majorPinData);
         }
@@ -5191,7 +5190,6 @@ export default class CourseMap extends React.Component {
       let point;
 
       for(var pin in this.majorPinData){
-        console.log('latitude:'+ this.majorPinData[pin].COT_COORD_Y + ' longitude:' + this.majorPinData[pin].COT_COORD_X);
         pointDist = Geolib.getDistance(
           {latitude: this.state.location.latitude, longitude: this.state.location.longitude},
           {latitude: this.majorPinData[pin].COT_COORD_Y, longitude: this.majorPinData[pin].COT_COORD_X}
@@ -5205,15 +5203,16 @@ export default class CourseMap extends React.Component {
     }
 
     showAlertStampPoint(point) {
-      console.log('point : ' + point.message);
-      // Simple show the alert with the manager
+      var msg = point.message;
       MessageBarManager.showAlert({
         title: "지점 발견",
-        message: '학도암',
+        message: msg,
         avatar: "https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg",
         alertType: 'info',
-        stylesheetInfo: {backgroundColor: '#f9931f', strokeColor: '#006acd', viewTopOffset: 100}
+        stylesheetInfo: {backgroundColor: '#f9931f', strokeColor: '#006acd', viewTopOffset: 100},
       });
+      StatusBar.setHidden(true);
+      Timer.setTimeout(this, 'showStatusBar',() => {StatusBar.setHidden(false);}, 4000);
     }
 
     startTracking() {
@@ -5261,7 +5260,7 @@ export default class CourseMap extends React.Component {
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
                         <NavButton style={{marginHorizontal: 14}} onPress={this.getMapCenter}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
+                            <Icon name="arrow-back" onPress={Actions.pop} size={24} style={navBarStyles.backIcon} />
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             수락·불암산코스
@@ -5275,21 +5274,25 @@ export default class CourseMap extends React.Component {
 
                 </NavBar>
                 <View style={styles.fill}>
-                    <WebView
-                        ref={ webview => { this.webview = webview; }}
-                        source={MapSource}
-                        onLoadEnd={this.onWebViewLoaded}
-                    />
+                    <WebView ref={ webview => { this.webview = webview; }} source={MapSource} onLoadEnd={this.onWebViewLoaded} />
                 </View>
-                <View style={{height: 90, borderTopWidth: 1, borderTopColor: '#D1D1D1', padding: 20, justifyContent: 'center'}}>
-                    <Text style={{fontSize: 18, color: '#222'}}>수락.불암산 코스</Text>
-                    <View style={{marginTop: 4, flexDirection: 'row', alignItems: 'center'}}>
-                        <Icon name="near-me" size={16} style={{marginRight: 2}} color='#999' />
-                        <Text style={{color: '#515151', fontSize: 13}}>노원구,도봉구(14.3km)</Text>
-                        <Icon name="timer" size={16} style={{marginRight: 2, marginLeft: 6,}} color='#999' />
-                        <Text style={{color: '#515151', fontSize: 13}}>6시간 30분</Text>
-                    </View>
-                </View>
+                <View style={{height: 60, backgroundColor: '#FFF', flexDirection: 'row'}}>
+                    <TouchableNativeFeedback onPress={this.state.trackingFunc}>
+                        <View style={{flex: 2, backgroundColor: '#3ABF00', justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#FFF'}}>{this.state.trackingButtonMsg}</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                    <TouchableNativeFeedback onPress={()=>{his.webview.send('show');}}>
+                         <View style={{flex: 1, backgroundColor: '#888', justifyContent: 'center', alignItems: 'center', borderRightWidth: 1, borderRightColor: '#666'}}>
+                             <Text style={{fontSize: 14, fontWeight: 'bold', color: '#FFF'}}>경로표시</Text>
+                         </View>
+                    </TouchableNativeFeedback>
+                    <TouchableNativeFeedback onPress={()=>{this.webview.send('hide');}}>
+                        <View style={{flex: 1, backgroundColor: '#888', justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={{fontSize: 14, fontWeight: 'bold', color: '#FFF'}}>경로숨김</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                  </View>
 
                 <MessageBar ref="alert" />
             </View>
