@@ -10,18 +10,98 @@ html, body { margin: 0; padding: 0; height: 100%; }
 .myLocPin::before { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 1; border-radius: 14px; box-shadow: inset 0px 2px 1px 1px rgba(255,255,255,0.1); }
 .myLocPin::after { content: ''; display: block; position: absolute; top: -1px; left: -1px; bottom: -1px; right: -1px; z-index: 2; border-radius: 16px; animation-name: blinker; animation-iteration-count: infinite; animation-timing-function: ease; animation-duration: 1s; }
 
-.pin { display: block; width: 24px; height: 24px; background-color: #eb8b2e; border-radius: 24px; position: relative; box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2); z-index: 1; }
-.pin::before { content: ''; display: block; position: absolute; width: 0; height: 0; border: 11px solid transparent; border-top-width: 20px; border-top-color: #eb8b2e; top: 17px; left: 1px; z-index: 1; }
-.pin::after { content: 'P'; display: block; width: 16px; height: 15px; position: absolute; background-color: #FFF; border-radius: 16px; z-index: 2; top: 4px; left: 4px; text-align: center; font-size: 12px; font-weight: bold; white-space: nowrap; padding-top: 1px; color: #eb8b2e; }
+.pin { display: block; width: 24px; height: 24px; background-color: #000; border-radius: 24px; position: relative; z-index: 1; }
+.pin::before { content: ''; display: block; position: absolute; width: 0; height: 0; border: 11px solid transparent; border-top-width: 20px; border-top-color: #000; top: 17px; left: 1px; z-index: 1; }
+.pin > * { display: block; position: absolute; width: 22px; height: 22px; background-color: #FFF; border-radius: 22px; z-index: 2; top: 1px; left: 1px; }
+.pin > *::before { content: ''; display: block; position: absolute;  width: 0; height: 0; border: 10px solid transparent; border-top-width: 18px; border-top-color: #FFF; top: 16px; left: 1px; z-index: 2; }
+.pin > *::after { content: 'P'; display: block; width: 18px; height: 16px; position: absolute; background-color: #000; border-radius: 18px; z-index: 2; top: 2px; left: 2px; text-align: center; font-size: 12px; font-weight: bold; white-space: nowrap; padding-top: 2px; color: #FFF; }
+
+.pin.active > * { background-color: #000; }
+.pin.active > *::before { border-top-color: #000; }
+.pin.active > *::after { background-color: #FFF; color: #000; }
+
+.pin.enterance { background-color: #037fff; }
+.pin.enterance::before { border-top-color: #037fff; }
+.pin.enterance > *::after { content: '0'; background-color: #037fff; }
+.pin.enterance.e1 > *::after { content: '1 '; }
+.pin.enterance.e2 > *::after { content: '2 '; }
+.pin.enterance.e3 > *::after { content: '3 '; }
+.pin.enterance.e4 > *::after { content: '4 '; }
+.pin.enterance.e5 > *::after { content: '5 '; }
+.pin.enterance.e6 > *::after { content: '6 '; }
+.pin.enterance.e7 > *::after { content: '7 '; }
+.pin.enterance.e8 > *::after { content: '8 '; }
+.pin.enterance.e9 > *::after { content: '9 '; }
+.pin.enterance.e10 > *::after { content: '10'; }
+.pin.stamp.active { background-color: #0470e3; }
+.pin.stamp.active::before { border-top-color: #0470e3; }
+.pin.enterance.active > * { background-color: #037fff; }
+.pin.enterance.active > *::before { border-top-color: #037fff; }
+.pin.enterance.active > *::after { background-color: #FFF; color: #037fff; }
 
 .pin.major { background-color: #3d70f8; }
 .pin.major::before { border-top-color: #3d70f8; }
-.pin.major::after { content: ' '; color: #3d70f8; font-family: xeicon; padding-top: 3px; height: 13px; }
+.pin.major > *::after { content: ''; font-family: xeicon; background-color: #3d70f8; height: 15px; padding-top: 3px; }
+.pin.stamp.active { background-color: #3966dd; }
+.pin.stamp.active::before { border-top-color: #3966dd; }
+.pin.major.active > * { background-color: #3d70f8; }
+.pin.major.active > *::before { border-top-color: #3d70f8; }
+.pin.major.active > *::after { background-color: #FFF; color: #3d70f8; }
 
 .pin.stamp { background-color: #eb8b2e; }
 .pin.stamp::before { border-top-color: #eb8b2e; }
-.pin.stamp::after { content: ' '; color: #eb8b2e; font-family: xeicon; padding-top: 3px; height: 13px; }
+.pin.stamp > *::after { content: 'A'; background-color: #eb8b2e; }
+.pin.stamp.e1 > *::after { content: 'A '; }
+.pin.stamp.e2 > *::after { content: 'B '; }
+.pin.stamp.e3 > *::after { content: 'C '; }
+.pin.stamp.e4 > *::after { content: 'D '; }
+.pin.stamp.e5 > *::after { content: 'E '; }
+.pin.stamp.e6 > *::after { content: 'F '; }
+.pin.stamp.e7 > *::after { content: 'G '; }
+.pin.stamp.e8 > *::after { content: 'H '; }
+.pin.stamp.e9 > *::after { content: 'I '; }
+.pin.stamp.e10 > *::after { content: 'J'; }
+.pin.stamp.active { background-color: #d37d29; }
+.pin.stamp.active::before { border-top-color: #d37d29; }
+.pin.stamp.active > * { background-color: #eb8b2e; }
+.pin.stamp.active > *::before { border-top-color: #eb8b2e; }
+.pin.stamp.active > *::after { background-color: #FFF; color: #eb8b2e; }
 
 .pin.safety { background-color: #fd556e; }
 .pin.safety::before { border-top-color: #fd556e; }
-.pin.safety::after { content: '안'; color: #fd556e; }
+.pin.safety > *::after { content: '안'; background-color: #fd556e; }
+.pin.safety.active > * { background-color: #fd556e; }
+.pin.safety.active > *::before { border-top-color: #fd556e; }
+.pin.safety.active > *::after { background-color: #FFF; color: #fd556e; }
+
+
+
+/*.pin { display: block; width: 24px; height: 24px; background-color: #eb8b2e; border-radius: 24px; position: relative; box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2); z-index: 1; }*/
+/*.pin::before { content: ''; display: block; position: absolute; width: 0; height: 0; border: 11px solid transparent; border-top-width: 20px; border-top-color: #eb8b2e; top: 17px; left: 1px; z-index: 1; }*/
+/*.pin::after { content: 'P'; display: block; width: 16px; height: 15px; position: absolute; background-color: #FFF; border-radius: 16px; z-index: 2; top: 4px; left: 4px; text-align: center; font-size: 12px; font-weight: bold; white-space: nowrap; padding-top: 1px; color: #eb8b2e; }*/
+
+/*.pin.major { background-color: #3d70f8; }*/
+/*.pin.major::before { border-top-color: #3d70f8; }*/
+/*.pin.major::after { content: ' '; color: #3d70f8; font-family: xeicon; padding-top: 3px; height: 13px; }*/
+
+/*.pin.stamp { background-color: #eb8b2e; }*/
+/*.pin.stamp::before { border-top-color: #eb8b2e; }*/
+/*.pin.stamp::after { content: ' '; color: #eb8b2e; font-family: xeicon; padding-top: 3px; height: 13px; }*/
+
+/*.pin.safety { background-color: #fd556e; }*/
+/*.pin.safety::before { border-top-color: #fd556e; }*/
+/*.pin.safety::after { content: '안'; color: #fd556e; }*/
+
+/*.pin.major { background-color: #037fff; }*/
+/*.pin.enterance::before { border-top-color: #037fff; }*/
+/*.pin.enterance::after { content: '1 '; color: #037fff; }*/
+/*.pin.enterance.e1::after { content: '1 '; }*/
+/*.pin.enterance.e2::after { content: '2 '; }*/
+/*.pin.enterance.e3::after { content: '3 '; }*/
+/*.pin.enterance.e4::after { content: '4 '; }*/
+/*.pin.enterance.e5::after { content: '5 '; }*/
+/*.pin.enterance.e6::after { content: '6 '; }*/
+/*.pin.enterance.e7::after { content: '7 '; }*/
+/*.pin.enterance.e8::after { content: '8 '; }*/
+/*.pin.enterance.e9::after { content: '9 '; }*/
+/*.pin.enterance.e10::after { content: '10'; }*/
