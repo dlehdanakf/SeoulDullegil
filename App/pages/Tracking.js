@@ -5135,11 +5135,14 @@ export default class Tracking extends React.Component {
         notificationKey: null,
         trackingFunc: null,
         trackingButtonMsg: "",
+        walkingTime: 0,
+        walkingDistance: -1,
       }
     }
 
     componentWillMount() {
       if (Platform.OS === 'android' && !Constants.isDevice) {
+
         this.setState({
           errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
         });
@@ -5155,14 +5158,14 @@ export default class Tracking extends React.Component {
 
     componentWillUnMount(){
       MessageBarManager.unregisterMessageBar();
-      clearTimeout(this);
+      Timer.clearTimeout(this);
     }
 
     componentDidMount(){
       MessageBarManager.registerMessageBar(this.refs.alert);
     }
 
-    _getLocationAsync = async () => {
+    async _getLocationAsync(){
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
       if (status !== 'granted') {
         this.setState({
@@ -5174,10 +5177,13 @@ export default class Tracking extends React.Component {
         enableHighAccuracy: true,
         distanceInterval: 1,
       }, (location) => {
+          console.log('walkingDistance: ' + this.state.walkingDistance);
         this.setState({location:{
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-        }});
+          },
+          walkingDistance: this.state.walkingDistance + 1,
+        });
         this.webview.emit('setMyLocationPin', {y: location.coords.latitude, x: location.coords.longitude});
         if(this.state.isStartTracking){
           this.searchStamp(this.majorPinData);
@@ -5209,7 +5215,10 @@ export default class Tracking extends React.Component {
         message: msg,
         avatar: "https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg",
         alertType: 'info',
-        stylesheetInfo: {backgroundColor: '#f9931f', strokeColor: '#006acd', viewTopOffset: 100},
+        durationToShow: 0,
+        viewTopInset: 10,
+        viewBottomInset: 10,
+        stylesheetInfo: {backgroundColor: '#f9931f', strokeColor: '#006acd'},
       });
       StatusBar.setHidden(true);
       Timer.setTimeout(this, 'showStatusBar',() => {StatusBar.setHidden(false);}, 4000);
@@ -5221,7 +5230,10 @@ export default class Tracking extends React.Component {
         isStartTracking: true,
         trackingFunc: this.stopTracking.bind(this),
         trackingButtonMsg: '트래킹 그만하기',
+        walkingTime: 0,
+        walkingDistance: 0,
       });
+      this.setWalkingTime();
     }
 
     stopTracking(){
@@ -5231,6 +5243,11 @@ export default class Tracking extends React.Component {
         trackingFunc: this.startTracking.bind(this),
         trackingButtonMsg: '트래킹 시작하기',
       });
+      Timer.clearInterval('walkingTime');
+    }
+
+    async setWalkingTime(){
+        Timer.setInterval('walkingTime', () => this.setState({walkingTime: this.state.walkingTime + 1}),1000);
     }
 
     getMapCenter(){
@@ -5292,7 +5309,11 @@ export default class Tracking extends React.Component {
                             <Text style={{fontSize: 14, fontWeight: 'bold', color: '#FFF'}}>경로숨김</Text>
                         </View>
                     </TouchableNativeFeedback>
-                  </View>
+                </View>
+                <View style={{alignItems:'center'}}>
+                    <Text style={{fontSize:20}}>{parseInt(this.state.walkingTime / 3600)} : {parseInt(this.state.walkingTime / 60)} : {this.state.walkingTime % 60}</Text>
+                    <Text style={{fontSize:20}}>{this.state.walkingDistance} M</Text>
+                </View>
 
                 <MessageBar ref="alert" />
             </View>
