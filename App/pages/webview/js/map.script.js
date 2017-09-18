@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function(){
             }));
         });
     });
-    // window.RNMessagesChannel.on('removeCoursePath', () => {});
     window.RNMessagesChannel.on('setCourseEnterancePath', (e)=>{
         enterancePath.map((v, i)=>{v.setMap(null);});
 
@@ -75,12 +74,11 @@ document.addEventListener("DOMContentLoaded", function(){
             }));
         });
     });
-    // window.RNMessagesChannel.on('removeCourseEnterancePath', ()=>{});
     window.RNMessagesChannel.on('setCourseEnterancePin', (e)=>{
         enterancePin.map((v, i) => { v.setMap(null) });
 
         e.map((v, i) => {
-            enterancePin.push(new naver.maps.Marker({
+            const marker = new naver.maps.Marker({
                 position: new naver.maps.LatLng(v.COORD[1], v.COORD[0]),
                 icon: {
                     content: "<span class='pin enterance e" + (i+1) + "'><span></span></span>",
@@ -88,15 +86,42 @@ document.addEventListener("DOMContentLoaded", function(){
                     anchor: new naver.maps.Point(12, 37)
                 },
                 map: map,
-            }));
+                title: i + 1,
+            });
+
+            enterancePin.push(marker);
+
+            naver.maps.Event.addListener(marker, 'click', ()=>{
+                enterancePin.map((k, j)=>{
+                    k.setOptions({
+                        icon: {
+                            content: "<span class='pin enterance e" + (k.getOptions('title')) + "'><span></span></span>",
+                            size: new naver.maps.Size(24, 37),
+                            anchor: new naver.maps.Point(12, 37)
+                        }
+                    });
+                });
+                marker.setOptions({
+                    icon: {
+                        content: "<span class='pin active enterance e" + (i+1) + "'><span></span></span>",
+                        size: new naver.maps.Size(24, 37),
+                        anchor: new naver.maps.Point(12, 37)
+                    }
+                });
+                map.setCenter(marker.getOptions('position'));
+
+                window.RNMessagesChannel.emit('onPressPin', {
+                    type: 'enterance',
+                    index: marker.getOptions('title'),
+                });
+            });
         });
     });
-    // window.RNMessagesChannel.on('removeCourseEnterancePin', ()=>{});
     window.RNMessagesChannel.on('setCourseMajorPin', (e)=>{
         majorPin.map((v, i) => { v.setMap(null) });
 
         e.map((v, i) => {
-            majorPin.push(new naver.maps.Marker({
+            const marker = new naver.maps.Marker({
                 position: new naver.maps.LatLng(v.COT_COORD_Y, v.COT_COORD_X),
                 icon: {
                     content: "<span class='pin major'><span></span></span>",
@@ -104,15 +129,42 @@ document.addEventListener("DOMContentLoaded", function(){
                     anchor: new naver.maps.Point(12, 37)
                 },
                 map: map,
-            }));
+                title: i + 1,
+            });
+
+            majorPin.push(marker);
+
+            naver.maps.Event.addListener(marker, 'click', ()=>{
+                majorPin.map((k, j)=>{
+                    k.setOptions({
+                        icon: {
+                            content: "<span class='pin major e" + (k.getOptions('title')) + "'><span></span></span>",
+                            size: new naver.maps.Size(24, 37),
+                            anchor: new naver.maps.Point(12, 37)
+                        }
+                    });
+                });
+                marker.setOptions({
+                    icon: {
+                        content: "<span class='pin active major e" + (i+1) + "'><span></span></span>",
+                        size: new naver.maps.Size(24, 37),
+                        anchor: new naver.maps.Point(12, 37)
+                    }
+                });
+                map.setCenter(marker.getOptions('position'));
+
+                window.RNMessagesChannel.emit('onPressPin', {
+                    type: 'major',
+                    index: marker.getOptions('title'),
+                });
+            });
         });
     });
-    // window.RNMessagesChannel.on('removeCourseMajorPin', ()=>{});
     window.RNMessagesChannel.on('setCourseSafetyPin', (e)=>{
         safetyPin.map((v, i) => { v.setMap(null) });
 
         e.map((v, i) => {
-            safetyPin.push(new naver.maps.Marker({
+            const marker = new naver.maps.Marker({
                 position: new naver.maps.LatLng(v.COT_COORD_Y, v.COT_COORD_X),
                 icon: {
                     content: "<span class='pin safety e" + (i+1) + "'><span></span></span>",
@@ -120,10 +172,37 @@ document.addEventListener("DOMContentLoaded", function(){
                     anchor: new naver.maps.Point(12, 37)
                 },
                 map: map,
-            }));
+                title: i + 1,
+            });
+
+            safetyPin.push(marker);
+
+            naver.maps.Event.addListener(marker, 'click', ()=>{
+                safetyPin.map((k, j)=>{
+                    k.setOptions({
+                        icon: {
+                            content: "<span class='pin safety e" + (k.getOptions('title')) + "'><span></span></span>",
+                            size: new naver.maps.Size(24, 37),
+                            anchor: new naver.maps.Point(12, 37)
+                        }
+                    });
+                });
+                marker.setOptions({
+                    icon: {
+                        content: "<span class='pin active safety e" + (i+1) + "'><span></span></span>",
+                        size: new naver.maps.Size(24, 37),
+                        anchor: new naver.maps.Point(12, 37)
+                    }
+                });
+                map.setCenter(marker.getOptions('position'));
+
+                window.RNMessagesChannel.emit('onPressPin', {
+                    type: 'safety',
+                    index: marker.getOptions('title')
+                });
+            });
         });
     });
-    // window.RNMessagesChannel.on('removeCourseSafetyPin', ()=>{});
     window.RNMessagesChannel.on('setCourseStampPin', (e)=>{
         stampPin.map((v, i) => { v.setMap(null) });
 
@@ -136,14 +215,15 @@ document.addEventListener("DOMContentLoaded", function(){
                     anchor: new naver.maps.Point(12, 37)
                 },
                 map: map,
+                title: i + 1,
             });
 
             stampPin.push(marker);
             naver.maps.Event.addListener(marker, 'click', ()=>{
-                stampPin.map((v, i)=>{
-                    v.setOptions({
+                stampPin.map((k, j)=>{
+                    k.setOptions({
                         icon: {
-                            content: "<span class='pin stamp e" + (i+1) + "'><span></span></span>",
+                            content: "<span class='pin stamp e" + (k.getOptions('title')) + "'><span></span></span>",
                             size: new naver.maps.Size(24, 37),
                             anchor: new naver.maps.Point(12, 37)
                         }
@@ -157,9 +237,20 @@ document.addEventListener("DOMContentLoaded", function(){
                     }
                 });
                 map.setCenter(marker.getOptions('position'));
+
+                window.RNMessagesChannel.emit('onPressPin', {
+                    type: 'stamp',
+                    index: marker.getOptions('title'),
+                });
             });
         });
     });
+
+    // window.RNMessagesChannel.on('removeCoursePath', () => {});
+    // window.RNMessagesChannel.on('removeCourseEnterancePath', ()=>{});
+    // window.RNMessagesChannel.on('removeCourseEnterancePin', ()=>{});
+    // window.RNMessagesChannel.on('removeCourseMajorPin', ()=>{});
+    // window.RNMessagesChannel.on('removeCourseSafetyPin', ()=>{});
     // window.RNMessagesChannel.on('removeCourseStampPin', ()=>{});
     window.RNMessagesChannel.on('removeAllPinAndPath', ()=>{
         enterancePath.map((v, i) => v.setMap(null));

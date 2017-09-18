@@ -23,6 +23,7 @@ export default [
             }
         ],
         COLOR: "#f36f21",
+        COT_GU_NAME: "노원구, 도봉구",
         DISTANCE: "14.3km",
         TIME: "6시간 30분",
         COORD_CENTER: [127.0677877, 37.6560945],
@@ -4503,10 +4504,18 @@ export default [
         COORD_ENTERANCE_DATA: [
             {
                 NAME: "6호선 화랑대역 4번 출구",
+                COT_NATION_POINT_NUMBER: "다사63335799",
+                COT_ADDR_FULL_NEW: "노원로1길 21",
+                COT_ADDR_FULL_OLD: "노원구 공릉동 282-6",
+                COT_GU_NAME: "노원구",
                 COORD: [127.084516954, 37.620628903],
                 COORD_DATA: []
             }, {
                 NAME: "효성화운트빌 버스정류장",
+                COT_NATION_POINT_NUMBER: "다사63385883",
+                COT_ADDR_FULL_NEW: "노원로 62",
+                COT_ADDR_FULL_OLD: "노원구 공릉동 119",
+                COT_GU_NAME: "노원구",
                 COORD: [127.085010541, 37.628245526],
                 COORD_DATA: [
                     [
@@ -4524,6 +4533,10 @@ export default [
                 ]
             }, {
                 NAME: "4호선 상계역 4번 출구",
+                COT_NATION_POINT_NUMBER: "다사62356239",
+                COT_ADDR_FULL_NEW: "한글비석로22길 18",
+                COT_ADDR_FULL_OLD: "노원구 중계동 141-41",
+                COT_GU_NAME: "노원구",
                 COORD: [127.0732363, 37.6602611],
                 COORD_DATA: [
                     [
@@ -4613,6 +4626,10 @@ export default [
                 ]
             }, {
                 NAME: "7호선 수락산역 3번 출구",
+                COT_NATION_POINT_NUMBER: "다사60806423",
+                COT_ADDR_FULL_NEW: "동일로 1664",
+                COT_ADDR_FULL_OLD: "노원구 상계동 1119-4",
+                COT_GU_NAME: "노원구",
                 COORD: [127.055540384, 37.676768796],
                 COORD_DATA: [
                     [
@@ -4654,10 +4671,18 @@ export default [
                 ],
             }, {
                 NAME: "지하철 1,7호선 도봉산역 2번 출구",
+                COT_NATION_POINT_NUMBER: "다사60036561",
+                COT_ADDR_FULL_NEW: "도봉로 964-40",
+                COT_ADDR_FULL_OLD: "도봉구 도봉동 38-3",
+                COT_GU_NAME: "도봉구",
                 COORD: [127.046745604, 37.689185167],
                 COORD_DATA: []
             }, {
                 NAME: "4호선 당고개역 1번 출구",
+                COT_NATION_POINT_NUMBER: "다사62906352",
+                COT_ADDR_FULL_NEW: "상계로 304",
+                COT_ADDR_FULL_OLD: "노원구 상계동 111",
+                COT_GU_NAME: "노원구",
                 COORD: [127.0793691, 37.6704502],
                 COORD_DATA: [
                     [
@@ -4706,7 +4731,7 @@ export default [
                 COT_VALUE_01: "4번 출구 (도착 지점)",
                 COT_MASTER_NO: "281",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 지하철 6호선 화랑대역 "
+                COT_CONTS_NAME: "지하철 6호선 화랑대역 "
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -4746,7 +4771,7 @@ export default [
                 COT_VALUE_01: "조선 제11대 왕 중종(中宗 재위 1506∼1544)의 두 번째 계비인 문정왕후(文定王后) 윤씨(1501~1565)의 무덤이다. 명종과 인순왕후 심씨의 무덤인 강릉(康陵)과 함께 1970년 5월 26일 사적 제201호로 지정되었다. 문정왕후는 자신이 중종 옆에 묻힐 요량으로 장경왕후의 능 옆에 있었던 중종의 정릉(靖陵)을 풍수지리가 안 좋다 하여 선릉(宣陵) 옆으로 옮겼다. 하지만 새로 옮긴 정릉의 지대가 낮아 홍수 피해가 자주 일어나자 결국 그 자리에 묻히지 못하고 현재의 위치에 예장되어 중종 옆에 묻히려던 소망을 이루지 못했다. 태릉은 왕비의 단릉(單陵)이라 믿기 힘들만큼 웅장한 능으로, 조성 당시 문정왕후의 세력이 얼마나 컸는지를 짐작케 한다. ",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 태릉"
+                COT_CONTS_NAME: "태릉"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -4786,7 +4811,7 @@ export default [
                 COT_VALUE_01: "노원골 아래는 넓은 평야에 갈대가 많아 노원평이라 불렀고, 말이 뛰놀아 마들이라고도 했다. 노원이란 지명이 여기서 유래했다. 서울시 무형문화재 제22호인 마들농요는 노원평야에서 부르던 농요이며, 노원골에서 시인 천상병이 살았다.",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "[1코스] 노원골(천상병산길)"
+                COT_CONTS_NAME: "노원골(천상병산길)"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -4866,7 +4891,7 @@ export default [
                 COT_VALUE_01: "풍요와 다산을 기원하던 여근석이다. 이곳 넓적바위도 아랫마을 동제의 대상이었을 것이고 조선시대에는 아들 낳기를 바라는 여인들의 발길이 끊이지 않았을 것이다. 원래는 호젓한 산속이었지만 둘레길이 나면서 사람들이 많이 지나는 곳이 되었다.",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "[1코스] 넓적바위"
+                COT_CONTS_NAME: "넓적바위"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -4946,7 +4971,7 @@ export default [
                 COT_VALUE_01: "수락골계곡은 푸른 바위와 안개가 자욱한 계곡이란 뜻으로 벽운동계곡이라고 부르며 서예가 이병직이 바위에 새긴 벽운동천등의 글씨가 있다. 수락골 등산로는 계유정란 이후 수락산에 숨어 살았던 김시습을 기념하여 김시습산길이라고 한다.",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "[1코스] 벽운동계곡"
+                COT_CONTS_NAME: "벽운동계곡"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -4986,7 +5011,7 @@ export default [
                 COT_VALUE_01: "창포원 서울둘레길 안내센터는 2016년 오픈하였으며 창포원 건물1층에 위치하여 서울둘레길 탐방객 안내와 인증서 발급 등의 업무를 수행한다.",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "[1코스] 창포원안내센터"
+                COT_CONTS_NAME: "창포원안내센터"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5066,7 +5091,7 @@ export default [
                 COT_VALUE_01: "서울창포원은 총면적 52,417㎡에 꽃창포를 비롯한 붓꽃을 주제로 한 서울시의 생태공원으로서 12개의 테마로 구분 조성되어 시민들에게 생태교육 및 여가와 휴식공간을 제공한다. ",
                 COT_MASTER_NO: "4",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 서울창포원"
+                COT_CONTS_NAME: "서울창포원"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5106,7 +5131,7 @@ export default [
                 COT_VALUE_01: "수락산 귀임봉 아래는 최근까지 채석장으로 이용되었다. 전망이 뛰어나 불암산, 용마산, 아차산, 관악산, 남산, 북한산이 모두 보이고 그 사이에 안겨있는 서울 시내가 한눈에 들어온다.",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "[1코스] 채석장"
+                COT_CONTS_NAME: "채석장"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5146,7 +5171,7 @@ export default [
                 COT_VALUE_01: "학도암은 조선 인조2년(1624)무공화상이 불암산에 있던 옛절을 이곳으로 옮겨 창건하였다. 학도암에는, 큰법당, 삼성각 등의 전각이 있으며, 대웅전 뒤편 암벽에는 명성황후의 염원에 의해 1872년에 조성된 높이 22.7m, 폭 7m의 거대한 '마애관음보살좌상(서울시유형문화재 제 124호)이 있는데 조선후기의 뛰어난 마애상으로 평가받고 있다.",
                 COT_MASTER_NO: "102",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 학도암"
+                COT_CONTS_NAME: "학도암"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5226,7 +5251,7 @@ export default [
                 COT_VALUE_01: "불암산 둘레길 노선에 위치한 공원으로 휴식시설과 편익시설 등이 설치되어 있으며 이용객들과 동네 주민들이 휴식을 취할 수 있는 공간이다.",
                 COT_MASTER_NO: "164",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 넓은마당"
+                COT_CONTS_NAME: "넓은마당"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5266,7 +5291,7 @@ export default [
                 COT_VALUE_01: "노원구의 수락산과 불암산을 연결해주는 곳으로 생태육교를 설치하여 사람뿐만이 아닌 동물도 이동이 가능하도록 만들어진 다리이다.",
                 COT_MASTER_NO: "159",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 덕릉고개"
+                COT_CONTS_NAME: "덕릉고개"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5306,7 +5331,7 @@ export default [
                 COT_VALUE_01: "수락산 중턱의 남향 길상지에 자리한 경관좋고 유서깊은 사찰 수암사는 신라 진평왕 43년(621년)에 화랑세속오계의 원작자인 원광국사께서 삼국통일의 대업을 이루고자 창건 하였다. 조선시대 병자호란때 소실된 이후 석국법당만 남아 있던 것을 다시 중건하였다. 경내에는 1962년 도욱스님의 중창 당시에 세워진 25평 규모의 전통양식(단청)의 극락보전을 비롯하여 삼성각, 요사채와 1972년에 건립된 미륵입상 등이 있다.",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 수암사"
+                COT_CONTS_NAME: "수암사"
             }
         ],
         STAMP_DATA: [
@@ -5348,7 +5373,7 @@ export default [
                 COT_VALUE_01: "스탬프 시설 위치 (1개 우체통에 2개 스탬프 시설)",
                 COT_MASTER_NO: "283-4",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스/2코스] 화랑대 4번 출구 앞 공원"
+                COT_CONTS_NAME: "화랑대 4번 출구 앞 공원"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5388,7 +5413,7 @@ export default [
                 COT_VALUE_01: "스탬프 시설 위치",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "[1코스] 창포원 관리사무소 앞"
+                COT_CONTS_NAME: "창포원 관리사무소 앞"
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5414,7 +5439,7 @@ export default [
                 COT_NATION_BASE_AREA: "01644",
                 THM_COORD_TYPE: "1",
                 COT_THEME_ID: "100211",
-                COT_ADDR_FULL_NEW: "",
+                COT_ADDR_FULL_NEW: "상계동 72-32",
                 COT_DONG_NAME: "상계동",
                 COT_COORD_X: "127.0836533",
                 COT_UPDATE_DATE: "2016-12-05 22:53:34",
@@ -5428,7 +5453,7 @@ export default [
                 COT_VALUE_01: "스탬프 시설 위치",
                 COT_MASTER_NO: "72-32",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "[1코스] 불암산 우회코스 갈림길"
+                COT_CONTS_NAME: "불암산 우회코스 갈림길"
             }
         ],
         SAFETY_DATA: [

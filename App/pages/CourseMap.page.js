@@ -20,12 +20,49 @@ export default class CourseMap extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            mapData: mapData,
             activeMapButton: '',
+            activeMapPinIndex: -1,
+
+            pinTitle: '',
+            pinDesc: '',
         };
 
         this.onWebViewLoaded = this.onWebViewLoaded.bind(this);
         this.getMapCenter = this.getMapCenter.bind(this);
         this.onPressMapButton = this.onPressMapButton.bind(this);
+    }
+    componentDidMount(){
+        this.webview.messagesChannel.on('onPressPin', (e) => {
+            let idx = parseInt(e.index), cng = idx, mapData = null, mapPinTitle = null, mapPinDesc;
+            if(this.state.activeMapPinIndex === idx) cng = -1;
+
+            switch(this.state.activeMapButton){
+                case 'stamp':
+                    mapData = this.state.mapData.STAMP_DATA[idx - 1];
+                    mapPinTitle = mapData.COT_CONTS_NAME;
+                    break;
+                case 'safety':
+                    mapData = this.state.mapData.SAFETY_DATA[idx - 1];
+                    mapPinTitle = mapData.COT_CONTS_NAME;
+                    break;
+                case 'major':
+                    mapData = this.state.mapData.POINT_DATA[idx - 1];
+                    mapPinTitle = mapData.COT_CONTS_NAME;
+                    break;
+                case 'enterance':
+                    mapData = this.state.mapData.COORD_ENTERANCE_DATA[idx - 1];
+                    mapPinTitle = mapData.NAME;
+                    break;
+            }
+            mapPinDesc = mapData.COT_NATION_POINT_NUMBER + ' | ' + mapData.COT_GU_NAME + ' ' + mapData.COT_ADDR_FULL_NEW;
+
+            this.setState({
+                pinTitle: mapPinTitle,
+                pinDesc: mapPinDesc,
+                activeMapPinIndex: cng
+            });
+        });
     }
 
     getMapCenter(){
@@ -33,31 +70,31 @@ export default class CourseMap extends React.Component {
     }
 
     onPressMapButton(e){
-        if(e === this.state.activeMapButton) this.setState({activeMapButton: ''});
-        else this.setState({activeMapButton: e});
+        if(e === this.state.activeMapButton) this.setState({activeMapPinIndex: -1, activeMapButton: ''});
+        else this.setState({activeMapPinIndex: -1, activeMapButton: e});
 
         this.webview.emit('removeAllPinAndPath');
         if(e === this.state.activeMapButton) return;
 
         switch(e){
             case 'stamp':
-                this.webview.emit('setCourseStampPin', mapData.STAMP_DATA);
+                this.webview.emit('setCourseStampPin', this.state.mapData.STAMP_DATA);
                 break;
             case 'safety':
-                this.webview.emit('setCourseSafetyPin', mapData.SAFETY_DATA);
+                this.webview.emit('setCourseSafetyPin', this.state.mapData.SAFETY_DATA);
                 break;
             case 'major':
-                this.webview.emit('setCourseMajorPin', mapData.POINT_DATA);
+                this.webview.emit('setCourseMajorPin', this.state.mapData.POINT_DATA);
                 break;
             case 'enterance':
-                this.webview.emit('setCourseEnterancePin', mapData.COORD_ENTERANCE_DATA);
-                this.webview.emit('setCourseEnterancePath', mapData.COORD_ENTERANCE_DATA);
+                this.webview.emit('setCourseEnterancePin', this.state.mapData.COORD_ENTERANCE_DATA);
+                this.webview.emit('setCourseEnterancePath', this.state.mapData.COORD_ENTERANCE_DATA);
                 break;
         }
     }
     onWebViewLoaded(){
-        this.webview.emit('moveMapCenter', mapData.COORD_CENTER);
-        this.webview.emit('setCoursePath', mapData.COORD_DATA);
+        this.webview.emit('moveMapCenter', this.state.mapData.COORD_CENTER);
+        this.webview.emit('setCoursePath', this.state.mapData.COORD_DATA);
     }
     render(){
         return (
@@ -68,7 +105,7 @@ export default class CourseMap extends React.Component {
                             <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
-                            수락·불암산코스
+                            지도보기
                         </NavTitle>
                     </View>
                 </NavBar>
@@ -133,15 +170,24 @@ export default class CourseMap extends React.Component {
                         </TouchableHighlight>
                     </View>
                 </View>
-                <View style={{height: 90, borderTopWidth: 1, borderTopColor: '#D1D1D1', padding: 20, justifyContent: 'center'}}>
-                    <Text style={{fontSize: 18, color: '#222'}}>수락.불암산 코스</Text>
-                    <View style={{marginTop: 4, flexDirection: 'row', alignItems: 'center'}}>
-                        <Icon name="near-me" size={16} style={{marginRight: 2}} color='#999' />
-                        <Text style={{color: '#515151', fontSize: 13}}>노원구,도봉구(14.3km)</Text>
-                        <Icon name="timer" size={16} style={{marginRight: 2, marginLeft: 6,}} color='#999' />
-                        <Text style={{color: '#515151', fontSize: 13}}>6시간 30분</Text>
+                {this.state.activeMapPinIndex === -1 ?
+                    <View style={{height: 90, borderTopWidth: 1, borderTopColor: '#D1D1D1', padding: 20, justifyContent: 'center'}}>
+                        <Text style={{fontSize: 18, color: '#222'}}>{this.state.mapData.NAME}</Text>
+                        <View style={{marginTop: 4, flexDirection: 'row', alignItems: 'center'}}>
+                            <Icon name="near-me" size={16} style={{marginRight: 2}} color='#999' />
+                            <Text style={{color: '#515151', fontSize: 13}}>{this.state.mapData.COT_GU_NAME}({this.state.mapData.DISTANCE})</Text>
+                            <Icon name="timer" size={16} style={{marginRight: 2, marginLeft: 6,}} color='#999' />
+                            <Text style={{color: '#515151', fontSize: 13}}>{this.state.mapData.TIME}</Text>
+                        </View>
                     </View>
-                </View>
+                :
+                    <View style={{height: 90, borderTopWidth: 1, borderTopColor: '#D1D1D1', padding: 20, justifyContent: 'center'}}>
+                        <Text style={{fontSize: 18, color: '#222'}}>{this.state.pinTitle}</Text>
+                        <View style={{marginTop: 4, flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style={{color: '#515151', fontSize: 13}}>{this.state.pinDesc}</Text>
+                        </View>
+                    </View>
+                }
             </View>
         );
     }
