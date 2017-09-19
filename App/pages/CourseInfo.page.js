@@ -12,6 +12,8 @@ import navBarStylesModule from './assets/navbar.styles';
 
 import CourseData from './datasets/course.list';
 import MapData from './datasets/courseinfo.list';
+import SubwayColors from './datasets/subway.colors';
+
 import StampIconFunc from './components/stamp.function';
 
 const COURSE_INDEX = 0;
@@ -131,35 +133,40 @@ export default class CourseInfo extends React.Component{
                             </View>
                             <View style={contentStyles.section}>
                                 <Text style={contentStyles.sectionTitle}>교통편</Text>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>출발지</Text>
-                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <Text style={{borderColor: '#00498B', color: '#00498B', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>1</Text>
-                                        <Text style={{borderColor: '#4D8000', color: '#4D8000', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>7</Text>
-                                        <Text style={{marginLeft: 4, color: '#444'}}>도봉산역 2번 출입구</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>진입로 1</Text>
-                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <Text style={{borderColor: '#4D8000', color: '#4D8000', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>7</Text>
-                                        <Text style={{marginLeft: 4, color: '#444'}}>수락산역 3번 출입구</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>진입로 2</Text>
-                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <Text style={{borderColor: '#00A2D1', color: '#00A2D1', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>4</Text>
-                                        <Text style={{marginLeft: 4, color: '#444'}}>당고개역 4번 출입구</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <Text style={{width: 70, fontSize: 13, color: '#444'}}>도착지</Text>
-                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <Text style={{borderColor: '#CC660D', color: '#CC660D', fontWeight: 'bold', marginRight: 2, borderRadius: 16, borderWidth: 2, width: 16, height: 16, alignItems: 'center', textAlign: 'center', fontSize: 11}}>6</Text>
-                                        <Text style={{marginLeft: 4, color: '#444'}}>화랑대역 3번 출입구</Text>
-                                    </View>
-                                </View>
+                                {this.state.mapData.TRANSPORT.map((v, i)=>{
+                                    return (
+                                        <View style={{flexDirection: 'row', alignItems: 'center'}} key={v.NAME}>
+                                            <Text style={{width: 70, fontSize: 13, color: '#444'}}>{v.NAME}</Text>
+                                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                                {v.NUMBER.map((b, j)=>{
+                                                    return (
+                                                        <Text
+                                                            key={j}
+                                                            style={[{
+                                                                borderColor: SubwayColors[b - 1],
+                                                                color: SubwayColors[b - 1],
+                                                            }, {
+                                                                fontWeight: 'bold',
+                                                                marginRight: 2,
+                                                                borderRadius: 16,
+                                                                borderWidth: 2,
+                                                                width: 16,
+                                                                height: 16,
+                                                                alignItems: 'center',
+                                                                textAlign: 'center',
+                                                                fontSize: 11
+                                                            }]}
+                                                        >
+                                                            {b}
+                                                        </Text>
+                                                    );
+                                                })}
+
+                                                <Text style={{marginLeft: 4, color: '#444'}}>{v.STATION}</Text>
+                                            </View>
+                                        </View>
+                                    );
+                                })}
                             </View>
                             <View style={contentStyles.section}>
                                 <Text style={contentStyles.sectionTitle}>코스정보</Text>
