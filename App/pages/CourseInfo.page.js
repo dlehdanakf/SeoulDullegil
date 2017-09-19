@@ -10,6 +10,12 @@ import { Actions } from 'react-native-router-flux';
 import Button from './components/button.component';
 import navBarStylesModule from './assets/navbar.styles';
 
+import CourseData from './datasets/course.list';
+import MapData from './datasets/courseinfo.list';
+import StampIconFunc from './components/stamp.function';
+
+const COURSE_INDEX = 0;
+
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
@@ -21,6 +27,8 @@ export default class CourseInfo extends React.Component{
         super(props);
 
         this.state = {
+            courseData: CourseData[COURSE_INDEX],
+            mapData: MapData[COURSE_INDEX],
             scrollY: new Animated.Value(0),
         };
     }
@@ -41,6 +49,8 @@ export default class CourseInfo extends React.Component{
             extrapolate: 'clamp',
         });
 
+        const courseDifficulty = ['초급', '초급', '중급', '고급'];
+
         return (
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
@@ -49,7 +59,7 @@ export default class CourseInfo extends React.Component{
                             <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
                         </NavButton>
                         <Animated.Text accessibilityTraits="header" style={[navBarStyles.title, {opacity: actionBarOpacity}]}>
-                            수락·불암산코스
+                            {this.state.courseData.COURSE_NM}
                         </Animated.Text>
                     </View>
                     <Animated.View style={{opacity: actionBarOpacity}}>
@@ -63,7 +73,7 @@ export default class CourseInfo extends React.Component{
                             <NavButton onPress={() => {}}>
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="transfer-within-a-station" size={24} color="#FFF" style={{marginRight: 4,}} />
-                                    <Text style={{color: '#FFF', fontSize: 13}}>경로지정</Text>
+                                    <Text style={{color: '#FFF', fontSize: 13}}>코스지정</Text>
                                 </View>
                             </NavButton>
                         </NavGroup>
@@ -78,7 +88,7 @@ export default class CourseInfo extends React.Component{
                         <View style={styles.scrollViewContent}>
                             <View style={contentStyles.section}>
                                 <Text style={contentStyles.sectionTitle}>소개</Text>
-                                <Text style={contentStyles.infoText}>서울 둘레길의 1코스로서 수락산과 불암산을 통과하는 노선이다. 서울의 대표적인 수락산과 불암산을 트래킹하며 숙련된 트래킹기술을 요하지는 않도록 정상을 통과하는 것이 아닌 불암산을 둘러 통과하는 노선으로 대체적으로 완만하다. 이 코스는 수락산과 함께 연계되어 태릉까지 이어지며 노선주변으로 수락산역, 당고개역, 상계역, 화랑대역 등이 인접한다.</Text>
+                                <Text style={contentStyles.infoText}>{this.state.mapData.DESCRIPTION}</Text>
                             </View>
                             <View style={contentStyles.section}>
                                 <Text style={contentStyles.sectionTitle}>스탬프</Text>
@@ -89,29 +99,34 @@ export default class CourseInfo extends React.Component{
                                     horizontal={true}
                                     showsHorizontalScrollIndicator={false}
                                 >
-                                    <View style={contentStyles.stampItemWrap}>
-                                        <View style={contentStyles.stampIconWrap}>
-                                            <Image
-                                                style={contentStyles.stampIcon}
-                                                source={require('./assets/stamps/stamp01.png')}
-                                            />
-                                        </View>
-                                        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-                                            <Text style={{fontSize: 13, color: '#BBB'}}>미획득</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}}>
-                                        <View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>
-                                            <Image
-                                                style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}
-                                                source={require('./assets/stamps/stamp01.png')}
-                                            />
-                                        </View>
-                                        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-                                            <Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14,}}/>
+                                    {/*<View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}}>*/}
+                                        {/*<View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>*/}
+                                            {/*<Image*/}
+                                                {/*style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}*/}
+                                                {/*source={require('./assets/stamps/stamp01.png')}*/}
+                                            {/*/>*/}
+                                        {/*</View>*/}
+                                        {/*<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>*/}
+                                            {/*<Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>*/}
+                                        {/*</View>*/}
+                                    {/*</View>*/}
+                                    {this.state.mapData.STAMP_DATA.map((v, i) => {
+                                        const iconPath = './assets/stamps/stamp01.png';
+
+                                        return (
+                                            <View style={contentStyles.stampItemWrap} key={i}>
+                                                <View style={contentStyles.stampIconWrap}>
+                                                    <Image
+                                                        style={contentStyles.stampIcon}
+                                                        source={StampIconFunc(v.COT_STAMP_ICON)}
+                                                    />
+                                                </View>
+                                                <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+                                                    <Text style={{fontSize: 13, color: '#BBB'}}>미획득</Text>
+                                                </View>
+                                            </View>
+                                        );
+                                    })}
                                 </ScrollView>
                             </View>
                             <View style={contentStyles.section}>
@@ -247,19 +262,19 @@ export default class CourseInfo extends React.Component{
                     </ScrollView>
                     <Animated.View style={[headerStyles.container, {height: headerHeight}]}>
                         <Animated.View style={[headerStyles.content, {opacity: headerOpacity}]}>
-                            <Text style={headerStyles.difficulty}>초급자용 코스</Text>
-                            <Text style={headerStyles.title}>수락·불암산코스</Text>
+                            <Text style={headerStyles.difficulty}>{courseDifficulty[this.state.courseData.COURSE_LEVEL]}코스</Text>
+                            <Text style={headerStyles.title}>{this.state.courseData.COURSE_NM}</Text>
                             <View style={headerStyles.distance}>
                                 <Icon name="near-me" size={16} style={{marginRight: 2}} color='rgba(255, 255, 255, .4)' />
-                                <Text style={headerStyles.distanceText}>노원구,도봉구(14.3km)</Text>
+                                <Text style={headerStyles.distanceText}>{this.state.courseData.LOCATION}({this.state.courseData.DISTANCE})</Text>
                                 <Icon name="timer" size={16} style={{marginRight: 2, marginLeft: 6,}} color='rgba(255, 255, 255, .4)' />
-                                <Text style={headerStyles.distanceText}>6시간 30분</Text>
+                                <Text style={headerStyles.distanceText}>{this.state.courseData.WALK_TIME}</Text>
                             </View>
                             <View style={headerStyles.buttons}>
                                 <View style={{marginRight: 12}}>
                                     <Button title="지도" icon="map" btnStyle={headerStyles.mapButton} borderRadius={24} />
                                 </View>
-                                <Button title="경로지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24} />
+                                <Button title="코스지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24} />
                             </View>
                         </Animated.View>
                     </Animated.View>

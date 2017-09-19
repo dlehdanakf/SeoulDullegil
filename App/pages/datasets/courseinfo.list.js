@@ -5373,7 +5373,8 @@ export default [
                 COT_VALUE_01: "스탬프 시설 위치 (1개 우체통에 2개 스탬프 시설)",
                 COT_MASTER_NO: "283-4",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "화랑대 4번 출구 앞 공원"
+                COT_CONTS_NAME: "화랑대 4번 출구 앞 공원",
+                COT_STAMP_ICON: "stamp01.png",
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5413,7 +5414,8 @@ export default [
                 COT_VALUE_01: "스탬프 시설 위치",
                 COT_MASTER_NO: "",
                 COT_LINE_WEIGHT: "2",
-                COT_CONTS_NAME: "창포원 관리사무소 앞"
+                COT_CONTS_NAME: "창포원 관리사무소 앞",
+                COT_STAMP_ICON: "stamp02.png",
             },
             {
                 THM_THEME_NAME: "서울둘레길",
@@ -5453,7 +5455,8 @@ export default [
                 COT_VALUE_01: "스탬프 시설 위치",
                 COT_MASTER_NO: "72-32",
                 COT_LINE_WEIGHT: "4",
-                COT_CONTS_NAME: "불암산 우회코스 갈림길"
+                COT_CONTS_NAME: "불암산 우회코스 갈림길",
+                COT_STAMP_ICON: "stamp03.png",
             }
         ],
         SAFETY_DATA: [
