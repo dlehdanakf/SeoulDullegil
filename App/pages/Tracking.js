@@ -5136,7 +5136,7 @@ export default class Tracking extends React.Component {
         trackingFunc: null,
         trackingButtonMsg: "",
         walkingTime: 0,
-        walkingDistance: -1,
+        walkingDistance: 0,
       }
     }
 
@@ -5181,12 +5181,14 @@ export default class Tracking extends React.Component {
         this.setState({location:{
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-          },
-          walkingDistance: this.state.walkingDistance + 1,
+          }
         });
         this.webview.emit('setMyLocationPin', {y: location.coords.latitude, x: location.coords.longitude});
         if(this.state.isStartTracking){
-          this.searchStamp(this.majorPinData);
+            this.setState({
+                walkingDistance: this.state.walkingDistance + 1,
+            });
+            this.searchStamp(this.majorPinData);
         }
       });
     }
@@ -5221,7 +5223,7 @@ export default class Tracking extends React.Component {
         stylesheetInfo: {backgroundColor: '#f9931f', strokeColor: '#006acd'},
       });
       StatusBar.setHidden(true);
-      Timer.setTimeout(this, 'showStatusBar',() => {StatusBar.setHidden(false);}, 4000);
+      Timer.setTimeout(this, 'showStatusBpmar',() => {StatusBar.setHidden(false);}, 4000);
     }
 
     startTracking() {
