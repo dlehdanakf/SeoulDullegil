@@ -11,14 +11,17 @@ import { WebView } from 'react-native-webview-messaging/WebView';
 
 import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
+import trakingStyles from './assets/TrackingComponent.styles';
 
 import {Constants, Location, Permissions, Notifications} from 'expo';
 import Geolib from 'geolib';
 
 import {MessageBar, MessageBarManager} from 'react-native-message-bar';
 import Timer from 'react-native-timer';
+import TrackingInfo from './components/trackingInfo';
+import Drawer from 'react-native-drawer'
 
-const navBarStyles = navBarStylesModule("#3ABF00");
+const navBarStyles = navBarStylesModule("#558F4A");
 
 export default class Tracking extends React.Component {
     constructor(props){
@@ -5137,6 +5140,9 @@ export default class Tracking extends React.Component {
         trackingButtonMsg: "",
         walkingTime: 0,
         walkingDistance: 0,
+
+        drawerOpen: false,
+        drawerDisabled: false,
       }
     }
 
@@ -5272,6 +5278,12 @@ export default class Tracking extends React.Component {
     }
 
 
+    closeControlPanel = () => {
+        this._drawer.close()
+    };
+      openControlPanel = () => {
+          this._drawer.open()
+      };
 
     render(){
         return (
@@ -5292,29 +5304,41 @@ export default class Tracking extends React.Component {
                     </View>
 
                 </NavBar>
-                <View style={styles.fill}>
+
+                <Drawer
+                    ref={(ref) => this._drawer = ref}
+                    type="overlay"
+                    content={<TrackingInfo walkingTime = {this.state.walkingTime}/>}
+                    openDrawerOffset={(viewport) => viewport.width - 100}  /* 사이드바 크기 조절 */
+                    closedDrawerOffset={40}
+                    styles={{main: {shadowColor: "#000000", shadowOpacity: 1, shadowRadius: 15}}}
+                    captureGestures
+                    tapToClose={true}
+                    tweenDuration={250}   //열고 닫는 시간
+                    panThreshold={0.25}
+                    panOpenMask={0.05}
+                    tweenHandler={(ratio) => ({
+                      main: { opacity:(2-ratio)/2}
+                    })}
+                    onPress={this.open}
+                    onOpen={() => {
+                      this.setState({drawerOpen: true})
+                    }}
+                    onClose={() => {
+                      this.setState({drawerOpen: false})
+                    }}
+                    disabled={this.state.drawerDisabled}
+                    side="bottom"
+                    >
                     <WebView ref={ webview => { this.webview = webview; }} source={MapSource} onLoadEnd={this.onWebViewLoaded} />
-                </View>
+                </Drawer>
+
                 <View style={{height: 60, backgroundColor: '#FFF', flexDirection: 'row'}}>
                     <TouchableNativeFeedback onPress={this.state.trackingFunc}>
-                        <View style={{flex: 2, backgroundColor: '#3ABF00', justifyContent: 'center', alignItems: 'center'}}>
+                        <View style={{flex: 1, backgroundColor: '#57C968', justifyContent: 'center', alignItems: 'center'}}>
                             <Text style={{fontSize: 18, fontWeight: 'bold', color: '#FFF'}}>{this.state.trackingButtonMsg}</Text>
                         </View>
                     </TouchableNativeFeedback>
-                    <TouchableNativeFeedback onPress={()=>{his.webview.send('show');}}>
-                         <View style={{flex: 1, backgroundColor: '#888', justifyContent: 'center', alignItems: 'center', borderRightWidth: 1, borderRightColor: '#666'}}>
-                             <Text style={{fontSize: 14, fontWeight: 'bold', color: '#FFF'}}>경로표시</Text>
-                         </View>
-                    </TouchableNativeFeedback>
-                    <TouchableNativeFeedback onPress={()=>{this.webview.send('hide');}}>
-                        <View style={{flex: 1, backgroundColor: '#888', justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{fontSize: 14, fontWeight: 'bold', color: '#FFF'}}>경로숨김</Text>
-                        </View>
-                    </TouchableNativeFeedback>
-                </View>
-                <View style={{alignItems:'center'}}>
-                    <Text style={{fontSize:20}}>{parseInt(this.state.walkingTime / 3600)} : {parseInt(this.state.walkingTime / 60)} : {this.state.walkingTime % 60}</Text>
-                    <Text style={{fontSize:20}}>{this.state.walkingDistance} M</Text>
                 </View>
 
                 <MessageBar ref="alert" />
