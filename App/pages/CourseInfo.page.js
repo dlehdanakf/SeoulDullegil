@@ -33,7 +33,80 @@ export default class CourseInfo extends React.Component{
             mapData: MapData[COURSE_INDEX],
             scrollY: new Animated.Value(0),
         };
+
+        this.renderCourseRoadItem = this.renderCourseRoadItem.bind(this);
     }
+
+    renderCourseRoadItem(data, index){
+        const length = this.state.mapData.ROAD_DATA.length;
+        let topLine = '#888',
+            bottomLine = '#888';
+
+        if(index === 0) topLine = 'transparent';
+        if(length === index + 1) bottomLine = 'transparent';
+
+        let icon = null;
+        switch(data.TYPE){
+            case 'M':
+                icon = (
+                    <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: SubwayColors[data.COLOR - 1]}]}>
+                        <Icon name="directions-subway" size={20} color={SubwayColors[data.COLOR - 1]} />
+                    </View>
+                );
+                break;
+            case 'S':
+                icon = (
+                    <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: '#f7941f'}]}>
+                        <Icon name="nature" size={20} color="#f7941f" />
+                    </View>
+                );
+                break;
+            case 'P':
+                icon = (
+                    <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: "#a8c99e"}]}>
+                        <Icon name="directions-walk" size={20} color="#a8c99e" />
+                    </View>
+                );
+                break;
+            default:
+                icon = (
+                    <View style={contentStyles.roadItemIcon}>
+                        <Icon name="expand-more" size={12} color="#888" />
+                    </View>
+                );
+        }
+
+        const item = (
+            <View style={contentStyles.roadItemWrap}>
+                <View style={contentStyles.roadItemIconWrap}>
+                    <View style={{flex: 1}} />
+                    <View style={contentStyles.roadItemLine}>
+                        <View style={{flex: 1, backgroundColor: topLine}} />
+                        <View style={{flex: 1, backgroundColor: bottomLine}} />
+                    </View>
+                    {icon}
+                    <View style={{width: 20}} />
+                </View>
+                <View style={contentStyles.roadItemInfoWrap}>
+                    <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>{data.NAME}</Text>
+                    {data.TYPE !== 'S' && data.DESCRIPTION !== null ? <Text style={{fontSize: 12, color: '#999'}}>{data.DESCRIPTION}</Text> : null}
+                    {data.TYPE === 'S' ? <Text style={{fontSize: 12, color: '#999'}}>스탬프 획득지점</Text> : null}
+                </View>
+            </View>
+        );
+
+        if(data.TYPE === 'N')
+            return (
+                <View key={index}>
+                    {item}
+                </View>
+            );
+
+        return (
+            <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0" key={index}>{item}</TouchableHighlight>
+        );
+    }
+
     render() {
         const actionBarOpacity = this.state.scrollY.interpolate({
             inputRange: [80, HEADER_SCROLL_DISTANCE],
@@ -136,7 +209,7 @@ export default class CourseInfo extends React.Component{
                                 {this.state.mapData.TRANSPORT.map((v, i)=>{
                                     return (
                                         <View style={{flexDirection: 'row', alignItems: 'center'}} key={v.NAME}>
-                                            <Text style={{width: 70, fontSize: 13, color: '#444'}}>{v.NAME}</Text>
+                                            <Text style={{width: 70, fontSize: 15, color: '#444'}}>{v.NAME}</Text>
                                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                                 {v.NUMBER.map((b, j)=>{
                                                     return (
@@ -162,7 +235,7 @@ export default class CourseInfo extends React.Component{
                                                     );
                                                 })}
 
-                                                <Text style={{marginLeft: 4, color: '#444'}}>{v.STATION}</Text>
+                                                <Text style={{marginLeft: 4, color: '#444', fontSize: 15}}>{v.STATION}</Text>
                                             </View>
                                         </View>
                                     );
@@ -172,98 +245,9 @@ export default class CourseInfo extends React.Component{
                                 <Text style={contentStyles.sectionTitle}>코스정보</Text>
                             </View>
                             <View style={contentStyles.sectionRoad}>
-                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
-                                    <View style={contentStyles.roadItemWrap}>
-                                        <View style={contentStyles.roadItemIconWrap}>
-                                            <View style={{flex: 1}} />
-                                            <View style={contentStyles.roadItemLine}>
-                                                <View style={{flex: 1, backgroundColor: 'transparent'}} />
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                            </View>
-                                            <View style={contentStyles.roadItemIcon}>
-                                                <Icon name="expand-more" size={12} color="#888" />
-                                            </View>
-                                            <View style={{width: 20}} />
-                                        </View>
-                                        <View style={contentStyles.roadItemInfoWrap}>
-                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>태릉</Text>
-                                        </View>
-                                    </View>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
-                                    <View style={contentStyles.roadItemWrap}>
-                                        <View style={contentStyles.roadItemIconWrap}>
-                                            <View style={{flex: 1}} />
-                                            <View style={contentStyles.roadItemLine}>
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                            </View>
-                                            <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: '#4D8000'}]}>
-                                                <Icon name="directions-subway" size={20} color="#4D8000" />
-                                            </View>
-                                            <View style={{width: 20}} />
-                                        </View>
-                                        <View style={contentStyles.roadItemInfoWrap}>
-                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>도봉산역</Text>
-                                            <Text style={{fontSize: 12, color: '#999'}}>지하철 7호선 도봉산역 2번출구</Text>
-                                        </View>
-                                    </View>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
-                                    <View style={contentStyles.roadItemWrap}>
-                                        <View style={contentStyles.roadItemIconWrap}>
-                                            <View style={{flex: 1}} />
-                                            <View style={contentStyles.roadItemLine}>
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                            </View>
-                                            <View style={contentStyles.roadItemIcon}>
-                                                <Icon name="expand-more" size={12} color="#888" />
-                                            </View>
-                                            <View style={{width: 20}} />
-                                        </View>
-                                        <View style={contentStyles.roadItemInfoWrap}>
-                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>넓쩍바위</Text>
-                                        </View>
-                                    </View>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
-                                    <View style={contentStyles.roadItemWrap}>
-                                        <View style={contentStyles.roadItemIconWrap}>
-                                            <View style={{flex: 1}} />
-                                            <View style={contentStyles.roadItemLine}>
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                            </View>
-                                            <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: '#f7941f'}]}>
-                                                <Icon name="nature" size={20} color="#f7941f" />
-                                            </View>
-                                            <View style={{width: 20}} />
-                                        </View>
-                                        <View style={contentStyles.roadItemInfoWrap}>
-                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>창포원.관리사무소 앞</Text>
-                                            <Text style={{fontSize: 12, color: '#999'}}>스탬프 획득지점</Text>
-                                        </View>
-                                    </View>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0">
-                                    <View style={contentStyles.roadItemWrap}>
-                                        <View style={contentStyles.roadItemIconWrap}>
-                                            <View style={{flex: 1}} />
-                                            <View style={contentStyles.roadItemLine}>
-                                                <View style={{flex: 1, backgroundColor: '#888'}} />
-                                                <View style={{flex: 1, backgroundColor: 'transparent'}} />
-                                            </View>
-                                            <View style={contentStyles.roadItemIcon}>
-                                                <Icon name="expand-more" size={12} color="#888" />
-                                            </View>
-                                            <View style={{width: 20}} />
-                                        </View>
-                                        <View style={contentStyles.roadItemInfoWrap}>
-                                            <Text style={{fontSize: 15, fontWeight: '400', color: '#222'}}>학도암</Text>
-                                        </View>
-                                    </View>
-                                </TouchableHighlight>
+                                {this.state.mapData.ROAD_DATA.map((v, i) => {
+                                    return this.renderCourseRoadItem(v, i)
+                                })}
                             </View>
                         </View>
                     </ScrollView>
@@ -362,12 +346,12 @@ const contentStyles = StyleSheet.create({
         borderTopColor: '#E6E6E6',
     },
     sectionTitle: {
-        fontSize: 16,
+        fontSize: 13,
         color: '#999',
         marginBottom: 2,
     },
     infoText: {
-        fontSize: 14,
+        fontSize: 15,
         lineHeight: 23,
         color: '#444',
     },

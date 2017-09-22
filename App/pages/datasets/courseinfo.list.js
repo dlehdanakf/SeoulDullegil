@@ -7981,5 +7981,115 @@ export default [
                 COT_CONTS_NAME: "1-45(안전지점)"
             }
         ],
+        ROAD_DATA: [
+            {
+                NAME: '도봉산역',
+                DESCRIPTION: '지하철 1,7호선 도봉산역',
+                TYPE: 'M',
+                COLOR: 1,
+            },
+            {
+                NAME: '서울 창포원',
+                DESCRIPTION: null,
+                TYPE: 'P',
+                COLOR: null,
+            },
+            {
+                NAME: '서울 창포원 앞 관리사무소',
+                DESCRIPTION: null,
+                TYPE: 'S',
+                COLOR: null,
+            },
+            {
+                NAME: '상도교',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '벽운동계곡',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '노원골',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '전망대',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '채석장 전망대',
+                DESCRIPTION: '갈림길에서 당고개 공원으로 진입가능',
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '학림사',
+                DESCRIPTION: null,
+                TYPE: 'P',
+                COLOR: null,
+            },
+            {
+                NAME: '덕릉고개',
+                DESCRIPTION: null,
+                TYPE: 'P',
+                COLOR: null,
+            },
+            {
+                NAME: '불암산 우회코스 갈림길',
+                DESCRIPTION: null,
+                TYPE: 'S',
+                COLOR: null,
+            },
+            {
+                NAME: '넓은마당',
+                DESCRIPTION: null,
+                TYPE: 'P',
+                COLOR: null,
+            },
+            {
+                NAME: '경수사',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '넓쩍바위',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '학도암',
+                DESCRIPTION: null,
+                TYPE: 'P',
+                COLOR: null,
+            },
+            {
+                NAME: '태릉',
+                DESCRIPTION: null,
+                TYPE: 'N',
+                COLOR: null,
+            },
+            {
+                NAME: '화랑대 4번출구 앞 공원',
+                DESCRIPTION: null,
+                TYPE: 'S',
+                COLOR: null,
+            },
+            {
+                NAME: '화랑대역',
+                DESCRIPTION: '지하철 6호선 화랑대역',
+                TYPE: 'M',
+                COLOR: 6,
+            }
+        ]
     }
 ];
