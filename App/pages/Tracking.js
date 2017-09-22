@@ -16,12 +16,15 @@ import trakingStyles from './assets/TrackingComponent.styles';
 import {Constants, Location, Permissions, Notifications} from 'expo';
 import Geolib from 'geolib';
 
-import {MessageBar, MessageBarManager} from 'react-native-message-bar';
 import Timer from 'react-native-timer';
 import TrackingInfo from './components/trackingInfo';
 import Drawer from 'react-native-drawer'
 
+import CourseData from './datasets/course.list';
+import MapData from './datasets/courseinfo.list';
+
 const navBarStyles = navBarStylesModule("#558F4A");
+const COURSE_INDEX = 0;
 
 export default class Tracking extends React.Component {
     constructor(props){
@@ -4501,635 +4504,11 @@ export default class Tracking extends React.Component {
               ]
           ]
       ];
-      this.majorPinData = [
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "1",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "2",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "8023.54326",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:34",
-              COT_NATION_POINT_NUMBER: "다사63325797",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01013",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01804",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "노원로1길 21",
-              COT_DONG_NAME: "공릉동",
-              COT_COORD_X: "127.0843538",
-              COT_UPDATE_DATE: "2016-12-05 22:53:34",
-              COT_ADDR_FULL_OLD: "노원구 공릉동 281-2",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.62052066",
-              COT_IMG_MAIN_URL: "",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "281",
-              COT_CONTS_NAME: "&#91;1코스&#93; 지하철 6호선 화랑대역 "
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "2",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "9746.580436",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:34",
-              COT_NATION_POINT_NUMBER: "다사64045979",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01010",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01794",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "화랑로 653",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.0925171",
-              COT_UPDATE_DATE: "2016-12-05 22:53:34",
-              COT_ADDR_FULL_OLD: "",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.63688167",
-              COT_IMG_MAIN_URL: "http://gil.seoul.go.kr/view/point/2013/09/03/4325925189900.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 태릉"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "3",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "10451.197087",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:34",
-              COT_NATION_POINT_NUMBER: "다사63556135",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01009",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01722",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.08685",
-              COT_UPDATE_DATE: "2017-04-05 13:30:50",
-              COT_ADDR_FULL_OLD: "",
-              COT_GU_NAME: "",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.65092827",
-              COT_IMG_MAIN_URL: "/smgis/ucimgs/conts/100211/100211_gilseoul_20170405133050_1.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 넓적바위"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "4",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "10475.926185",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-03-16 10:31:23",
-              COT_NATION_POINT_NUMBER: "다사63666127",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01025",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01723",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.088138163",
-              COT_UPDATE_DATE: "2017-04-13 16:30:51",
-              COT_ADDR_FULL_OLD: "노원구 중계동 101-20",
-              COT_GU_NAME: "",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.650268642",
-              COT_IMG_MAIN_URL: "",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93;화장실(1-57 안전지점 인근)"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "5",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "10589.55335",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-03-16 10:27:07",
-              COT_NATION_POINT_NUMBER: "다사63246181",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01024",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01719",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.083355767",
-              COT_UPDATE_DATE: "2017-04-13 16:30:09",
-              COT_ADDR_FULL_OLD: "노원구 중계동 101-1",
-              COT_GU_NAME: "",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.655078509",
-              COT_IMG_MAIN_URL: "",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93;화장실(1-56 안전지점 인근)"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "6",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "10865.235238",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:34",
-              COT_NATION_POINT_NUMBER: "다사63946155",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01012",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01723",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "중계동",
-              COT_COORD_X: "127.0912494",
-              COT_UPDATE_DATE: "2017-03-29 16:17:45",
-              COT_ADDR_FULL_OLD: "노원구 중계동 102",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.65278647",
-              COT_IMG_MAIN_URL: "http://gil.seoul.go.kr/view/point/2013/09/03/4519656670990.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "102",
-              COT_CONTS_NAME: "&#91;1코스&#93; 학도암"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "7",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "11497.478175",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-02-28 16:37:29",
-              COT_NATION_POINT_NUMBER: "다사61356412",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01020",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01626",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.061722194",
-              COT_UPDATE_DATE: "2017-04-06 16:37:42",
-              COT_ADDR_FULL_OLD: "노원구 상계동 62-3",
-              COT_GU_NAME: "",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.675798412",
-              COT_IMG_MAIN_URL: "/smgis/ucimgs/conts/100211/100211_gilseoul_20170406163740_1.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 노원골(천상병산길)"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "8",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "11601.696463",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-02-28 16:47:10",
-              COT_NATION_POINT_NUMBER: "다사62246380",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01021",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01639",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.071814159",
-              COT_UPDATE_DATE: "2017-04-06 17:00:14",
-              COT_ADDR_FULL_OLD: "노원구 상계동 145-1",
-              COT_GU_NAME: "",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.672955722",
-              COT_IMG_MAIN_URL: "/smgis/ucimgs/conts/100211/100211_gilseoul_20170406170014_1.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 채석장"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "9",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "9",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "11629.803924",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:33",
-              COT_NATION_POINT_NUMBER: "다사63256317",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01006",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01645",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "상계동",
-              COT_COORD_X: "127.08341002",
-              COT_UPDATE_DATE: "2016-12-05 22:53:33",
-              COT_ADDR_FULL_OLD: "노원구 상계동 164-9",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.66731169",
-              COT_IMG_MAIN_URL: "http://gil.seoul.go.kr/view/point/2013/09/03/3820580874985.JPG",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "164",
-              COT_CONTS_NAME: "&#91;1코스&#93; 넓은마당"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "10",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "11712.318264",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-03-16 10:35:26",
-              COT_NATION_POINT_NUMBER: "다사62896352",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01026",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01634",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "상계로 305",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.079309107",
-              COT_UPDATE_DATE: "2017-03-16 10:36:40",
-              COT_ADDR_FULL_OLD: "노원구 상계동 65-41",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.670540078",
-              COT_IMG_MAIN_URL: "",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93;화장실(당고개역1층)"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "11",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "11997.069042",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-02-28 16:14:50",
-              COT_NATION_POINT_NUMBER: "다사61086481",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01019",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01622",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "동일로250길 41",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.058617803",
-              COT_UPDATE_DATE: "2017-04-05 13:12:38",
-              COT_ADDR_FULL_OLD: "노원구 상계동 42-2",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.682028563",
-              COT_IMG_MAIN_URL: "/smgis/ucimgs/conts/100211/100211_gilseoul_20170405131232_1.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 벽운동계곡"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "12",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "12456.135588",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-02-28 16:57:05",
-              COT_NATION_POINT_NUMBER: "다사60086564",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01022",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01318",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "마들로 916",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.047231576",
-              COT_UPDATE_DATE: "2017-03-30 11:58:06",
-              COT_ADDR_FULL_OLD: "도봉구 도봉동 4-1",
-              COT_GU_NAME: "도봉구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.689470953",
-              COT_IMG_MAIN_URL: "/smgis/ucimgs/conts/100211/100211_gilseoul_20170330115750_1.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 창포원안내센터"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "13",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "12460.425036",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2017-03-16 10:16:39",
-              COT_NATION_POINT_NUMBER: "다사60086564",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01023",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01318",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "마들로 916",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.047319311",
-              COT_UPDATE_DATE: "2017-03-16 15:32:01",
-              COT_ADDR_FULL_OLD: "도봉구 도봉동 4-1",
-              COT_GU_NAME: "도봉구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.68949833",
-              COT_IMG_MAIN_URL: "",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "2",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93;화장실(창포원건물 1층)"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "14",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "1",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "12469.908799",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:33",
-              COT_NATION_POINT_NUMBER: "다사60156564",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01004",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01318",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "도봉동",
-              COT_COORD_X: "127.04806895",
-              COT_UPDATE_DATE: "2016-12-05 22:53:33",
-              COT_ADDR_FULL_OLD: "도봉구 도봉동 4-1",
-              COT_GU_NAME: "도봉구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.68945345",
-              COT_IMG_MAIN_URL: "http://gil.seoul.go.kr/view/point/2013/09/03/3700195241870.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "4",
-              COT_CONTS_NAME: "&#91;1코스&#93; 서울창포원"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "15",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "9",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "12948.839284",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:33",
-              COT_NATION_POINT_NUMBER: "다사64056427",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01005",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01641",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "상계동",
-              COT_COORD_X: "127.0924149",
-              COT_UPDATE_DATE: "2016-12-05 22:53:33",
-              COT_ADDR_FULL_OLD: "노원구 상계동 159-9",
-              COT_GU_NAME: "노원구",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.6772893",
-              COT_IMG_MAIN_URL: "http://gil.seoul.go.kr/view/point/2013/09/03/3769376943425.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "159",
-              COT_CONTS_NAME: "&#91;1코스&#93; 덕릉고개"
-          },
-          {
-              COT_CONTS_LAN_TYPE: "KOR",
-              THM_THEME_NAME: "서울둘레길",
-              RNUM: "16",
-              COT_COORD_DATA: [ ],
-              COT_THEME_SUB_ID: "9",
-              COT_EXTRA_NAME: "",
-              COT_MBR_MIN_X: "",
-              THM_THEME_TYPE: "2",
-              COT_SLAVE_NO: "",
-              COT_LINE_COLOR: "#0000FF",
-              DIST: "13587.773991",
-              COT_COORD_TYPE: "1",
-              COT_REG_DATE: "2016-12-05 22:53:34",
-              COT_NATION_POINT_NUMBER: "다사64066509",
-              COT_EXTRA_DATA_01: "",
-              COT_CONTS_ID: "gil_01011",
-              COT_MBR_MAX_X: "",
-              COT_MBR_MIN_Y: "",
-              COT_MBR_MAX_Y: "",
-              COT_KW: "",
-              COT_NATION_BASE_AREA: "01633",
-              THM_COORD_TYPE: "1",
-              COT_THEME_ID: "100211",
-              COT_ADDR_FULL_NEW: "",
-              COT_DONG_NAME: "",
-              COT_COORD_X: "127.0924456",
-              COT_UPDATE_DATE: "2017-03-29 16:18:52",
-              COT_ADDR_FULL_OLD: "",
-              COT_GU_NAME: "",
-              COT_SAN_NAME: "",
-              COT_COORD_Y: "37.68470663",
-              COT_IMG_MAIN_URL: "http://gil.seoul.go.kr/view/point/2013/09/03/4459219559145.jpg",
-              COT_CONTS_STAT: "1",
-              COT_LINE_PATTERN: "L",
-              COT_LINE_WEIGHT: "4",
-              COT_MASTER_NO: "",
-              COT_CONTS_NAME: "&#91;1코스&#93; 수암사"
-          }
-      ];
+      this.majorPinData = MapData[COURSE_INDEX].STAMP_DATA;
 
       this.onWebViewLoaded = this.onWebViewLoaded.bind(this);
       this.getMapCenter = this.getMapCenter.bind(this);
+      this.onPressMapButton = this.onPressMapButton.bind(this);
 
       this.state = {
         location: null,
@@ -5141,8 +4520,16 @@ export default class Tracking extends React.Component {
         walkingTime: 0,
         walkingDistance: 0,
 
+        courseData: CourseData[COURSE_INDEX],
+        mapData: MapData[COURSE_INDEX],
+
         drawerOpen: false,
         drawerDisabled: false,
+
+
+        activeMapPinIndex: -1,
+        pinTitle: '',
+        pinDesc: '',
       }
     }
 
@@ -5163,12 +4550,68 @@ export default class Tracking extends React.Component {
     }
 
     componentWillUnMount(){
-      MessageBarManager.unregisterMessageBar();
       Timer.clearTimeout(this);
     }
 
     componentDidMount(){
-      MessageBarManager.registerMessageBar(this.refs.alert);
+        this.webview.messagesChannel.on('onPressPin', (e) => {
+            let idx = parseInt(e.index), cng = idx, mapData = null, mapPinTitle = null, mapPinDesc;
+            if(this.state.activeMapPinIndex === idx) cng = -1;
+
+            switch(this.state.activeMapButton){
+                case 'stamp':
+                    mapData = this.state.mapData.STAMP_DATA[idx - 1];
+                    mapPinTitle = mapData.COT_CONTS_NAME;
+                    break;
+                case 'safety':
+                    mapData = this.state.mapData.SAFETY_DATA[idx - 1];
+                    mapPinTitle = mapData.COT_CONTS_NAME;
+                    break;
+                case 'major':
+                    mapData = this.state.mapData.POINT_DATA[idx - 1];
+                    mapPinTitle = mapData.COT_CONTS_NAME;
+                    break;
+                case 'enterance':
+                    mapData = this.state.mapData.COORD_ENTERANCE_DATA[idx - 1];
+                    mapPinTitle = mapData.NAME;
+                    break;
+            }
+            mapPinDesc = mapData.COT_NATION_POINT_NUMBER + ' | ' + mapData.COT_GU_NAME + ' ' + mapData.COT_ADDR_FULL_NEW;
+
+            this.setState({
+                pinTitle: mapPinTitle,
+                pinDesc: mapPinDesc,
+                activeMapPinIndex: cng
+            });
+        });
+    }
+
+    onPressMapButton(e){
+        if(e === this.state.activeMapButton) this.setState({activeMapPinIndex: -1, activeMapButton: ''});
+        else this.setState({activeMapPinIndex: -1, activeMapButton: e});
+
+        this.webview.emit('removeAllPinAndPath');
+        if(e === this.state.activeMapButton) return;
+
+        switch(e){
+            case 'stamp':
+                this.webview.emit('setCourseStampPin', this.state.mapData.STAMP_DATA);
+                break;
+            case 'safety':
+                this.webview.emit('setCourseSafetyPin', this.state.mapData.SAFETY_DATA);
+                break;
+            case 'major':
+                this.webview.emit('setCourseMajorPin', this.state.mapData.POINT_DATA);
+                break;
+            case 'enterance':
+                this.webview.emit('setCourseEnterancePin', this.state.mapData.COORD_ENTERANCE_DATA);
+                this.webview.emit('setCourseEnterancePath', this.state.mapData.COORD_ENTERANCE_DATA);
+                break;
+        }
+    }
+    onWebViewLoaded(){
+        this.webview.emit('moveMapCenter', this.state.mapData.COORD_CENTER);
+        this.webview.emit('setCoursePath', this.state.mapData.COORD_DATA);
     }
 
     async _getLocationAsync(){
@@ -5183,7 +4626,6 @@ export default class Tracking extends React.Component {
         enableHighAccuracy: true,
         distanceInterval: 1,
       }, (location) => {
-          console.log('walkingDistance: ' + this.state.walkingDistance);
         this.setState({location:{
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
@@ -5201,7 +4643,6 @@ export default class Tracking extends React.Component {
 
     searchStamp(pinPoint){
       const errorRange = 10;  //10m
-      let point;
 
       for(var pin in this.majorPinData){
         pointDist = Geolib.getDistance(
@@ -5209,27 +4650,10 @@ export default class Tracking extends React.Component {
           {latitude: this.majorPinData[pin].COT_COORD_Y, longitude: this.majorPinData[pin].COT_COORD_X}
         );
         if(pointDist <= errorRange){
-          this.showAlertStampPoint({message: this.majorPinData[pin].COT_CONTS_NAME.split(';')[2]});
-          Notifications.presentLocalNotificationAsync({title: '지점 발견', body: this.majorPinData[pin].COT_CONTS_NAME.split(';')[2], vibrate: true});
+          Notifications.presentLocalNotificationAsync({title: '스템프 발견', body: this.majorPinData[pin].COT_CONTS_NAME});
           break;
         }
       }
-    }
-
-    showAlertStampPoint(point) {
-      var msg = point.message;
-      MessageBarManager.showAlert({
-        title: "지점 발견",
-        message: msg,
-        avatar: "https://image.freepik.com/free-icon/super-simple-avatar_318-1018.jpg",
-        alertType: 'info',
-        durationToShow: 0,
-        viewTopInset: 10,
-        viewBottomInset: 10,
-        stylesheetInfo: {backgroundColor: '#f9931f', strokeColor: '#006acd'},
-      });
-      StatusBar.setHidden(true);
-      Timer.setTimeout(this, 'showStatusBpmar',() => {StatusBar.setHidden(false);}, 4000);
     }
 
     startTracking() {
@@ -5260,21 +4684,6 @@ export default class Tracking extends React.Component {
 
     getMapCenter(){
         this.webview.emit('center');
-    }
-
-    onWebViewLoaded(){
-        this.webview.emit('moveMapCenter', {
-            x: 127.0677877,
-            y: 37.6560945,
-        });
-        this.webview.emit('setCoursePath', this.pathData);
-
-        this.webview.emit('setCourseMajorPin', this.majorPinData);
-
-        // this.webview.emit('setMyLocationPin', {
-        //     x: 126.978399,
-        //     y: 37.566621
-        // });	Show the modal?
     }
 
 
@@ -5331,6 +4740,60 @@ export default class Tracking extends React.Component {
                     side="bottom"
                     >
                     <WebView ref={ webview => { this.webview = webview; }} source={MapSource} onLoadEnd={this.onWebViewLoaded} />
+                        <View style={{position: 'absolute', top: 14, right: 14}}>
+                            <TouchableHighlight
+                                underlayColor={this.state.activeMapButton === 'stamp' ? '#4388ff' : '#F1F1F1'}
+                                onPress={()=>this.onPressMapButton('stamp')}
+                                style={[
+                                    styles.mapButton,
+                                    this.state.activeMapButton === 'stamp' ? styles.mapButtonActive : {},
+                                ]}
+                            >
+                                <Icon name="nature" color={this.state.activeMapButton === 'stamp' ? '#FFF' : '#565c75'} size={20} />
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                underlayColor={this.state.activeMapButton === 'enterance' ? '#4388ff' : '#F1F1F1'}
+                                onPress={()=>this.onPressMapButton('enterance')}
+                                style={[
+                                    styles.mapButton,
+                                    this.state.activeMapButton === 'enterance' ? styles.mapButtonActive : {},
+                                    {marginTop: 6}
+                                ]}
+                            >
+                                <View>
+                                    <Text style={[styles.mapButtonText, {color: this.state.activeMapButton === 'enterance' ? '#FFF' : '#565c75'}]}>진입</Text>
+                                    <Text style={[styles.mapButtonText, {marginTop: -3, color: this.state.activeMapButton === 'enterance' ? '#FFF' : '#565c75'}]}>경로</Text>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                underlayColor={this.state.activeMapButton === 'major' ? '#4388ff' : '#F1F1F1'}
+                                onPress={()=>this.onPressMapButton('major')}
+                                style={[
+                                    styles.mapButton,
+                                    this.state.activeMapButton === 'major' ? styles.mapButtonActive : {},
+                                    {marginTop: 6}
+                                ]}
+                            >
+                                <View>
+                                    <Text style={[styles.mapButtonText, {color: this.state.activeMapButton === 'major' ? '#FFF' : '#565c75'}]}>주요</Text>
+                                    <Text style={[styles.mapButtonText, {marginTop: -3, color: this.state.activeMapButton === 'major' ? '#FFF' : '#565c75'}]}>지점</Text>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                underlayColor={this.state.activeMapButton === 'safety' ? '#4388ff' : '#F1F1F1'}
+                                onPress={()=>this.onPressMapButton('safety')}
+                                style={[
+                                    styles.mapButton,
+                                    this.state.activeMapButton === 'safety' ? styles.mapButtonActive : {},
+                                    {marginTop: 6}
+                                ]}
+                            >
+                                <View>
+                                    <Text style={[styles.mapButtonText, {color: this.state.activeMapButton === 'safety' ? '#FFF' : '#565c75'}]}>안전</Text>
+                                    <Text style={[styles.mapButtonText, {marginTop: -3, color: this.state.activeMapButton === 'safety' ? '#FFF' : '#565c75'}]}>지점</Text>
+                                </View>
+                            </TouchableHighlight>
+                        </View>
                 </Drawer>
 
                 <View style={{height: 60, backgroundColor: '#FFF', flexDirection: 'row'}}>
@@ -5340,8 +4803,6 @@ export default class Tracking extends React.Component {
                         </View>
                     </TouchableNativeFeedback>
                 </View>
-
-                <MessageBar ref="alert" />
             </View>
         );
     }
@@ -5351,5 +4812,23 @@ const styles = StyleSheet.create({
     fill: {
         flex: 1,
         backgroundColor: '#FFF',
+    },
+    mapButton: {
+        width: 36,
+        height: 36,
+        borderRadius: 3,
+        borderWidth: 1,
+        borderColor: '#9c9c9c',
+        backgroundColor: '#FCFCFC',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    mapButtonText: {
+        color: '#565c75',
+        fontSize: 12
+    },
+    mapButtonActive: {
+        borderColor: '#4a6fa1',
+        backgroundColor: '#4388ff',
     },
 });
