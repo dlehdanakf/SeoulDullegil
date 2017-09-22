@@ -51,7 +51,7 @@ export default class CourseInfo extends React.Component{
             extrapolate: 'clamp',
         });
 
-        const courseDifficulty = ['초급', '초급', '중급', '고급'];
+        const courseDifficulty = ['', '초급', '중급', '고급'];
 
         return (
             <View style={styles.fill}>
