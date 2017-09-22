@@ -19,16 +19,19 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     window.RNMessagesChannel.on('setMyLocationPin', e => {
-        if(myLocationMarker !== null) myLocationMarker.setMap(null);
-
-        myLocationMarker = new naver.maps.Marker({
-            position: new naver.maps.LatLng(e.y, e.x),
-            map: map,
-            icon: {
-                content: "<span class='myLocPin'></span>",
-                size: new naver.maps.Size(14, 14)
-            },
-        });
+        //if(myLocationMarker !== null) myLocationMarker.setMap(null);
+        if(myLocationMarker !== null)
+          myLocationMarker.setPosition(new naver.maps.LatLng(e.y, e.x));
+        else{
+          myLocationMarker = new naver.maps.Marker({
+              position: new naver.maps.LatLng(e.y, e.x),
+              map: map,
+              icon: {
+                  content: "<span class='myLocPin'></span>",
+                  size: new naver.maps.Size(14, 14)
+              },
+          });
+        }
     });
     window.RNMessagesChannel.on('moveMapCenter', e => {
         map.setCenter(

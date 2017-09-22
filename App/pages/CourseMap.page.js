@@ -1,7 +1,8 @@
 import React, { Component } from 'React'
 import {
     Animated, Image, ScrollView,
-    StyleSheet, Text, View, TouchableHighlight
+    StyleSheet, Text, View, TouchableHighlight,
+    Platform
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-native-nav'
@@ -12,6 +13,10 @@ import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 
 import MapData from './datasets/courseinfo.list';
+import {Constants, Location, Permissions, Notifications} from 'expo';
+import Geolib from 'geolib';
+
+import {MessageBar, MessageBarManager} from 'react-native-message-bar';
 
 const navBarStyles = navBarStylesModule("#564339");
 const mapData = MapData[0];
@@ -96,6 +101,9 @@ export default class CourseMap extends React.Component {
         this.webview.emit('moveMapCenter', this.state.mapData.COORD_CENTER);
         this.webview.emit('setCoursePath', this.state.mapData.COORD_DATA);
     }
+
+
+
     render(){
         return (
             <View style={styles.fill}>
@@ -107,7 +115,13 @@ export default class CourseMap extends React.Component {
                         <NavTitle style={navBarStyles.title}>
                             지도보기
                         </NavTitle>
+                        <View style={{flex:1, alignItems:'flex-end'}}>
+                          <NavButton onPress={this.state.trackingFunc}>
+                            <Text style={{color:'white', fontSize:17}}>{this.state.trackingButtonMsg}</Text>
+                          </NavButton>
+                        </View>
                     </View>
+
                 </NavBar>
                 <View style={styles.fill}>
                     <WebView
@@ -188,6 +202,8 @@ export default class CourseMap extends React.Component {
                         </View>
                     </View>
                 }
+
+                <MessageBar ref="alert" />
             </View>
         );
     }
