@@ -5308,8 +5308,8 @@ export default class Tracking extends React.Component {
                 <Drawer
                     ref={(ref) => this._drawer = ref}
                     type="overlay"
-                    content={<TrackingInfo walkingTime = {this.state.walkingTime}/>}
-                    openDrawerOffset={(viewport) => viewport.width - 100}  /* 사이드바 크기 조절 */
+                    content={<TrackingInfo walkingTime = {this.state.walkingTime} walkingDistance={this.state.walkingDistance}/>}
+                    openDrawerOffset={(viewport) => viewport.width - 80}  /* 사이드바 크기 조절 */
                     closedDrawerOffset={40}
                     styles={{main: {shadowColor: "#000000", shadowOpacity: 1, shadowRadius: 15}}}
                     captureGestures
