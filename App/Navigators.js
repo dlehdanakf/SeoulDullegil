@@ -14,13 +14,8 @@ import Tracking from './pages/Tracking';
 const MyNavigator = () => (
   <Router>
       <Scene key="root" headerMode="none">
-<<<<<<< HEAD
-=======
-          <Scene key="tracking" component={Tracking} />
           <Scene key="course_map" component={CourseMap} />
->>>>>>> twDevelop
           <Scene key="course_info" component={CourseInfo} />
-          <Scene key="course_map" component={CourseMap} />
       </Scene>
   </Router>
 );
