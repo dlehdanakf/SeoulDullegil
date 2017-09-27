@@ -18,7 +18,7 @@ export default class TrackingInfo extends React.Component{
         return(
             <View style={{flex:1, height:80}}>
                 <View style={{height:40, flexDirection: 'row', backgroundColor:'#0C181C', alignItems:'center',paddingLeft: 15, paddingRight: 15}}>
-                    <Text style={{flex: 1, fontSize:20, color:'white'}}>수락·불암산코스</Text>
+                    <Text style={{flex: 1, fontSize:20, color:'white'}}>{this.props.courseName}</Text>
                     <View style={{flex: 1, alignItems:'center', flexDirection: 'row'}}>
                         <IconMaterialCommunityIcons name="timer" size={20} color="white" style={{flex:1, textAlign: 'right'}}>
                             <Text style={{flex: 1, fontSize:20, color:'white', textAlign:'right'}}>  {parseInt(this.props.walkingTime / 60)} : {this.props.walkingTime % 60}</Text>
@@ -32,8 +32,8 @@ export default class TrackingInfo extends React.Component{
                             <Text style={{color:"white", fontSize: 20}}> 걸은 거리 (M)</Text>
                         </View>
                         <View style={{flex:1, paddingLeft:10, paddingTop: 20}}>
-                            <Text style={{fontSize:40, color:'white'}}>{this.props.walkingDistance} m</Text>
-                            <Text style={{fontSize:20, color:'white'}}>칼로리 소모량: 45 kcal</Text>
+                            <Text style={{flex:3, fontSize:40, color:'white'}}>{this.props.walkingDistance} m</Text>
+                            <Text style={{flex:2, fontSize:20, color:'white'}}>칼로리 소모량: 45 kcal</Text>
                         </View>
                     </View>
                     <View style={{flex: 1}}>
@@ -42,8 +42,8 @@ export default class TrackingInfo extends React.Component{
                             <Text style={{fontSize:20, color:'white'}}>가까운 지점</Text>
                         </View>
                         <View style={{flex:1, paddingLeft:10, paddingTop: 20, borderLeftWidth:2, borderStyle: 'dotted', borderColor: 'white'}}>
-                            <Text style={{fontSize:40, color:'white'}}>세종대학교</Text>
-                            <Text style={{fontSize:20, color:'white'}}>지점까지 거리: 15 km</Text>
+                            <Text style={{flex:3, fontSize:30, color:'white'}}>{this.props.nearSpot.name}</Text>
+                            <Text style={{flex:2, fontSize:20, color:'white'}}>지점까지 거리: {this.props.nearSpot.distance} m</Text>
                         </View>
                     </View>
                 </View>
