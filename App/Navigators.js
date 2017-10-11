@@ -3,10 +3,6 @@ import {
   Scene, Router, Actions, Reducer, ActionConst,
 } from 'react-native-router-flux';
 
-// import Home from './MainPage/Index';
-// import Tracking from './Tracking';
-// import CourseInfo from './Course/CourseInfo';
-
 import CourseInfo from './pages/CourseInfo.page';
 import CourseMap from './pages/CourseMap.page';
 import Tracking from './pages/Tracking';
