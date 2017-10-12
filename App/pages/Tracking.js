@@ -17,6 +17,11 @@ import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native
 import {Actions} from 'react-native-router-flux';
 import {WebView} from 'react-native-webview-messaging/WebView';
 
+
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 import trakingStyles from './assets/TrackingComponent.styles';
@@ -282,151 +287,41 @@ export default class Tracking extends React.Component {
                             </NavButton>
                         </View>
                     </View>
-
                 </NavBar>
 
-                <Drawer ref={(ref) => this._drawer = ref}
-                    type="overlay"
-                    content={
-                        <TrackingInfo
-                            courseName = {this.state.mapData.NAME}
-                            walkingTime = {this.state.walkingTime}
-                            walkingDistance = {this.state.walkingDistance}
-                            nearSpot = {this.state.nearSpot}
-                        />
-                    }
-                    openDrawerOffset={(viewport) => viewport.height - 270} /* 사이드바 크기 조절 */
-                    closedDrawerOffset={40} styles={{
-                        main: {
-                            shadowColor: "#000000",
-                            shadowOpacity: 1,
-                            shadowRadius: 0
-                        }
-                    }}
-                    captureGestures={false}
-                    acceptTap={true}
-                    tapToClose={true}
-                    tweenDuration={250} //열고 닫는 시간
-                    panOpenMask={-20}
-                    panCloseMask={1000}
-                    onPress={this.open}
-                    onOpen={() => { this.setState({drawerOpen: true}) }}
-                    onClose={() => { this.setState({drawerOpen: false}) }}
-                    disabled={this.state.drawerDisabled} side="bottom">
-                    <WebView ref={webview => {
-                        this.webview = webview;
-                    }} source={MapSource} onLoadEnd={this.onWebViewLoaded}/>
-                    <View style={{
-                        position: 'absolute',
-                        top: 14,
-                        right: 14
-                    }}>
-                        <TouchableHighlight underlayColor={this.state.activeMapButton === 'stamp'
-                            ? '#4388ff'
-                            : '#F1F1F1'} onPress={() => this.onPressMapButton('stamp')} style={[
-                            styles.mapButton, this.state.activeMapButton === 'stamp'
-                                ? styles.mapButtonActive
-                                : {}
-                        ]}>
-                            <Icon name="nature" color={this.state.activeMapButton === 'stamp'
-                                ? '#FFF'
-                                : '#565c75'} size={20}/>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor={this.state.activeMapButton === 'enterance'
-                            ? '#4388ff'
-                            : '#F1F1F1'} onPress={() => this.onPressMapButton('enterance')} style={[
-                            styles.mapButton, this.state.activeMapButton === 'enterance'
-                                ? styles.mapButtonActive
-                                : {}, {
-                                marginTop: 6
-                            }
-                        ]}>
-                            <View>
-                                <Text style={[
-                                    styles.mapButtonText, {
-                                        color: this.state.activeMapButton === 'enterance'
-                                            ? '#FFF'
-                                            : '#565c75'
-                                    }
-                                ]}>진입</Text>
-                                <Text style={[
-                                    styles.mapButtonText, {
-                                        marginTop: -3,
-                                        color: this.state.activeMapButton === 'enterance'
-                                            ? '#FFF'
-                                            : '#565c75'
-                                    }
-                                ]}>경로</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor={this.state.activeMapButton === 'major'
-                            ? '#4388ff'
-                            : '#F1F1F1'} onPress={() => this.onPressMapButton('major')} style={[
-                            styles.mapButton, this.state.activeMapButton === 'major'
-                                ? styles.mapButtonActive
-                                : {}, {
-                                marginTop: 6
-                            }
-                        ]}>
-                            <View>
-                                <Text style={[
-                                    styles.mapButtonText, {
-                                        color: this.state.activeMapButton === 'major'
-                                            ? '#FFF'
-                                            : '#565c75'
-                                    }
-                                ]}>주요</Text>
-                                <Text style={[
-                                    styles.mapButtonText, {
-                                        marginTop: -3,
-                                        color: this.state.activeMapButton === 'major'
-                                            ? '#FFF'
-                                            : '#565c75'
-                                    }
-                                ]}>지점</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor={this.state.activeMapButton === 'safety'
-                            ? '#4388ff'
-                            : '#F1F1F1'} onPress={() => this.onPressMapButton('safety')} style={[
-                            styles.mapButton, this.state.activeMapButton === 'safety'
-                                ? styles.mapButtonActive
-                                : {}, {
-                                marginTop: 6
-                            }
-                        ]}>
-                            <View>
-                                <Text style={[
-                                    styles.mapButtonText, {
-                                        color: this.state.activeMapButton === 'safety'
-                                            ? '#FFF'
-                                            : '#565c75'
-                                    }
-                                ]}>안전</Text>
-                                <Text style={[
-                                    styles.mapButtonText, {
-                                        marginTop: -3,
-                                        color: this.state.activeMapButton === 'safety'
-                                            ? '#FFF'
-                                            : '#565c75'
-                                    }
-                                ]}>지점</Text>
-                            </View>
-                        </TouchableHighlight>
+                <View style={{flex:1}}>
+                    <View style={{flex: 3}}>
+                        <WebView ref={webview => {this.webview = webview;}} source={MapSource} onLoadEnd={this.onWebViewLoaded}/>
                     </View>
-                </Drawer>
+                    <View style={{flex:2, paddingLeft: 15, paddingRight: 15, paddingBottom: 15}}>
+                        <View style={{height:30, backgroundColor: 'yellow'}} />
+                        <View style={{flex:1, flexDirection: 'row'}}>
+                            <View style={{flex:2, backgroundColor:'blue', flexDirection: 'row'}}>
+                                <View style={{flex:1}}>
+                                    <View style={{flex:1, flexDirection: 'row'}}>
+                                        <Text style={{}}></Text>
+                                    </View>
+                                    <View style={{flex:1, flexDirection: 'row'}}>
 
-                <View style={{
-                    position: 'absolute',
-                    zIndex: -1,
-                    bottom: 0,
-                    height: 100,
-                    width: Dimensions.get('window').width,
-                    backgroundColor: '#0C181C'
-                }}/>
-                <View style={{
-                    height: 60
-                }}>
+                                    </View>
+                                </View>
+                                <View style={{flex:1}}>
+                                    <View style={{flex:1, flexDirection: 'row'}}>
+
+                                    </View>
+                                    <View style={{flex:1, flexDirection: 'row'}}>
+
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{flex:1, backgroundColor:'red'}}>
+                                <View></View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={{ height: 60 }}>
                     <TouchableNativeFeedback onPress={this.state.trackingFunc}>
                         <View style={{
                             flex: 1,
