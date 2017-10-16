@@ -54,8 +54,8 @@ export default class Tracking extends React.Component {
 
         this.state = {
             location: {
-                latitude: null,
-                longitude: null
+                latitude: 0,
+                longitude: 0,
             },
             errorMessage: null,
             isStartTracking: null,
@@ -177,20 +177,36 @@ export default class Tracking extends React.Component {
                 enableHighAccuracy: true,
                 distanceInterval: 1
             }, (location) => {
+
+                let walkingForMin = 0;
+
+                if(this.state.location.latitude != 0 && this.state.location.longitude != 0)
+                {
+                    walkingForMin = Geolib.getDistance({
+                        latitude: this.state.location.latitude,
+                        longitude: this.state.location.longitude
+                    }, {
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude,
+                    });
+                }
+
                 this.setState({
                     location: {
                         latitude: location.coords.latitude,
-                        longitude: location.coords.longitude
+                        longitude: location.coords.longitude,
                     }
                 });
+
                 this.webview.emit('setMyLocationPin', {
                     y: location.coords.latitude,
                     x: location.coords.longitude
                 });
+
                 if (this.state.isStartTracking) {
                     this.setState({
-                        walkingDistance: this.state.walkingDistance + 1,
-                        burnKcal: this.state.burnKcal + this.kcalperM,
+                        walkingDistance: this.state.walkingDistance + walkingForMin,
+                        burnKcal: this.state.burnKcal + this.kcalperM * walkingForMin,
                     });
                     this.searchStamp(this.majorPinData);
                 }
@@ -239,7 +255,18 @@ export default class Tracking extends React.Component {
                 body: this.state.mapData.NAME + ' 트래킹 진행중~.',
                 sticky: true
             });
-            this.setState({isStartTracking: true, trackingFunc: this.stopTracking.bind(this), trackingButtonMsg: '트래킹 그만하기', walkingTime: 0, walkingDistance: 0});
+            this.setState({
+                isStartTracking: true,
+                trackingFunc: this.stopTracking.bind(this),
+                trackingButtonMsg: '트래킹 그만하기',
+                walkingTime: 0,
+                walkingDistance: 0,
+                burnKcal: 0,
+                nearSpot: {
+                    distance: 0,
+                    stamp: '',
+                },
+            });
             this.setWalkingTime();
         }
     }
@@ -406,7 +433,7 @@ export default class Tracking extends React.Component {
                                     <Text style={contentStyles.smallTitle}> 걸은 거리 (M)</Text>
                                 </View>
                                 <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                                    <Text style={{fontSize:40, color:'white'}}>{this.state.walkingDistance} m</Text>
+                                    <Text style={{fontSize:40, color:'white'}}>{parseInt(this.state.walkingDistance)} m</Text>
                                 </View>
                                 <View style={{alignItems: 'center', height:40, flexDirection:'row', justifyContent:'center'}}>
                                     <Text style={{fontSize:20, color:'white'}}>운동량 {(this.state.burnKcal).toFixed(2)}</Text>
@@ -424,7 +451,7 @@ export default class Tracking extends React.Component {
                                         <View style={contentStyles.stampIconWrap}>
                                             <Image
                                                 style={contentStyles.stampIcon}
-                                                source={StampIconFunc(this.state.stamp)}
+                                                source={StampIconFunc(this.state.nearSpot.stamp)}
                                             />
                                         </View>
                                     </View>
