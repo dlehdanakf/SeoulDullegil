@@ -31,6 +31,7 @@ import Geolib from 'geolib';
 
 import Timer from 'react-native-timer';
 import TrackingInfo from './components/trackingInfo';
+import StampIconFunc from './components/stamp.function';
 import Drawer from 'react-native-drawer'
 
 import CourseData from './datasets/course.list';
@@ -49,6 +50,8 @@ export default class Tracking extends React.Component {
         this.getMapCenter = this.getMapCenter.bind(this);
         this.onPressMapButton = this.onPressMapButton.bind(this);
 
+        this.kcalperM = 0.0476;
+
         this.state = {
             location: {
                 latitude: null,
@@ -63,7 +66,8 @@ export default class Tracking extends React.Component {
             walkingDistance: 0,
             nearSpot: {
                 distance: 0,
-                name: '트래킹을 시작해주세요'
+                name: '트래킹을 시작해주세요',
+                stamp: '',
             },
             courseData: CourseData[COURSE_INDEX],
             mapData: MapData[COURSE_INDEX],
@@ -72,7 +76,9 @@ export default class Tracking extends React.Component {
             drawerDisabled: false,
             activeMapPinIndex: -1,
             pinTitle: '',
-            pinDesc: ''
+            pinDesc: '',
+
+            burnKcal: 0,
         }
     }
 
@@ -183,7 +189,8 @@ export default class Tracking extends React.Component {
                 });
                 if (this.state.isStartTracking) {
                     this.setState({
-                        walkingDistance: this.state.walkingDistance + 1
+                        walkingDistance: this.state.walkingDistance + 1,
+                        burnKcal: this.state.burnKcal + this.kcalperM,
                     });
                     this.searchStamp(this.majorPinData);
                 }
@@ -215,7 +222,8 @@ export default class Tracking extends React.Component {
         this.setState({
             nearSpot: {
                 name: this.majorPinData[nearSpotIdx].COT_CONTS_NAME,
-                distance: nearSpotDist
+                distance: nearSpotDist,
+                stamp: this.majorPinData[nearSpotIdx].COT_STAMP_ICON,
             }
         });
         console.log('가까운 지점 : ' + this.state.nearSpot.name);
@@ -252,13 +260,6 @@ export default class Tracking extends React.Component {
         this.webview.emit('center');
     }
 
-    closeControlPanel = () => {
-        this._drawer.close()
-    };
-    openControlPanel = () => {
-        this._drawer.open()
-    };
-
     render() {
         return (
             <View style={styles.fill}>
@@ -289,33 +290,153 @@ export default class Tracking extends React.Component {
                     </View>
                 </NavBar>
 
-                <View style={{flex:1}}>
-                    <View style={{flex: 3}}>
+                <View style={{flex:1, backgroundColor: 'rgba(20,39,46,0.9)'}}>
+                    <View style={{flex: 1}}>
                         <WebView ref={webview => {this.webview = webview;}} source={MapSource} onLoadEnd={this.onWebViewLoaded}/>
-                    </View>
-                    <View style={{flex:2, paddingLeft: 15, paddingRight: 15, paddingBottom: 15}}>
-                        <View style={{height:30, backgroundColor: 'yellow'}} />
-                        <View style={{flex:1, flexDirection: 'row'}}>
-                            <View style={{flex:2, backgroundColor:'blue', flexDirection: 'row'}}>
-                                <View style={{flex:1}}>
-                                    <View style={{flex:1, flexDirection: 'row'}}>
-                                        <Text style={{}}></Text>
-                                    </View>
-                                    <View style={{flex:1, flexDirection: 'row'}}>
-
-                                    </View>
+                        <View style={{position: 'absolute',top: 14,right: 14}}>
+                            <TouchableHighlight underlayColor={this.state.activeMapButton === 'stamp'
+                                ? '#4388ff'
+                                : '#F1F1F1'} onPress={() => this.onPressMapButton('stamp')} style={[
+                                styles.mapButton, this.state.activeMapButton === 'stamp'
+                                    ? styles.mapButtonActive
+                                    : {}
+                            ]}>
+                                <Icon name="nature" color={this.state.activeMapButton === 'stamp'
+                                    ? '#FFF'
+                                    : '#565c75'} size={20}/>
+                            </TouchableHighlight>
+                            <TouchableHighlight underlayColor={this.state.activeMapButton === 'enterance'
+                                ? '#4388ff'
+                                : '#F1F1F1'} onPress={() => this.onPressMapButton('enterance')} style={[
+                                styles.mapButton, this.state.activeMapButton === 'enterance'
+                                    ? styles.mapButtonActive
+                                    : {}, {
+                                    marginTop: 6
+                                }
+                            ]}>
+                                <View>
+                                    <Text style={[
+                                        styles.mapButtonText, {
+                                            color: this.state.activeMapButton === 'enterance'
+                                                ? '#FFF'
+                                                : '#565c75'
+                                        }
+                                    ]}>진입</Text>
+                                    <Text style={[
+                                        styles.mapButtonText, {
+                                            marginTop: -3,
+                                            color: this.state.activeMapButton === 'enterance'
+                                                ? '#FFF'
+                                                : '#565c75'
+                                        }
+                                    ]}>경로</Text>
                                 </View>
-                                <View style={{flex:1}}>
-                                    <View style={{flex:1, flexDirection: 'row'}}>
-
-                                    </View>
-                                    <View style={{flex:1, flexDirection: 'row'}}>
-
-                                    </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight underlayColor={this.state.activeMapButton === 'major'
+                                ? '#4388ff'
+                                : '#F1F1F1'} onPress={() => this.onPressMapButton('major')} style={[
+                                styles.mapButton, this.state.activeMapButton === 'major'
+                                    ? styles.mapButtonActive
+                                    : {}, {
+                                    marginTop: 6
+                                }
+                            ]}>
+                                <View>
+                                    <Text style={[
+                                        styles.mapButtonText, {
+                                            color: this.state.activeMapButton === 'major'
+                                                ? '#FFF'
+                                                : '#565c75'
+                                        }
+                                    ]}>주요</Text>
+                                    <Text style={[
+                                        styles.mapButtonText, {
+                                            marginTop: -3,
+                                            color: this.state.activeMapButton === 'major'
+                                                ? '#FFF'
+                                                : '#565c75'
+                                        }
+                                    ]}>지점</Text>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight underlayColor={this.state.activeMapButton === 'safety'
+                                ? '#4388ff'
+                                : '#F1F1F1'} onPress={() => this.onPressMapButton('safety')} style={[
+                                styles.mapButton, this.state.activeMapButton === 'safety'
+                                    ? styles.mapButtonActive
+                                    : {}, {
+                                    marginTop: 6
+                                }
+                            ]}>
+                                <View>
+                                    <Text style={[
+                                        styles.mapButtonText, {
+                                            color: this.state.activeMapButton === 'safety'
+                                                ? '#FFF'
+                                                : '#565c75'
+                                        }
+                                    ]}>안전</Text>
+                                    <Text style={[
+                                        styles.mapButtonText, {
+                                            marginTop: -3,
+                                            color: this.state.activeMapButton === 'safety'
+                                                ? '#FFF'
+                                                : '#565c75'
+                                        }
+                                    ]}>지점</Text>
+                                </View>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                    <View style={{height:250, paddingLeft: 15, paddingRight: 15, paddingBottom: 15}}>
+                        <View style={{height: 40, flexDirection: 'row', marginBottom:5}}>
+                            <View style={{flex:1, borderColor: 'white', borderBottomWidth: 1, flexDirection:'row'}}>
+                                <Text style={{flex:1, fontSize:20, color:'white', alignSelf:'center'}}>{this.state.mapData.NAME}</Text>
+                                <View style={{flex:1, alignItems: 'flex-end', justifyContent:'center'}}>
+                                    <IconMaterialCommunityIcons name="timer" size={20} color="white">
+                                        <Text style={{color:'white', fontSize:20}}> {parseInt(this.state.walkingTime / 60)} : {this.state.walkingTime % 60}</Text>
+                                    </IconMaterialCommunityIcons>
                                 </View>
                             </View>
-                            <View style={{flex:1, backgroundColor:'red'}}>
-                                <View></View>
+                        </View>
+                        <View style={{flex:1, flexDirection: 'row'}}>
+                            <View style={{flex:1, flexDirection: 'column'}}>
+                                <View style={{alignItems:'center', height: 40, justifyContent:'center', flexDirection: 'row'}}>
+                                    <IconIonicons name="md-walk" size={20} color="white" />
+                                    <Text style={contentStyles.smallTitle}> 걸은 거리 (M)</Text>
+                                </View>
+                                <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                                    <Text style={{fontSize:40, color:'white'}}>{this.state.walkingDistance} m</Text>
+                                </View>
+                                <View style={{alignItems: 'center', height:40, flexDirection:'row', justifyContent:'center'}}>
+                                    <Text style={{fontSize:20, color:'white'}}>운동량 {(this.state.burnKcal).toFixed(2)}</Text>
+                                    <Text style={{fontSize:15, color:'white'}}> kcal</Text>
+                                </View>
+                            </View>
+
+                            <View style={{flex:1, flexDirection:'column'}}>
+                                <View style={{alignItems:'center', height: 40, justifyContent:'center', flexDirection: 'row'}}>
+                                    <IconMaterialCommunityIcons name="map-marker" size={20} color="white" />
+                                    <Text style={contentStyles.smallTitle}>가까운 지점</Text>
+                                </View>
+                                <View style={{flex:1, borderLeftWidth:2, borderColor: 'white'}}>
+                                    <View style={{alignItems:'center', marginTop: 5, marginBottom:5}}>
+                                        <View style={contentStyles.stampIconWrap}>
+                                            <Image
+                                                style={contentStyles.stampIcon}
+                                                source={StampIconFunc(this.state.stamp)}
+                                            />
+                                        </View>
+                                    </View>
+                                    <Text style={contentStyles.smallTitle}>남은 거리</Text>
+                                </View>
+                                <View style={{height:40, flexDirection:'row'}}>
+                                    <View style={{flex:1}} />
+                                    <View style={{flex:5, justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+                                        <Text style={contentStyles.text}>{(this.state.nearSpot.distance / 1000).toFixed(2)}</Text>
+                                        <Text style={contentStyles.smallTitle}> km</Text>
+                                    </View>
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -366,3 +487,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#4388ff'
     }
 });
+
+const contentStyles = StyleSheet.create({
+    smallTitle:{
+        color: 'white',
+        fontSize: 20,
+        fontWeight:'bold'
+    },
+    text:{
+        color: 'white',
+        fontSize: 35
+    },
+    stampIconWrap: {
+        width: 101,
+        height: 101,
+        borderColor: '#D1D1D1',
+        borderWidth: 1,
+        borderRadius: 101,
+        borderStyle: 'dashed'
+    },
+    stampIcon: {
+        width: 100,
+        height: 100,
+        tintColor:'#D1D1D1'
+    },
+})
