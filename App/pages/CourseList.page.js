@@ -13,11 +13,16 @@ import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native
 import {Actions} from 'react-native-router-flux';
 import navBarStylesModule from './assets/navbar.styles';
 
+import courseListData from './datasets/course.list';
+
 const navBarStyles = navBarStylesModule("#558F4A");
 
 export default class CourseList extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            list: courseListData,
+        };
     }
 
     render() {

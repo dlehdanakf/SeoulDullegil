@@ -1,13 +1,7 @@
 import React, {Component} from 'React'
 import {
-    Image,
-    StyleSheet,
-    Text,
-    View,
-    TouchableHighlight,
-    ToastAndroid,
-    TouchableNativeFeedback,
-    Dimensions
+    Image, StyleSheet, Text, View, ListView,
+    TouchableHighlight, ToastAndroid, TouchableNativeFeedback, Dimensions
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconOcticons from 'react-native-vector-icons/Octicons';
@@ -19,24 +13,55 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import navBarStylesModule from './assets/navbar.styles';
 import DefaultTabBar from './components/tabbar.component';
 
+import greenColors from './datasets/green.colors';
+import courseListData from './datasets/course.list';
+
 const navBarStyles = navBarStylesModule("white");
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
+        this.ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2,
+            sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+        });
+
+        this.state = {
+            list: this.ds.cloneWithRows(courseListData),
+        };
+
+        this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
     }
 
-    renderNavBarBtn(icon, press, marginLeft, marginRight, key){
+    renderCourseRowItem(rowData){
+        const green = greenColors[parseInt(rowData.COURSE_NO) - 1];
+        const level = ['', '초급', '중급', '상급'];
+        const levelColor = ['', '#398b88', '#fe6d02', '#fb535c'];
+
         return (
-            <NavButton onPress={press} key={key} style={{marginLeft: marginLeft,}}>
-                <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: marginRight}]}>
-                    <IconMaterialIcons name={icon} size={24} color="#FFF" />
-                </NavButtonText>
-            </NavButton>
+            <TouchableHighlight onPress={()=>{}} underlayColor="#FAFAFA">
+                <View key={rowData.COURSE_NO} style={{flex: 1, flexDirection: 'row', paddingVertical: 12, paddingHorizontal: 8}}>
+                    <View style={{width: 60, justifyContent: 'center', alignItems: 'center'}}>
+                        <View style={{width: 50, height: 50, borderWidth: 3, borderColor: green, backgroundColor: green, borderRadius: 60, alignItems: 'center', justifyContent: 'center',}}>
+                            <Text style={{color: '#FFF', fontSize: 26, fontWeight: 'normal'}}>{rowData.COURSE_NO}</Text>
+                        </View>
+                    </View>
+                    <View style={{flex: 1, paddingLeft: 8}}>
+                        <Text style={{fontSize: 18}}>{rowData.COURSE_NM}</Text>
+                        <Text style={{fontSize: 13, color: '#999'}}>{rowData.LOCATION}</Text>
+                        <View style={{flex: 1, flexDirection: 'row', marginTop: 5, alignItems: 'center'}}>
+                            <View style={{borderColor: levelColor[parseInt(rowData.COURSE_LEVEL)], borderWidth: 1, paddingBottom: 1, paddingHorizontal: 4, borderRadius: 2}}>
+                                <Text style={{color: levelColor[parseInt(rowData.COURSE_LEVEL)], fontSize: 11}}>{level[parseInt(rowData.COURSE_LEVEL)]}</Text>
+                            </View>
+                            <Text style={{fontSize: 13, color: '#999', paddingLeft: 6}}>{rowData.DISTANCE} ({rowData.WALK_TIME})</Text>
+                        </View>
+                    </View>
+                    <View style={{width: 40}} />
+                </View>
+            </TouchableHighlight>
         );
     }
 
-    //#F8931F
     render() {
         return (
             <View style={styles.fill}>
@@ -75,13 +100,21 @@ export default class Home extends React.Component {
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
-                    >
+                    initialPage={1}
+                >
                     <View tabLabel="내 기록">
                         <View >
                             <Text>그래프</Text>
                         </View>
                     </View>
-                    <Text tabLabel="둘레길" />
+                    <ListView
+                        tabLabel="둘레길"
+                        style={{flex: 1}}
+                        dataSource={this.state.list}
+                        enableEmptySections={true}
+                        renderRow={this.renderCourseRowItem}
+                        renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
+                    />
                     <Text tabLabel="스탬프 북" />
                 </ScrollableTabView>
 
