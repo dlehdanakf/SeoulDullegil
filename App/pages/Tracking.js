@@ -12,7 +12,7 @@ import {
     Dimensions,
     ToastAndroid
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav'
 import {Actions} from 'react-native-router-flux';
 import {WebView} from 'react-native-webview-messaging/WebView';
@@ -298,7 +298,7 @@ export default class Tracking extends React.Component {
                         <NavButton style={{
                             marginHorizontal: 14
                         }}>
-                            <Icon name="arrow-back" onPress={Actions.pop} size={24} style={navBarStyles.backIcon}/>
+                            <IconMaterialIcons name="arrow-back" onPress={Actions.pop} size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             {this.state.mapData.NAME}
@@ -328,7 +328,7 @@ export default class Tracking extends React.Component {
                                     ? styles.mapButtonActive
                                     : {}
                             ]}>
-                                <Icon name="nature" color={this.state.activeMapButton === 'stamp'
+                                <IconMaterialIcons name="nature" color={this.state.activeMapButton === 'stamp'
                                     ? '#FFF'
                                     : '#565c75'} size={20}/>
                             </TouchableHighlight>
