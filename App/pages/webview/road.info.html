@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>서울둘레길 - 상세정보</title>
+    <script type="text/javascript" src="libraries/webview.min.js"></script>
+    <script type="text/javascript" src="js/road.script.js"></script>
+    <style>
+        html { padding: 0; margin: 0; }
+        body { padding: 0; margin: 0; }
+        #info { padding: 14px; }
+        .img { display: block; position: relative; }
+        .img::after { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0,0,0,.1); }
+        .img img { display: block; width: 100%; }
+        .img img[src="loading.gif"] { width: 180px; margin: 0 auto; padding-top: 20px; padding-bottom: 20px; }
+        .img span { display: block; font-size: 18px; font-weight: bold; text-align: center; padding: 80px 0; }
+        .desc { margin: 14px 0 0 0; padding: 0; }
+        .desc p { font-size: 16px; font-weight: normal; color: #333; line-height: 1.41em; }
+    </style>
+</head>
+<body>
+<div id="info">
+    <div class="img" id="img_wrap">
+        <img id="img" src="loading.gif" alt="IMG" />
+    </div>
+    <div class="desc">
+        <p id="desc"></p>
+    </div>
+</div>
+</body>
+</html>
