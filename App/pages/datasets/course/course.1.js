@@ -8010,8 +8010,8 @@ export default {
             RNUM: '8'
         },
         {
-            NAME: '화장실',
-            DESCRIPTION: '창포원 건물 1층',
+            NAME: '창포원 건물 1층',
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '9'
@@ -8052,8 +8052,8 @@ export default {
             RNUM: null
         },
         {
-            NAME: '화장실',
-            DESCRIPTION: '당고개역 1층',
+            NAME: '당고개역 1층',
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '13'
@@ -8080,8 +8080,8 @@ export default {
             RNUM: null
         },
         {
-            NAME: '화장실',
-            DESCRIPTION: '1-56 안전지점 인근',
+            NAME: '1-56 안전지점 인근',
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '4'
@@ -8094,8 +8094,8 @@ export default {
             RNUM: '5'
         },
         {
-            NAME: '화장실',
-            DESCRIPTION: '1-57 안전지점 인근',
+            NAME: '1-57 안전지점 인근',
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '6'

@@ -1364,7 +1364,7 @@ export default {
             COT_VALUE_01: "양화교 앞에 있으며 1979년 7월 27일에 준공하였다. 높이 15m·길이 98m의 규모로서 주 폭포를 포함하여 모두 6줄기의 폭포수가 쏟아져 내려온다. 주 폭포는 높이 12m·넓이 15m 규모이며, 나머지 폭포들은 높이 12m·넓이는 각각 2~3m이다. 폭포가 쏟아져 형성하는 연못 주변에 180개의 수중등과 투광등을 설치해놓아 밤이면 아름다운 야경이 연출된다. 폭포 주위로는 녹지대를 조성하여 시민공원으로 활용하며, 파라솔·벤치·식수대·화장실·휴게실 등과 주차장도 설치되어 있다.",
             COT_MASTER_NO: "153",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 양화교폭포"
+            COT_CONTS_NAME: "양화교폭포"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -1444,7 +1444,7 @@ export default {
             COT_VALUE_01: "증미산 아래 염창동은 한양에서 부평과 인천으로 가는 길목이었다. 소금창고가 많아 염창동이라는 지명이 붙여졌다. 서해에서 배로 실어 온 소금과 인천에서 등짐으로 가져온 소금은 국가용, 군사용, 일반판매용으로 구분하여 저장하였다가 필요할 때 꺼내 한양으로 풀려나갔다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[6코스] 염창동이야기"
+            COT_CONTS_NAME: "염창동이야기"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -1484,7 +1484,7 @@ export default {
             COT_VALUE_01: "목동 운동장은 대한민국 서울특별시가 생활 체육의 저변 확대와 아마추어 야구의 활성화를 목적으로 1987년 대한민국 서울특별시 양천구에 건립한 종합운동장이다. 주경기장, 야구장, 실내빙상장의 체육 시설과 사격장, 체력단련장의 부대 시설로 구성되어 있으며, 이용자의 편의를 위해 운동장 주차장과는 별도로 유수지를 복개하여 조성한 주차 공간을 제공하고 있다. 육상 경기, 축구 경기, 아마추어 야구 경기, 빙상 경기, 아이스발레 등의 행사가 개최되며, 인근에 목동 대단위 주택 단지 거주민이 편의 시설로 많이 이용하고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 목동 종합운동장"
+            COT_CONTS_NAME: "목동 종합운동장"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -1564,7 +1564,7 @@ export default {
             COT_VALUE_01: "넓이 2만 2,002㎡로, 1993년 11월 1일 개원하였다. 서울 올림픽대로를 따라 길게 뻗어 있으며 올림픽대로와 맞닿는 면에는 높은 펜스가 있다. 농구장·테니스장·배드민턴장·소운동장 등의 체육공간과 화장실·정자·벤치 등이 있다. 스트로브잣나무·은행나무·벚나무·느티나무 등이 있고, 나무 사이로 700m의 탄성고무 산책로가 있어 조깅하거나 산책하기에 좋다. ",
             COT_MASTER_NO: "227",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 황금내근린공원 "
+            COT_CONTS_NAME: "황금내근린공원 "
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -1644,7 +1644,7 @@ export default {
             COT_VALUE_01: "안양천(安養川)은 한강의 지류중 하나이다. 경기도 안양시를 지난다 하여 안양천이라는 이름이 붙었다. 안양천은 경기도 의왕시에서 발원하여 왕곡천, 오전천, 학의천, 산본천, 수암천과 합류하며 경인선 구일역(안양천 철교)부터 올림픽대로 염창교까지 국가하천으로 지정되어 있다. 안양천로와 서부간선도로가 안양천과 나란히 지나가고 있다. 서울특별시에서는 양천구, 구로구, 강서구, 영등포구, 금천구, 경기도 광명시의 경계가 되기도 한다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 안양천"
+            COT_CONTS_NAME: "안양천"
         }
     ],
     STAMP_DATA: [
@@ -1686,7 +1686,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "226-4",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 황금내 근린공원 화장실 앞",
+            COT_CONTS_NAME: "황금내 근린공원 화장실 앞",
             COT_STAMP_ICON: "stamp17.png"
         },
         {
@@ -1727,7 +1727,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 구일역 앞",
+            COT_CONTS_NAME: "구일역 앞",
             COT_STAMP_ICON: "stamp18.png"
         },
         {
@@ -1768,7 +1768,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[6코스] 석수역 앞",
+            COT_CONTS_NAME: "석수역 앞",
             COT_STAMP_ICON: "stamp19.png"
         }
     ],
@@ -3826,7 +3826,7 @@ export default {
         },
         {
             NAME: '구일역',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '7'
@@ -3840,7 +3840,7 @@ export default {
         },
         {
             NAME: '6-31 안전지점 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '5'
@@ -3868,7 +3868,7 @@ export default {
         },
         {
             NAME: '6-46 안전지점 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '2'

@@ -11272,7 +11272,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (형제봉매표소 인근 )"
+            COT_CONTS_NAME: "화장실 (형제봉매표소 인근 )"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11312,7 +11312,7 @@ export default {
             COT_VALUE_01: "대남문과 비봉능선에서 이어져 내려와 조선시대 도성과 북한산성을 연결하여 축성된 성문이다.",
             COT_MASTER_NO: "257",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 탕춘대성 암문"
+            COT_CONTS_NAME: "탕춘대성 암문"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11352,7 +11352,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 ( 북악공원안내센터 인근 )"
+            COT_CONTS_NAME: "화장실 ( 북악공원안내센터 인근 )"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11392,7 +11392,7 @@ export default {
             COT_VALUE_01: "형제봉입구에서 산길로 접어들면 갑자기 깊은산중이다. 사방이 조용해지고 물소리, 새소리가 들린다. 북한산 깃대종인 오색딱따구리도 자주 나타난다. 계곡과 능선을 오르내리는 제법 난이도가 있는 길을 걷다보면 잡념이 사라진다. 명상길 전망대에서는 칼바위 능선과 정릉계곡 위로 북한산이 펼쳐 보인다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 명상길전망대"
+            COT_CONTS_NAME: "명상길전망대"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11432,7 +11432,7 @@ export default {
             COT_VALUE_01: "북한산 생태공원(북한산도시자연공원)은 행정구역상 서울시 은평구 불광동에 위치하고 있으며, 북쪽에는 북한산국립공원이 자리 잡고 동쪽에는 구기터널이 있으며 서쪽에는 불광역이 위치하고 있어 서울둘레길, 은평둘레길과 더불어 북한산국립공원을 이용하는 시민고객들의 만남의 장소로 이용되고 있고 아울러 지역주민들의 쉼터로 애용되고 있다",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 북한산생태공원"
+            COT_CONTS_NAME: "북한산생태공원"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11472,7 +11472,7 @@ export default {
             COT_VALUE_01: "북한산 생태공원(북한산도시자연공원)은 행정구역상 서울시 은평구 불광동에 위치하고 있으며, 북쪽에는 북한산국립공원이 자리 잡고 동쪽에는 구기터널이 있으며 서쪽에는 불광역이 위치하고 있어 서울둘레길, 은평둘레길과 더불어 북한산국립공원을 이용하는 시민고객들의 만남의 장소로 이용되고 있고 아울러 지역주민들의 쉼터로 애용되고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 북한산생태공원"
+            COT_CONTS_NAME: "북한산생태공원"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11512,7 +11512,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (정릉탐방안내소)"
+            COT_CONTS_NAME: "화장실 (정릉탐방안내소)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11552,7 +11552,7 @@ export default {
             COT_VALUE_01: "북한산에 인접하여 위치한 성북생태체험관은 자연학습을 통해 식물과 동물을 알고 교육을 할 수 있는 곳으로 어린이 뿐만 아니라 어른들도 함께 보고 즐길 수 있는 곳이다.",
             COT_MASTER_NO: "231",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 성북생태체험관"
+            COT_CONTS_NAME: "성북생태체험관"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11592,7 +11592,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (성북생태체험관 )"
+            COT_CONTS_NAME: "화장실 (성북생태체험관 )"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11632,7 +11632,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (힐스테이트3차 인근)"
+            COT_CONTS_NAME: "화장실 (힐스테이트3차 인근)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11672,7 +11672,7 @@ export default {
             COT_VALUE_01: "빨래골은 삼각산 골짜기에서 흘러내리는 물의 양이 많아 ‘무너미’라 불리던 곳이다. 물이 많아 자연적으로 마을이 형성되어 인근 주민들의 쉼터와 빨래터로 이용되었고, 당시 대궐의 궁중 무수리들이 빨래터와 휴식처로 이용하면서 ‘빨래골’이라는 명칭이 유래되었으며 지금도 일반인들에게 널리 통용되고 있는 지명이다.",
             COT_MASTER_NO: "127",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 빨래골 지킴터"
+            COT_CONTS_NAME: "빨래골 지킴터"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11712,7 +11712,7 @@ export default {
             COT_VALUE_01: "울창한 숲속의 오솔길을 걷다보면 12m높이의 구름전망대가 나온다. 구름전망대에 오르면 동서남북 사방이 모두 보인다. 북한산, 도봉산, 수락산, 불암산, 용마산, 아차산으로 둘러싸인 서울을 볼 수 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 구름전망대"
+            COT_CONTS_NAME: "구름전망대"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11752,7 +11752,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (화계사 인근)"
+            COT_CONTS_NAME: "화장실 (화계사 인근)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11792,7 +11792,7 @@ export default {
             COT_VALUE_01: "한말의 독립운동가 이준(李儁 1859~1907)의 묘이다. 묘역 입구에는 위훈비와 홍살문이 서 있고, 묘역으로 올라가는 숲속 오솔길 곳곳에 이준이 남긴 말을 적은 비석들이 배치되어 있다. 묘역에 들어서면 이준의 흉상부조가 부착된 벽체 아래에 태극기가 새겨진 석판이 놓여 있는데, 그 석판 밑에 이준 열사가 묻혀 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 이준 열사 묘소"
+            COT_CONTS_NAME: "이준 열사 묘소"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11832,7 +11832,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (통일교육원 인근 )"
+            COT_CONTS_NAME: "화장실 (통일교육원 인근 )"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11872,7 +11872,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (향운사 인근)"
+            COT_CONTS_NAME: "화장실 (향운사 인근)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11952,7 +11952,7 @@ export default {
             COT_VALUE_01: "1963년 9월 20일 약 3,000평으로 건립되었다. 한 가운데 4·19혁명의 기상을 상징하는 높이 7척의 탑주 일곱 개가 솟아 있고, 주위에는 수호신상 및 각도를 달리한 20개의 만장이 조화를 이루었다. 진입로 앞에 세운 ‘민주의 뿌리’는 9개 기둥의 화강암 조형물로 민주주의 발원지임을 뜻하고, 중앙 양측에 마련된 청동재질의 ‘자유투사’는 독재정권에 항쟁하는 모습을 담았으며, 화강암 재질의 ‘정의의 불꽃’은 높이 9m의 불꽃형상으로 4·19의 정신을 뜻한다.",
             COT_MASTER_NO: "580",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 4·19국립묘지"
+            COT_CONTS_NAME: "4·19국립묘지"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -11992,7 +11992,7 @@ export default {
             COT_VALUE_01: "1969년 9월 18일 서울특별시 유형문화재 제2호로 지정되었다. 1912년 6월 19일 천도교 제3세 교조인 의암 손병희(孫秉熙:1862∼1922)가 천도교의 신앙생활을 뿌리내리게 하는 한편, 보국안민(輔國安民)을 내세우고 천도교 지도자들에게 역사의식을 심어주며 일제에 빼앗긴 주권을 되찾기 위하여 항일독립운동을 이끌 교역자를 양성하기 위한 목적으로 지었다. 독립운동사에서 중요한 기능을 수행한 민족의 성지로서 재인식되고 있으며, 후세들의 역사탐방 장소로 많이 이용되고 있다.",
             COT_MASTER_NO: "254",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 봉황각"
+            COT_CONTS_NAME: "봉황각"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12032,7 +12032,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 ( 손병희선생묘소 인근)"
+            COT_CONTS_NAME: "화장실 ( 손병희선생묘소 인근)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12072,7 +12072,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (우이분소)"
+            COT_CONTS_NAME: "화장실 (우이분소)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12112,7 +12112,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (우이동만남의광장)"
+            COT_CONTS_NAME: "화장실 (우이동만남의광장)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12152,7 +12152,7 @@ export default {
             COT_VALUE_01: "원당샘은 600여년 전 파평윤씨 일가가 자연부락인 원당마을에 정착하면서 이용하였다고 하며 마을 이름을 따서 원당샘으로 불리워지고 수 백년 동안 생활용수로 공급되었다. 그러나 2009년부터 물이 흐르지 않아 2011년 지하수를 연결하여 원당샘이 마르지 않고 흐를 수 있도록 복원하였으며 북한산 둘레길과 인접되어 있어 주민과 등산객의 왕래가 빈번한 곳으로써 원당샘 주변을 공원으로 조성하게 되어 연산군묘 및 은행나무와 함께 역사와 문화가 어우러지는 새로운 도봉구의 문화명소로 각광받고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 원당샘 공원"
+            COT_CONTS_NAME: "원당샘 공원"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12192,7 +12192,7 @@ export default {
             COT_VALUE_01: "김수영(1921~1968)시인은 대한민국의 대표적 자유시인이다. 문학관 1,2층 전시실에는 시인의 작품 초고, 육피 원고와 사진 등이 전시되어 있고 3,4층은 작은 도서관, 강당 등으로 구성되어있다. 문학관에서 원당샘공원에 이르는 거리는 주변의 둘레길과 역사문화 명소를 연계하여 ‘문화의 거리’로 조성되어 볼거리를 제공하고 있다. 김수영시인의 대표작인 ‘풀’이 새겨진 시비는 도봉서원 아래 위치하고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 김수영 문학관"
+            COT_CONTS_NAME: "김수영 문학관"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12232,7 +12232,7 @@ export default {
             COT_VALUE_01: "서울시 지정보호수 제1호인 방학동 은행나무는 2013년에 문화재(서울시 기념물 제33호)로 지정되었다. 높이 24m, 둘레 9.6m, 수령 600년 된 서울시에서 가장 오래된 은행나무다. 이 은행나무는 그 모습이 매우 고상하고 아름다우며 예부터 많은 사람들이 신성시하였고 이 곳에 불이 날 때마다 나라에 큰 변이 생겼다고 하는 일화가 지금까지도 전해지고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 방학동은행나무"
+            COT_CONTS_NAME: "방학동은행나무"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12272,7 +12272,7 @@ export default {
             COT_VALUE_01: "연산군은 두 번의 사화를 일으키는 등 폭정을 일삼다 종종반정으로 쫓겨나 교동도에서 31세로 세상을 떠났다. 7년 뒤 부인 신 씨가 요청하여 이곳으로 무덤을 옮겼다. 묘역 맨 아래는 딸과 사위의 무덤이다. 연산군묘 아래에 방학동 은행나무와 원당샘이 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 연산군묘"
+            COT_CONTS_NAME: "연산군묘"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12312,7 +12312,7 @@ export default {
             COT_VALUE_01: "정의공주는 세종과 소현왕후 심씨의 둘째 딸로 안맹담과 혼인하였다. 정의공주는 세종이 훈민정음을 만들 때 큰 도움을 주었다는 이야기가 죽산 안 씨 대동보에 전해 온다고 한다. 묘역 앞에 있는 비석은 안맹담 신도비이다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 정의공주묘"
+            COT_CONTS_NAME: "정의공주묘"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12392,7 +12392,7 @@ export default {
             COT_VALUE_01: "숲길로 이어지는 방학동길에서 쌍둥이 전망대를 만난다. 쌍둥이 전망대에서는 북한산의 인수봉이 산위에 핀 꽃처럼 보이고, 도봉산의 바위 봉우리들이 특히 잘 보인다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 쌍둥이 전망대"
+            COT_CONTS_NAME: "쌍둥이 전망대"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12432,7 +12432,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (도봉사인근 )"
+            COT_CONTS_NAME: "화장실 (도봉사인근 )"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12472,7 +12472,7 @@ export default {
             COT_VALUE_01: "도봉동문은 도봉서원으로 들어가는 문이라는 의미로 도봉계곡 입구 에 있다. 송시열의 글씨를 바위에 새긴 것이다. 도봉서원은 조선 선비들이 존경하던 조광조를 모시는 서원이다. 가까운 곳에 산악박물관과 광륜사가 있어 둘러볼 만하다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 도봉동문"
+            COT_CONTS_NAME: "도봉동문"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -12512,7 +12512,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[8코스] 화장실 (도봉산입구)"
+            COT_CONTS_NAME: "화장실 (도봉산입구)"
         }
     ],
     STAMP_DATA: [
@@ -12554,7 +12554,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (서울둘레길과 북한산둘레길 합류점)",
             COT_MASTER_NO: "151-25",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 선림사 옆",
+            COT_CONTS_NAME: "선림사 옆",
             COT_STAMP_ICON: "stamp23.png"
         },
         {
@@ -12595,7 +12595,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (북한산둘레길)",
             COT_MASTER_NO: "1-101",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 옛성길 시작점",
+            COT_CONTS_NAME: "옛성길 시작점",
             COT_STAMP_ICON: "stamp24.png"
         },
         {
@@ -12636,7 +12636,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (북한산둘레길)",
             COT_MASTER_NO: "6-416",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 명상길 시작점",
+            COT_CONTS_NAME: "명상길 시작점",
             COT_STAMP_ICON: "stamp25.png"
         },
         {
@@ -12677,7 +12677,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (북한산둘레길)",
             COT_MASTER_NO: "108-8",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 흰구름길 시작점",
+            COT_CONTS_NAME: "흰구름길 시작점",
             COT_STAMP_ICON: "stamp26.png"
         },
         {
@@ -12718,7 +12718,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (북한산둘레길)",
             COT_MASTER_NO: "103",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 왕실묘역 시작점",
+            COT_CONTS_NAME: "왕실묘역 시작점",
             COT_STAMP_ICON: "stamp27.png"
         },
         {
@@ -12759,7 +12759,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "408-10",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[8코스] 도봉탐방지원센터 옆",
+            COT_CONTS_NAME: "도봉탐방지원센터 옆",
             COT_STAMP_ICON: "stamp28.png"
         }
     ],
@@ -12781,7 +12781,7 @@ export default {
         },
         {
             NAME: '힐스테이트 3차 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '10'
@@ -12823,14 +12823,14 @@ export default {
         },
         {
             NAME: '형제봉 매표소 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '1'
         },
         {
             NAME: '북악공원 안내센터 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '3'
@@ -12844,7 +12844,7 @@ export default {
         },
         {
             NAME: '정릉탐방안내소',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '7'
@@ -12858,7 +12858,7 @@ export default {
         },
         {
             NAME: '성북생태체험관',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '9'
@@ -12886,14 +12886,14 @@ export default {
         },
         {
             NAME: '화계사 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '13'
         },
         {
             NAME: '향운사 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '16'
@@ -12907,7 +12907,7 @@ export default {
         },
         {
             NAME: '통일교육원 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '15'
@@ -12928,21 +12928,21 @@ export default {
         },
         {
             NAME: '손병희선생 묘소 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '20'
         },
         {
             NAME: '우이동 만남의광장',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '22'
         },
         {
             NAME: '우이분소',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '21'
@@ -13012,7 +13012,7 @@ export default {
         },
         {
             NAME: '도봉사 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '30'
@@ -13033,7 +13033,7 @@ export default {
         },
         {
             NAME: '도봉산 입구',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '32'

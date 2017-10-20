@@ -5815,7 +5815,7 @@ export default {
             COT_VALUE_01: "서울특별시 종로구, 서대문구, 마포구 일대에 걸쳐 흐르는 지방 2급 하천으로 조선시대에 이 하천 연안에 중국의 사신이나 관리가 묵어 가던 홍제원이 있었던 까닭으로 '홍제원천'이라고도 한다. 홍제천은 생태하천으로 복원되어 많은 시민들이 이용하고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 홍제천"
+            COT_CONTS_NAME: "홍제천"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -5855,7 +5855,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 화장실 (증산체육공원)"
+            COT_CONTS_NAME: "화장실 (증산체육공원)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -5895,7 +5895,7 @@ export default {
             COT_VALUE_01: "불광천은 북한산을 바라보며 걷기 좋은 길이다. 불광천은 북한산 비봉에서 흘러내려 홍제천과 합해져 한강으로 흘러든다. 서울의 대표적인 오염하천이었으나 정비 후 생태하천으로 탈바꿈했다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 불광천"
+            COT_CONTS_NAME: "불광천"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -5935,7 +5935,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 화장실 (보조경기장 옆)"
+            COT_CONTS_NAME: "화장실 (보조경기장 옆)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -5975,7 +5975,7 @@ export default {
             COT_VALUE_01: "마포구 난지도길에 위치한 월드컵 경기장은 2002년 월드컵으로 인해 유명해진 곳으로 66,806명이 관람할 수 있는 경기장이다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 월드컵경기장"
+            COT_CONTS_NAME: "월드컵경기장"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6015,7 +6015,7 @@ export default {
             COT_VALUE_01: "봉산생태환경보전지역으로 지정된 팥배나무 군락지가 있다. 팥배나무는 팥 같은 배가 열린다고 해서 붙은 이름으로 꽃도 배꽃과 비슷하다. 붉은 색의 열매는 겨울철 작은 새들의 먹이가 된다. 팥배나무는 우리나라가 원산인 나무로 서울에서는 보기 드문 대규모(5,000㎡)군락을 이루고 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 봉산 팥배나무 군락지"
+            COT_CONTS_NAME: "봉산 팥배나무 군락지"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6055,7 +6055,7 @@ export default {
             COT_VALUE_01: "은평뉴타운은 서울 도심에서 북서쪽으로 10km 떨어진 뉴타운으로 동쪽으로 북한산 국립공원, 서쪽으로는 서오릉 자연공원, 남쪽으로는 갈현근린공원과 인접한다. 구역 중앙에는 진관 근린공원이 자리잡고 있고, 북쪽으로 청정하천인 창릉천이 경기도와 시계를 이루고 있는 등 도시 내에서 자연 그대로를 느낄 수 있는 서울지역 최고의 자연경관을 보유하고 있다.",
             COT_MASTER_NO: "191",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 은평뉴타운"
+            COT_CONTS_NAME: "은평뉴타운"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6095,7 +6095,7 @@ export default {
             COT_VALUE_01: "제2매립지는 한강 상류 쪽에 위치한 곳으로 면적은 19만㎡로 이곳은 난지도 중에서 가장 토양이 척박한 지역이다. 하늘공원은 자연 천이가 진행되는 생태적 환경을 갖추고 있다기보다는 쓰레기 매립지 안정화공사의 결과로 형성된 인공적인 땅이다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 하늘공원"
+            COT_CONTS_NAME: "하늘공원"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6135,7 +6135,7 @@ export default {
             COT_VALUE_01: "대한 불교조계종 수국사는 조선조 제7대 세조대왕 5년(1459년)에 세조의 장남 의경세자의 극락왕생을 위해 경릉 동쪽에 정인사라는 이름으로 건립되었다. 그후 화재로 소실되어 오랫동안 폐허로 남아있다가 갈현동 태화산 자락에 다시 짓게 되었다.",
             COT_MASTER_NO: "314",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 수국사"
+            COT_CONTS_NAME: "수국사"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6175,7 +6175,7 @@ export default {
             COT_VALUE_01: "봉산 봉수대는 평안도에서 오는 신호를 목멱산 봉수대에 보내 주는 마지막 봉수대였다. 봉산 봉수대는 고려 말 봉수제도에 따라 두 개의 굴뚝으로 복원하였다고 한다. 봉수대가 있는 곳에서는 북한산 아래 서울의 모습과 황홀한 일출을 만날 수 있다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 봉수대"
+            COT_CONTS_NAME: "봉수대"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6215,7 +6215,7 @@ export default {
             COT_VALUE_01: "월드컵공원 내에 위치한 공원으로 한강변의 난지도 쓰레기 매집장이 폐쇄된 자리와 그 주변에 조성되었다. 난지천을 생태하천으로 복원하여 갈대가 우거지고 버드나무와 각종 식물들이 군락을 형성하고 있다. 하천 외의 주변에는 어린이놀이터와 다목적운동장, 게이트볼장 및 인조잔디축구장, 산책로 등의 시설이 마련되었다.",
             COT_MASTER_NO: "1731",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 난지천공원"
+            COT_CONTS_NAME: "난지천공원"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6255,7 +6255,7 @@ export default {
             COT_VALUE_01: "봉산과 앵봉산 사이에 있는 고개로 서울 은평구와 고양시 덕양구를 잇는 길이다. 벌고개란 이름은 의경세자의 무덤을 만들 때 땅속에서 벌이 나와 무덤자리를 잡아 준 지관을 쏘아 죽였다는 전설에서 비롯된 것이라고 한다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 벌고개"
+            COT_CONTS_NAME: "벌고개"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6295,7 +6295,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 화장실(7-3 안전지점 인근)"
+            COT_CONTS_NAME: "화장실(7-3 안전지점 인근)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6335,7 +6335,7 @@ export default {
             COT_VALUE_01: "노을공원은 서울에서 가장 아름다운 저녁노을을 볼 수 있는 문화예술공원으로, 조각작품, 전망데크 등과 더불어 넓은 잔디밭에서 시민들이 여유로움을 즐길 수 있다. 또한 노을공원은 고라니, 삵, 너구리 등 야생동물이 살고 있는 서울의 대표적인 생태보고이기도 하다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 노을공원"
+            COT_CONTS_NAME: "노을공원"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6375,7 +6375,7 @@ export default {
             COT_VALUE_01: "경기도 고양시 용두동(龍頭洞)에 있는 사적 제198호 조선시대 왕실의 무덤으로 경릉, 창릉, 익릉, 명릉, 홍릉 총 오릉이 있어 서오릉으로 불린다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 서오릉 (코스 주변)"
+            COT_CONTS_NAME: "서오릉 (코스 주변)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6415,7 +6415,7 @@ export default {
             COT_VALUE_01: "",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[7코스] 화장실( 7-2 안전지점 인근)"
+            COT_CONTS_NAME: "화장실( 7-2 안전지점 인근)"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -6497,7 +6497,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "18",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 증산체육공원 화장실 앞",
+            COT_CONTS_NAME: "증산체육공원 화장실 앞",
             COT_STAMP_ICON: "stamp20.png"
         },
         {
@@ -6538,7 +6538,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "123",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 애봉산 끝부분",
+            COT_CONTS_NAME: "애봉산 끝부분",
             COT_STAMP_ICON: "stamp21.png"
         },
         {
@@ -6579,7 +6579,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "1475",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[7코스] 가양대교 시작점",
+            COT_CONTS_NAME: "가양대교 시작점",
             COT_STAMP_ICON: "stamp22.png"
         }
     ],
@@ -8249,7 +8249,7 @@ export default {
         },
         {
             NAME: '7-2 안전지점 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '16'
@@ -8263,7 +8263,7 @@ export default {
         },
         {
             NAME: '7-3 안전지점 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '13'
@@ -8291,7 +8291,7 @@ export default {
         },
         {
             NAME: '보조경기장 옆',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '4'
@@ -8333,7 +8333,7 @@ export default {
         },
         {
             NAME: '증산체육공원',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '2'

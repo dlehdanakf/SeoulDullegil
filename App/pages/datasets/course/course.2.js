@@ -3327,7 +3327,7 @@ export default {
             COT_VALUE_01: "묵동을 지나 중랑천과 합해진다고 해서 묵동천이라고 부른다. 봉화산 아래에 있는 묵동은 조선시대에 먹을 만들던 고장이어서 먹골이라고 했는데, 한자로 표기하면서 묵동이 되었다. 유명한 먹골배가 나오던 곳이다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[2코스] 묵동천"
+            COT_CONTS_NAME: "묵동천"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3407,7 +3407,7 @@ export default {
             COT_VALUE_01: "외사산의 2코스인 구릉산, 망우산, 용마산, 아차산을 통과하는 코스이다. 대체적으로 산이 경사가 심한 편은 아니지만 한 코스에 산이 4개고 길이가 길어 소요시간이 많이 걸린다. 이 코스 중 구릉산과 망우산은 개발이 되지 않은 자연적인 산을 즐기며 트레킹할 수 있고 용마산과 아차산은 정비가 잘 되어 있어서 편안한 트레킹이 가능하다. 특히 아차산은 정비가 잘 되어 있을 뿐만이 아니라 쉼터와 약수터가 곳곳에 위치하여 어려움없이 트레킹이 가능하다.",
             COT_MASTER_NO: "381",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[2코스] 아차산 생태공원, 아차산 역사문화 홍보관"
+            COT_CONTS_NAME: "아차산 생태공원, 아차산 역사문화 홍보관"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3447,7 +3447,7 @@ export default {
             COT_VALUE_01: "아차산내에 있는 광장으로 해돋이 뿐만 아니라 다채로운 축제가 열리는 곳이다. ",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[2코스] 해맞이광장"
+            COT_CONTS_NAME: "해맞이광장"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3487,7 +3487,7 @@ export default {
             COT_VALUE_01: "해발고도 200m 산정에서 시작해 동남쪽으로 한강을 향하여 완만하게 경사진 산 중턱 위쪽을 둘러서, 둘레 약 1,000m 이상의 성벽이 구축되어 있으며 동쪽·서쪽·남쪽에 성문지(城門址)가 남아 있다.",
             COT_MASTER_NO: "5",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[2코스] 아차산성"
+            COT_CONTS_NAME: "아차산성"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3527,7 +3527,7 @@ export default {
             COT_VALUE_01: "보루성이라고도 불리는 보루는 사방을 조망하기 좋은 낮은 봉우리에 쌓은 소형 석축산성으로, 산성에 비해 규모가 작은 군사시설을 말한다. 아차산 일대 보루군은 출토유물이나 축성방법 등으로 보아 삼국시대의 유적으로 보이며, 분포지역으로 볼 때 고구려가 5세기 후반에 한강유역을 진압한 후 신라와 백제에게 한강유역을 빼앗긴 6세기 중반까지 한강유역을 둘러싼 삼국의 정세를 규명하는 중요한 유적으로 평가된다.",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[2코스] 아차산4보루성터"
+            COT_CONTS_NAME: "아차산4보루성터"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3687,7 +3687,7 @@ export default {
             COT_VALUE_01: "개발제한구역내 비닐하우스등으로 훼손된 곳을 복원하여 학생소풍 및 가족단위 피크닉을 주제로 한 체험형 공원, 인위적 시설 최소화, 건강한 숲을 주제로 한 생태학습 공원, 소규모 야외무대 설치 등 청소년 중심의 문화중심 공원으로 조성하였다. ",
             COT_MASTER_NO: "79",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[2코스] 중랑캠핑숲"
+            COT_CONTS_NAME: "중랑캠핑숲"
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3727,7 +3727,7 @@ export default {
             COT_VALUE_01: "망우산 일대 83만 2,800㎡의 공간에 조성된 묘지공원이다.한용운, 오세창, 서동일 등 독립운동가들과 방정환, 이중섭, 박인환 등 17인의 유명인사가 잠들어 있으며, 안창호 선생의 묘도 이장되기 전에는 이곳에 있었다. 산책과 조깅을 즐길 수 있는 휴식공간으로 활용되고 있으며, 5.2km의 산책로 곳곳에 15인의 연보비가 놓여 있다. ",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[2코스] 망우묘지공원 "
+            COT_CONTS_NAME: "망우묘지공원 "
         },
         {
             THM_THEME_NAME: "서울둘레길",
@@ -3850,7 +3850,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (아차산 관리사무소 앞)",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "2",
-            COT_CONTS_NAME: "[2코스] 아차산 관리사무소 앞",
+            COT_CONTS_NAME: "아차산 관리사무소 앞",
             COT_STAMP_ICON: "stamp05.png",
         },
         {
@@ -3891,7 +3891,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치",
             COT_MASTER_NO: "",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[2코스] 용마산 깔딱고개 쉼터",
+            COT_CONTS_NAME: "용마산 깔딱고개 쉼터",
             COT_STAMP_ICON: "stamp06.png"
         }
     ],
@@ -4721,7 +4721,7 @@ export default {
         },
         {
             NAME: '망우 청소년 수련관',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '8'
@@ -4735,7 +4735,7 @@ export default {
         },
         {
             NAME: '망우치안센터 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '9'
@@ -4749,14 +4749,14 @@ export default {
         },
         {
             NAME: '망우묘지공원',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '12'
         },
         {
             NAME: '2-11 안전지점 인근',
-            DESCRIPTION: null,
+            DESCRIPTION: '화장실',
             TYPE: 'T',
             COLOR: null,
             RNUM: '7'
