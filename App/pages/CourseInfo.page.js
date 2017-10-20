@@ -16,7 +16,7 @@ import SubwayColors from './datasets/subway.colors';
 
 import StampIconFunc from './components/stamp.function';
 
-const COURSE_INDEX = 5;
+const COURSE_INDEX = 7;
 
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 0;
