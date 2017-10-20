@@ -57,7 +57,7 @@ export default class DefaultTabBar extends React.Component {
                 onPress={() => onPressHandler(page)}
             >
                 <View style={[styles.tab, this.props.tabStyle, ]}>
-                    <Text style={{fontSize:18}}>{name}</Text>
+                    <Text style={{fontSize:16}}>{name}</Text>
                 </View>
             </Button>
         );

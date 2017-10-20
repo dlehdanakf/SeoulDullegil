@@ -14,13 +14,9 @@ const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
             <Scene key="home" component={Home} />
-            <Scene key="main" component={Main} />
             <Scene key="tracking" component={Tracking} />
-
-
-
-                <Scene key="course_map" component={CourseMap} />
-                <Scene key="course_info" component={CourseInfo} />
+            <Scene key="course_map" component={CourseMap} />
+            <Scene key="course_info" component={CourseInfo} />
         </Scene>
     </Router>
 );
