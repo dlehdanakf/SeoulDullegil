@@ -1,11 +1,14 @@
 import React, { Component } from 'React'
 import {
-    Animated, Image, ScrollView,
+    Animated, Image, ScrollView, ToastAndroid,
     StyleSheet, Text, View, TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Modal from 'react-native-modal';
 import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-native-nav'
 import { Actions } from 'react-native-router-flux';
+import { WebView } from 'react-native-webview-messaging/WebView';
+import RoadInfo from './webview/road.info.html';
 
 import Button from './components/button.component';
 import navBarStylesModule from './assets/navbar.styles';
@@ -32,9 +35,15 @@ export default class CourseInfo extends React.Component{
             courseData: CourseData[COURSE_INDEX],
             mapData: MapData[COURSE_INDEX],
             scrollY: new Animated.Value(0),
+            showModal: false,
+            modalData: {
+                title: null,
+                subTitle: null
+            },
         };
 
         this.renderCourseRoadItem = this.renderCourseRoadItem.bind(this);
+        this.onPressRoadItem = this.onPressRoadItem.bind(this);
     }
 
     renderCourseRoadItem(data, index){
@@ -95,16 +104,37 @@ export default class CourseInfo extends React.Component{
             </View>
         );
 
-        if(data.TYPE !== 'P' && data.TYPE !== 'S')
-            return (
-                <View key={index}>
-                    {item}
-                </View>
-            );
-
         return (
-            <TouchableHighlight onPress={()=>{}} underlayColor="#F0F0F0" key={index}>{item}</TouchableHighlight>
+            <TouchableHighlight onPress={()=>{ this.onPressRoadItem(data); }} underlayColor="#F0F0F0" key={index}>{item}</TouchableHighlight>
         );
+    }
+    onPressRoadItem(data){
+        function takeModalDataFromPoint(e){
+            const data = e.TYPE === 'S' ? MapData[COURSE_INDEX].STAMP_DATA : MapData[COURSE_INDEX].POINT_DATA;
+            for(let i = 0; i < data.length; i++){
+                if(data[i].RNUM === e.RNUM){
+                    return {
+                        img: data[i].COT_IMG_MAIN_URL,
+                        desc: e.TYPE === 'S' ? null : data[i].COT_VALUE_01,
+                        title: data[i].COT_CONTS_NAME,
+                        subTitle: e.TYPE === 'S' ? '스탬프 획득지점' : '주요지점'
+                    };
+                }
+            }
+        }
+
+        let modal_data = {};
+        switch(data.TYPE){
+            case 'M':
+            case 'T': ToastAndroid.show('해당 지점에 대한 상세정보가 없습니다.', ToastAndroid.SHORT); return; break;
+            case 'S':
+            case 'P': modal_data = takeModalDataFromPoint(data); break;
+        }
+
+        this.setState({
+            modalData: modal_data,
+            showModal: true
+        });
     }
 
     render() {
@@ -277,6 +307,42 @@ export default class CourseInfo extends React.Component{
                         </Animated.View>
                     </Animated.View>
                 </View>
+                <Modal
+                    isVisible={this.state.showModal}
+                    animationIn="slideInUp"
+                    animationOut="slideOutDown"
+                    animationInTiming={300}
+                    animationOutTiming={150}
+                    backdropOpacity={0.5}
+                    onBackButtonPress={()=>this.setState({showModal: false})}
+                    onBackdropPress={()=>this.setState({showModal: false})}
+                    style={{marginHorizontal: 0, marginBottom: -10}}
+                >
+                    <View style={modalStyles.modalWrap}>
+                        <View style={modalStyles.modal}>
+                            <View style={modalStyles.header}>
+                                <TouchableHighlight onPress={()=>this.setState({showModal: false})} style={modalStyles.titleWrap} underlayColor="#F1F1F1">
+                                    <View style={{flex: 1, flexDirection: 'row'}}>
+                                        <View style={{flex: 1, paddingHorizontal: 12, justifyContent: 'center',}}>
+                                            <Text style={modalStyles.title}>{this.state.modalData.title}</Text>
+                                            <Text style={modalStyles.subTitle}>{this.state.modalData.subTitle}</Text>
+                                        </View>
+                                        <View style={modalStyles.icon}>
+                                            <Icon name="keyboard-arrow-down" size={32} />
+                                        </View>
+                                    </View>
+                                </TouchableHighlight>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <WebView
+                                    ref={ webview => { this.webview = webview; }}
+                                    source={RoadInfo}
+                                    onLoadEnd={() => this.webview.emit('drawRoadInfo', this.state.modalData) }
+                                />
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
             </View>
         );
     }
@@ -435,6 +501,44 @@ const contentStyles = StyleSheet.create({
         borderBottomColor: '#E1E1E1',
         marginRight: 14,
         paddingLeft: 7,
+        justifyContent: 'center',
+    },
+});
+const modalStyles = StyleSheet.create({
+    modalWrap: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingVertical: 10,
+        paddingHorizontal: 0
+    },
+    modal: {
+        backgroundColor: '#FFF',
+        borderRadius: 6,
+        elevation: 2,
+        height: 400,
+    },
+    header: {
+        height: 70,
+        padding: 5,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#AAA'
+    },
+    titleWrap: {
+        flex: 1,
+        borderRadius: 4,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    subTitle: {
+        fontSize: 13,
+        color: '#AAA'
+    },
+    icon: {
+        width: 60,
+        height: 60,
+        alignItems: 'center',
         justifyContent: 'center',
     },
 });
