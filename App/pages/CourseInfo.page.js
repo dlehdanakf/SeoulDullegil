@@ -16,7 +16,7 @@ import SubwayColors from './datasets/subway.colors';
 
 import StampIconFunc from './components/stamp.function';
 
-const COURSE_INDEX = 0;
+const COURSE_INDEX = 5;
 
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 0;
@@ -61,10 +61,10 @@ export default class CourseInfo extends React.Component{
                     </View>
                 );
                 break;
-            case 'P':
+            case 'T':
                 icon = (
-                    <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon, {borderColor: "#a8c99e"}]}>
-                        <Icon name="directions-walk" size={20} color="#a8c99e" />
+                    <View style={[contentStyles.roadItemIcon, contentStyles.bigIcon]}>
+                        <Icon name="wc" size={18} color="#888" />
                     </View>
                 );
                 break;
@@ -95,7 +95,7 @@ export default class CourseInfo extends React.Component{
             </View>
         );
 
-        if(data.TYPE === 'N')
+        if(data.TYPE !== 'P' && data.TYPE !== 'S')
             return (
                 <View key={index}>
                     {item}
@@ -212,6 +212,13 @@ export default class CourseInfo extends React.Component{
                                             <Text style={{width: 70, fontSize: 15, color: '#444'}}>{v.NAME}</Text>
                                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                                 {v.NUMBER.map((b, j)=>{
+                                                    let num = b, w = 16;
+                                                    switch(num){
+                                                        case 10: num = '경의중앙'; w = 50; break;
+                                                        case 11: num = '분당'; w = 30; break;
+                                                        case 12: num = '신분당'; w = 40; break;
+                                                    }
+
                                                     return (
                                                         <Text
                                                             key={j}
@@ -223,14 +230,14 @@ export default class CourseInfo extends React.Component{
                                                                 marginRight: 2,
                                                                 borderRadius: 16,
                                                                 borderWidth: 2,
-                                                                width: 16,
+                                                                width: w,
                                                                 height: 16,
                                                                 alignItems: 'center',
                                                                 textAlign: 'center',
                                                                 fontSize: 11
                                                             }]}
                                                         >
-                                                            {b}
+                                                            {num}
                                                         </Text>
                                                     );
                                                 })}
