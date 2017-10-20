@@ -1438,7 +1438,7 @@ export default {
             COT_GU_NAME: "",
             COT_SAN_NAME: "",
             COT_COORD_Y: "37.553913568",
-            COT_IMG_MAIN_URL: "/smgis/ucimgs/conts/100211/100211_gilseoul_20170303104144_1.jpg",
+            COT_IMG_MAIN_URL: "http://map.seoul.go.kr/smgis/ucimgs/conts/100211/100211_gilseoul_20170303104144_1.jpg",
             COT_CONTS_STAT: "1",
             COT_LINE_PATTERN: "L",
             COT_VALUE_01: "증미산 아래 염창동은 한양에서 부평과 인천으로 가는 길목이었다. 소금창고가 많아 염창동이라는 지명이 붙여졌다. 서해에서 배로 실어 온 소금과 인천에서 등짐으로 가져온 소금은 국가용, 군사용, 일반판매용으로 구분하여 저장하였다가 필요할 때 꺼내 한양으로 풀려나갔다.",
