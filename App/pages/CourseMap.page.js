@@ -13,10 +13,6 @@ import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 
 import MapData from './datasets/courseinfo.list';
-import {Constants, Location, Permissions, Notifications} from 'expo';
-import Geolib from 'geolib';
-
-import {MessageBar, MessageBarManager} from 'react-native-message-bar';
 
 const navBarStyles = navBarStylesModule("#564339");
 const mapData = MapData[0];
