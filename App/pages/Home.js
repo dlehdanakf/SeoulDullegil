@@ -17,6 +17,7 @@ import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
 
 import StampList from './StampList.page';
+import MyRecord from './MyRecord.page';
 
 const navBarStyles = navBarStylesModule("white");
 
@@ -98,13 +99,9 @@ export default class Home extends React.Component {
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
-                    initialPage={1}
+                    initialPage={0}
                 >
-                    <View tabLabel="내 기록">
-                        <View >
-                            <Text>그래프</Text>
-                        </View>
-                    </View>
+                    <MyRecord tabLabel="내 기록" />
                     <ListView
                         tabLabel="둘레길"
                         style={{flex: 1}}
