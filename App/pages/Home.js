@@ -7,7 +7,8 @@ import {
     TouchableHighlight,
     ToastAndroid,
     TouchableNativeFeedback,
-    Dimensions
+    Dimensions,
+    ListView
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconOcticons from 'react-native-vector-icons/Octicons';
@@ -18,6 +19,8 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import navBarStylesModule from './assets/navbar.styles';
 import DefaultTabBar from './components/tabbar.component';
+
+import StampList from './StampList.page';
 
 const navBarStyles = navBarStylesModule("white");
 
@@ -68,8 +71,6 @@ export default class Home extends React.Component {
                     </View>
                 </NavBar>
 
-
-
                 <ScrollableTabView
                     style={{backgroundColor:'white'}}
                     tabBarActiveTextColor='#F8931F'
@@ -82,20 +83,13 @@ export default class Home extends React.Component {
                         </View>
                     </View>
                     <Text tabLabel="둘레길" />
-                    <Text tabLabel="스탬프 북" />
+                    <StampList tabLabel="스탬프 북" />
                 </ScrollableTabView>
 
             </View>
         );
     }
 }
-
-const data = [[
-	[0, 1],
-	[1, 3],
-	[3, 7],
-	[4, 9],
-]];
 
 const styles = StyleSheet.create({
     fill: {
