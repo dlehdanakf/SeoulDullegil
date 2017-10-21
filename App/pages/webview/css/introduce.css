@@ -1,0 +1,24 @@
+html, body { padding: 0; margin: 0; }
+
+.intro-main {  }
+.intro-main .logo { padding: 2rem 0; }
+.intro-main .logo img { height: 2.6rem; display: block; margin: 0 auto; }
+.intro-main .img { position: relative; }
+.intro-main .img::after { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0,0,0,.1); }
+.intro-main .img img { width: 100%; display: block; }
+.intro-main .desc { padding: 1rem; }
+.intro-main .desc + .desc { padding-top: 0.4rem; }
+.intro-main .desc p { font-size: 0.96rem; line-height: 1.41em; color: #333; margin: 0.3rem 0; }
+.intro-main .desc h2 { margin: 0; padding: 0; line-height: 1; color: #333; font-size: 1.3rem; font-weight: normal; }
+.intro-main .desc > ul { padding-left: 20px; margin-top: 0.4rem; margin-bottom: 0; }
+.intro-main .desc > ul ul { padding-left: 20px; margin-top: 0.1rem; }
+.intro-main .desc > ul li { font-size: 0.9rem; line-height: 1.4em; color: #333; }
+.intro-main .list { margin-top: -0.2rem; padding-bottom: 1rem; }
+.intro-main .list .item { position: relative; padding-left: 7.8rem; min-height: 4rem; margin-top: 0.8rem; padding-bottom: 0.2rem; border-bottom: 1px solid #EEE; }
+.intro-main .list .item .thumb { position: absolute; top: 0; left: 0; width: 7rem; height: 4rem; background-color: #DDD; background-size: cover; background-position: center; background-repeat: no-repeat; }
+.intro-main .list .item .thumb::after { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0,0,0,.1); }
+.intro-main .list .item .text {  }
+.intro-main .list .item .text h3 { color: #333; line-height: 1; margin: 0 0 0.4rem 0; font-size: 1.1rem; font-weight: normal; }
+.intro-main .list .item .text p { color: #666; line-height: 1.2em; font-size: 0.8rem; margin: 0.2rem 0; }
+.intro-main .list .item:last-child { border-bottom: 0; }
+
