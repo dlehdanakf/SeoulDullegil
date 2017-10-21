@@ -134,17 +134,21 @@ export default class StampList extends React.Component {
         return(
             <View style={{height:150, flex:1, flexDirection:'row', margin:8}}>
                 <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[0]);}}>
-                    <View style={[styles.stampViewContainer]}>
+                    <View style={[styles.stampViewContainer, {backgroundColor:row[0].coursecolor, borderRadius:10}]}>
+                    <View style={[styles.stampViewContainer, {backgroundColor:'white', alignItems:'center', marginHorizontal:0, marginBottom:4, marginRight:4, borderRadius:6}]}>
                         <View style={styles.stampIconWrap}>
                             <Image source={StampIconFunc(row[0].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#D1D1D1'}]}/>
                         </View>
                     </View>
+                    </View>
                 </TouchableNativeFeedback>
                 <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[1]);}}>
-                    <View style={styles.stampViewContainer}>
+                    <View style={[styles.stampViewContainer, {backgroundColor:row[1].coursecolor, borderRadius:10}]}>
+                    <View style={[styles.stampViewContainer, {backgroundColor:'white', alignItems:'center', marginHorizontal:0, marginBottom:4, marginRight:4, borderRadius:6}]}>
                         <View style={styles.stampIconWrap}>
                             <Image source={StampIconFunc(row[1].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor:'#D1D1D1'}]}/>
                         </View>
+                    </View>
                     </View>
                 </TouchableNativeFeedback>
             </View>
@@ -221,7 +225,6 @@ const styles = StyleSheet.create({
         flex:1,
         marginHorizontal:8,
         justifyContent:'center',
-        alignItems:'center',
         elevation:3,
         borderWidth:0,
     },
