@@ -1,4 +1,4 @@
-import React, {Component} from 'React'
+import React, {Component} from 'React';
 import {
     Image, StyleSheet, Text, View, ListView,
     TouchableHighlight, ToastAndroid, TouchableNativeFeedback, Dimensions
@@ -23,11 +23,11 @@ export default class Home extends React.Component {
         super(props);
         this.ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
-            sectionHeaderHasChanged: (s1, s2) => s1 !== s2
         });
 
         this.state = {
             list: this.ds.cloneWithRows(courseListData),
+            activeCourseNum: 2,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -37,6 +37,7 @@ export default class Home extends React.Component {
         const green = greenColors[parseInt(rowData.COURSE_NO) - 1];
         const level = ['', '초급', '중급', '상급'];
         const levelColor = ['', '#398b88', '#fe6d02', '#fb535c'];
+        const isActiveCourse = this.state.activeCourseNum.toString() === rowData.COURSE_NO;
 
         return (
             <TouchableHighlight onPress={()=>{}} underlayColor="#FAFAFA">
@@ -56,7 +57,13 @@ export default class Home extends React.Component {
                             <Text style={{fontSize: 13, color: '#999', paddingLeft: 6}}>{rowData.DISTANCE} ({rowData.WALK_TIME})</Text>
                         </View>
                     </View>
-                    <View style={{width: 40}} />
+                    {isActiveCourse ?
+                        <View style={{width: 50, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
+                            <IconMaterialIcons name="directions-run" size={28} style={{color: '#f49805'}} />
+                            <Text style={{color: '#f49805', fontSize: 13, marginTop: 2}}>주행중</Text>
+                        </View>
+                        : null
+                    }
                 </View>
             </TouchableHighlight>
         );
