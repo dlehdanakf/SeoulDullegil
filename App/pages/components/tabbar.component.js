@@ -43,9 +43,8 @@ export default class DefaultTabBar extends React.Component {
 
     renderTab(name, page, isTabActive, onPressHandler) {
         const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
-        const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-        let iconSize = 24;
-        if(name === 'more-horiz') iconSize = 40;
+        const textColor = isTabActive ? '#f49805' : '#999';
+        const textWeight = isTabActive ? 'bold' : 'normal';
 
         return (
             <Button
@@ -56,19 +55,19 @@ export default class DefaultTabBar extends React.Component {
                 accessibilityTraits='button'
                 onPress={() => onPressHandler(page)}
             >
-                <View style={[styles.tab, this.props.tabStyle, ]}>
-                    <Text style={{fontSize:16}}>{name}</Text>
+                <View style={[styles.tab, this.props.tabStyle]}>
+                    <Text style={{fontSize:15, color: textColor, fontWeight: textWeight}}>{name}</Text>
                 </View>
             </Button>
         );
     }
     render(){
-        const containerWidth = this.props.containerWidth;
+        const containerWidth = this.props.containerWidth - 28;
         const numberOfTabs = this.props.tabs.length;
         const tabUnderlineStyle = {
             position: 'absolute',
             width: containerWidth / numberOfTabs,
-            height: 2,
+            height: 3,
             backgroundColor: this.props.activeTextColor,
             bottom: -1,
         };
@@ -78,22 +77,24 @@ export default class DefaultTabBar extends React.Component {
         });
 
         return (
-            <View style={[styles.tabs, this.props.style, ]}>
-                {this.props.tabs.map((name, page) => {
-                    const isTabActive = this.props.activeTab === page;
-                    const renderTab = this.props.renderTab || this.renderTab;
+            <View style={styles.tabsWrap}>
+                <View style={[styles.tabs, this.props.style]}>
+                    {this.props.tabs.map((name, page) => {
+                        const isTabActive = this.props.activeTab === page;
+                        const renderTab = this.props.renderTab || this.renderTab;
 
-                    return renderTab(name, page, isTabActive, this.props.goToPage);
-                })}
-                <Animated.View
-                    style={[
-                        tabUnderlineStyle, {
-                            transform: [
-                                { translateX },
-                            ]
-                        }, this.props.underlineStyle,
-                    ]}
-                />
+                        return renderTab(name, page, isTabActive, this.props.goToPage);
+                    })}
+                    <Animated.View
+                        style={[
+                            tabUnderlineStyle, {
+                                transform: [
+                                    { translateX },
+                                ]
+                            }, this.props.underlineStyle,
+                        ]}
+                    />
+                </View>
             </View>
         );
     }
@@ -107,14 +108,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     tabs: {
-        height: 50,
+        height: 40,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        borderWidth: 1,
-        borderTopWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderColor: '#E1E1E1',
-        backgroundColor: 'white',
     },
+    tabsWrap: {
+        height: 40,
+        paddingHorizontal: 14,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E9E9E9',
+        backgroundColor: '#FFF',
+    }
 });

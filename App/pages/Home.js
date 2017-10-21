@@ -68,10 +68,9 @@ export default class Home extends React.Component {
                 <NavBar style={navBarStyles}>
                     <View style={{flex:1, flexDirection: 'row'}}>
                         <View style={{alignItems:'center', flexDirection:'row'}}>
-                            <Image source={require('./assets/bird_logo.png')} style={{height:26, width:33}} />
+                            <Image source={require('./assets/bird_logo.png')} style={{height:24, width:30, marginTop: 2}} />
                         </View>
                     </View>
-
                     <View style={{flex:1, flexDirection: 'row', justifyContent:'flex-end'}}>
                         <NavGroup style={{marginRight: -20,}}>
                             <NavButton style={{marginLeft: 1,}}>
@@ -92,9 +91,6 @@ export default class Home extends React.Component {
                         </NavGroup>
                     </View>
                 </NavBar>
-
-
-
                 <ScrollableTabView
                     style={{backgroundColor:'white'}}
                     tabBarActiveTextColor='#F8931F'
