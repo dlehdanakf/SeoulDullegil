@@ -36,7 +36,7 @@ html, body { padding: 0; margin: 0; }
 .intro-tour .desc p .caution::before { content: '=='; margin-right: 4px; }
 .intro-tour .desc p .caution::after { content: '=='; margin-left: 4px; }
 .intro-tour .desc .guide + p { font-size: 0.8rem; color: #333; margin-top: 0.6rem; margin-bottom: 0; }
-.intro-tour .desc h3 { margin: 0.6rem 0 0 0; line-height: 1; font-size: 1.05rem; font-weight: normal; color: #333; }
+.intro-tour .desc h3 { margin: 0.6rem 0 0 0; line-height: 1; font-size: 1.05rem; font-weight: normal; color: #398b87; }
 .intro-tour .desc h3::before { content: '# '; }
 .intro-tour .desc .wanju { margin-top: -0.3rem; margin-bottom: 1rem; font-size: 0.8rem; color: #888; }
 .intro-tour .desc .cards { margin: 0.5rem -0.5rem; }
@@ -46,3 +46,16 @@ html, body { padding: 0; margin: 0; }
 .intro-tour .desc .cards .item .card .thumbnail { position: relative; background: #DDD no-repeat center; background-size: cover; padding-bottom: 60%; }
 .intro-tour .desc .cards .item .card .thumbnail::after { content: ''; position: absolute; display: block; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0, 0, 0, .1); }
 .intro-tour .desc .cards .item .card p { border: 1px solid #DDD; border-top: 0; margin: 0; line-height: 1; padding: 0.5rem 0.4rem 0.4rem 0.4rem; }
+
+.intro-safety { padding: 1rem 0; }
+.intro-safety .desc h3 { margin: 1.2rem 0 0.4rem 0; line-height: 1; font-size: 1.05rem; font-weight: normal; color: #398b87; }
+.intro-safety .desc h3::before { content: '# '; }
+.intro-safety .desc h2 + h3 { margin-top: 0.6rem; }
+.intro-safety .desc p::after { content: ''; display: block; float: none; clear: both; }
+.intro-safety .desc p .thumbnail { float: left; position: relative; margin-right: 0.6rem; }
+.intro-safety .desc p .thumbnail::after { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0,0,0,.1); }
+.intro-safety .desc p .thumbnail img { width: 7.6rem; display: block; }
+.intro-safety table { width: 100%; border-collapse: collapse; mso-cellspacing: 0; margin-top: 0.4rem; }
+.intro-safety table th { color: #333; font-weight: normal; font-size: 0.94rem; text-align: left; padding: 0.16rem 0.5rem 0.16rem 0; }
+.intro-safety table td { color: #333; font-weight: normal; font-size: 0.94rem; }
+.intro-safety table td a { color: #49948b; text-decoration: none; }
