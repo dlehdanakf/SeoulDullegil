@@ -4,15 +4,17 @@ html, body { padding: 0; margin: 0; }
 .intro-main .logo { padding: 2rem 0; }
 .intro-main .logo img { height: 2.6rem; display: block; margin: 0 auto; }
 .intro-main .img { position: relative; }
-.intro-main .img::after { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0,0,0,.1); }
+.intro-main .img::after { content: ''; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0,0,0,.1); border-left: 0; border-right: 0; }
 .intro-main .img img { width: 100%; display: block; }
 .intro-main .desc { padding: 1rem; }
 .intro-main .desc + .desc { padding-top: 0.4rem; }
 .intro-main .desc p { font-size: 0.96rem; line-height: 1.41em; color: #333; margin: 0.3rem 0; }
 .intro-main .desc h2 { margin: 0; padding: 0; line-height: 1; color: #333; font-size: 1.3rem; font-weight: normal; }
-.intro-main .desc > ul { padding-left: 20px; margin-top: 0.4rem; margin-bottom: 0; }
+.intro-main .desc > ul,
+.intro-main .desc > ol { padding-left: 20px; margin-top: 0.4rem; margin-bottom: 0; }
 .intro-main .desc > ul ul { padding-left: 20px; margin-top: 0.1rem; }
-.intro-main .desc > ul li { font-size: 0.9rem; line-height: 1.4em; color: #333; }
+.intro-main .desc > ul li,
+.intro-main .desc > ol li { font-size: 0.9rem; line-height: 1.4em; color: #333; }
 .intro-main .list { margin-top: -0.2rem; padding-bottom: 1rem; }
 .intro-main .list .item { position: relative; padding-left: 7.8rem; min-height: 4rem; margin-top: 0.8rem; padding-bottom: 0.2rem; border-bottom: 1px solid #EEE; }
 .intro-main .list .item .thumb { position: absolute; top: 0; left: 0; width: 7rem; height: 4rem; background-color: #DDD; background-size: cover; background-position: center; background-repeat: no-repeat; }
@@ -22,3 +24,25 @@ html, body { padding: 0; margin: 0; }
 .intro-main .list .item .text p { color: #666; line-height: 1.2em; font-size: 0.8rem; margin: 0.2rem 0; }
 .intro-main .list .item:last-child { border-bottom: 0; }
 
+.intro-tour { padding: 1rem 0; }
+.intro-tour table { width: 100%; border-collapse: collapse; mso-cellspacing: 0; }
+.intro-tour table th { color: #333; font-weight: normal; font-size: 0.94rem; text-align: left; padding: 0.16rem 0.5rem 0.16rem 0; }
+.intro-tour table td { color: #333; font-weight: normal; font-size: 0.94rem; }
+.intro-tour table td a { color: #49948b; text-decoration: none; }
+.intro-tour table.stamp { margin-top: 0.6rem; }
+.intro-tour table.stamp th { font-size: 0.86rem; white-space: nowrap; vertical-align: top; }
+.intro-tour table.stamp td { font-size: 0.86rem; padding: 0.16rem 0; }
+.intro-tour .desc p .caution { display: block; font-size: 0.8rem; color: #ff0000; }
+.intro-tour .desc p .caution::before { content: '=='; margin-right: 4px; }
+.intro-tour .desc p .caution::after { content: '=='; margin-left: 4px; }
+.intro-tour .desc .guide + p { font-size: 0.8rem; color: #333; margin-top: 0.6rem; margin-bottom: 0; }
+.intro-tour .desc h3 { margin: 0.6rem 0 0 0; line-height: 1; font-size: 1.05rem; font-weight: normal; color: #333; }
+.intro-tour .desc h3::before { content: '# '; }
+.intro-tour .desc .wanju { margin-top: -0.3rem; margin-bottom: 1rem; font-size: 0.8rem; color: #888; }
+.intro-tour .desc .cards { margin: 0.5rem -0.5rem; }
+.intro-tour .desc .cards::after { content: ''; display: block; float: none; clear: both; }
+.intro-tour .desc .cards .item { float: left; width: 50%; padding: 0.5rem; box-sizing: border-box; }
+.intro-tour .desc .cards .item .card {  }
+.intro-tour .desc .cards .item .card .thumbnail { position: relative; background: #DDD no-repeat center; background-size: cover; padding-bottom: 60%; }
+.intro-tour .desc .cards .item .card .thumbnail::after { content: ''; position: absolute; display: block; top: 0; left: 0; bottom: 0; right: 0; border: 1px solid rgba(0, 0, 0, .1); }
+.intro-tour .desc .cards .item .card p { border: 1px solid #DDD; border-top: 0; margin: 0; line-height: 1; padding: 0.5rem 0.4rem 0.4rem 0.4rem; }
