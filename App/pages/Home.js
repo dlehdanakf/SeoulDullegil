@@ -16,6 +16,8 @@ import DefaultTabBar from './components/tabbar.component';
 import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
 
+import StampList from './StampList.page';
+
 const navBarStyles = navBarStylesModule("white");
 
 export default class Home extends React.Component {
@@ -118,20 +120,13 @@ export default class Home extends React.Component {
                         renderRow={this.renderCourseRowItem}
                         renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
                     />
-                    <Text tabLabel="스탬프 북" />
+                    <StampList tabLabel="스탬프 북" />
                 </ScrollableTabView>
 
             </View>
         );
     }
 }
-
-const data = [[
-	[0, 1],
-	[1, 3],
-	[3, 7],
-	[4, 9],
-]];
 
 const styles = StyleSheet.create({
     fill: {
