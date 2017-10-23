@@ -85,38 +85,52 @@ export default class StampList extends React.Component {
     showStampRecord(stamp){
 
         function modalContent(v){
-            if(isVisited === false){
+            //나중에 바꿔야 할부분
+            if(v.INDEX % 2 == 1){
                 return(
-                    <View style={{flex:1, alignItems:'center'}}>
-                        <IconFontAwesome name='close' size={100} style={{color:'#FF6244'}}/>
-                        <Text style={{fontSize:15, fontWeight:'bold'}}>아직 발견하지 못한 도장입니다</Text>
+                    <View style={{flex:1}}>
+                        <View style={{flex:1}}>
+                            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                                <IconFontAwesome name='close' size={115} style={{color:'#FF6244'}}/>
+                            </View>
+                            <View style={{height:50, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color: '#5F6364', fontSize:20}}>{v.NAME}</Text>
+                                <Text style={{color: '#BBC0C4', fontSize:15}}>{v.COT_CONTS_NAME}</Text>
+                            </View>
+                        </View>
+                        <View style={{height: 80, backgroundColor: '#323638', borderBottomLeftRadius: 6, borderBottomRightRadius:6, flexDirection:'row'}}>
+                            <View style={{flex:1, justifyContent:'center', flexDirection:'row'}}>
+                                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', padding:10}}>
+                                    <Text style={{fontSize:18, color:'white', fontWeight:'bold'}}>아직 발견하지 못한 도장입니다</Text>
+                                </View>
+                            </View>
+                        </View>
                     </View>
                 );
             }
             else {
                 return(
-                    <View style={{flex:1, flexDirection:'row'}}>
-                        <View style={{width:101, marginHorizontal:15, justifyContent:'center'}}>
-                            <View style={[styles.stampIconWrap, {width:101, height:101, borderRadius:101, borderColor: v.coursecolor}]}>
-                                <Image source={StampIconFunc(stamp.COT_STAMP_ICON)} size={100} style={{width:100, height:100, tintColor: v.coursecolor}} />
+                    <View style={{flex:1}}>
+                        <View style={{flex:1}}>
+                            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                                <View style={[styles.stampIconWrap, {height: 115, width:115, borderColor:'#778086'}]}>
+                                    <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={{height: 115, width:115, tintColor:'#778086'}} />
+                                </View>
+                            </View>
+                            <View style={{height:50, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color: '#5F6364', fontSize:20}}>{v.NAME}</Text>
+                                <Text style={{color: '#BBC0C4', fontSize:15}}>{v.COT_CONTS_NAME}</Text>
                             </View>
                         </View>
-                        <View style={{flex:1, margin:10, flexDirection:'column'}}>
-                            <View style={{marginTop:10, borderLeftWidth:3, borderColor: v.color, paddingLeft: 5}}>
-                                <Text style={modalStyles.title}>{v.COT_CONTS_NAME}</Text>
-                            </View>
-                            <View style={{flex:1, flexDirection:'row', padding:8}}>
-                                <View style={{flex:3, justifyContent:'center', alignItems:'center'}}>
-                                    <Text style={{fontWeight:'bold', fontSize:14}}>획득 날짜</Text>
-                                    <Text>2017-04-11</Text>
+                        <View style={{height: 80, backgroundColor: '#323638', borderBottomLeftRadius: 6, borderBottomRightRadius:6, flexDirection:'row'}}>
+                            <View style={{flex:1, justifyContent:'center', flexDirection:'row'}}>
+                                <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'center', paddingLeft:17}}>
+                                    <IconMaterialIcons name="map" size={16} style={{color:'#51585C', marginBottom:-1}} />
+                                    <Text style={{fontSize:15, color:'white', paddingLeft:3}}>{v.COT_GU_NAME}</Text>
                                 </View>
-                                <View style={{flex:1, flexDirection:'row', paddingVertical:15}}>
-                                    <View style={{flex:1, borderRightWidth:1, borderColor:'#d1d1d1'}}/>
-                                    <View style={{flex:1}}/>
-                                </View>
-                                <View style={{flex:3, justifyContent:'center', alignItems:'center'}}>
-                                    <Text style={{fontWeight:'bold', fontSize:15}}>방문 횟수</Text>
-                                    <Text>4</Text>
+                                <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'flex-start', padding:0}}>
+                                    <IconMaterialIcons name="access-time" size={16} style={{color:'#626B70', marginBottom:-1}} />
+                                    <Text style={{fontSize:15, color:'white', paddingLeft:3}}>2017-04-11</Text>
                                 </View>
                             </View>
                         </View>
@@ -152,7 +166,7 @@ export default class StampList extends React.Component {
                     </View>
                 </TouchableNativeFeedback>
                 <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[1]);}}>
-                    <View style={[styles.stampViewContainer, {backgroundColor: row[1].coursecolor, opacity: row[1].INDEX === 2 || row[1].INDEX == 5 ? 0.7 : 1}]}>
+                    <View style={[styles.stampViewContainer, {backgroundColor: row[1].coursecolor, opacity: 0.7}]}>
                         <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                             <View style={styles.stampIconWrap}>
                                 <Image source={StampIconFunc(row[1].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#E1E1E1'}]}/>
@@ -190,22 +204,12 @@ export default class StampList extends React.Component {
                 >
                     <View style={modalStyles.modalWrap}>
                         <View style={modalStyles.modal}>
-                            <View style={[modalStyles.header, {backgroundColor: this.state.modalHeaderColor}]}>
-                                <TouchableHighlight onPress={()=>this.setState({isModalVisible: false})} style={modalStyles.titleWrap} underlayColor="#F1F1F1">
-                                    <View style={{flex: 1, flexDirection: 'row'}}>
-                                        <View style={{flex: 1, paddingHorizontal: 12, justifyContent: 'center',}}>
-                                            <Text style={modalStyles.title}>{this.state.modalData.title}</Text>
-                                            <Text style={[modalStyles.subTitle, {color:'white'}]}>{this.state.modalData.subTitle}</Text>
-                                        </View>
-                                        <View style={modalStyles.icon}>
-                                            <IconMaterialIcons name="keyboard-arrow-down" size={32} />
-                                        </View>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                            <View style={{flex:1}}>
-                                {this.state.modalData.content}
-                            </View>
+                            <TouchableNativeFeedback onPress={()=>this.setState({isModalVisible: false})}>
+                                <View style={modalStyles.icon}>
+                                    <IconMaterialIcons name="close" size={24} />
+                                </View>
+                            </TouchableNativeFeedback>
+                            {this.state.modalData.content}
                         </View>
                     </View>
                 </Modal>
@@ -266,31 +270,28 @@ const styles = StyleSheet.create({
 
 const modalStyles = StyleSheet.create({
     modalWrap: {
-        padding:10,
+        padding:10,justifyContent:'flex-end',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 4,
+        borderRadius: 6
     },
     modal: {
         justifyContent:'center',
-        backgroundColor: '#FFF',
-        borderRadius: 6,
-        elevation: 2,
-        height: 200,
-        width: 320,
+        backgroundColor:'#F0F8F9',
+        elevation: 3,
+        height: 280,
+        width: 230,
+        borderRadius: 6
     },
     header: {
-        height: 70,
+        height: 60,
         padding: 5,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#AAA',
-    },
-    titleWrap: {
-        flex: 1,
-        borderRadius: 4,
+        flexDirection: 'row'
     },
     title: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
     },
     subTitle: {
@@ -298,9 +299,9 @@ const modalStyles = StyleSheet.create({
         color: '#AAA'
     },
     icon: {
-        width: 60,
-        height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: 30,
+        alignItems: 'flex-end',
+        paddingRight: 5,
+        paddingTop: 5,
     },
 });
