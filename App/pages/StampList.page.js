@@ -6,7 +6,8 @@ import {
     View,
     TouchableNativeFeedback,
     TouchableHighlight,
-    ListView
+    ListView,
+    Dimensions
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -18,6 +19,11 @@ import StampIconFunc from './components/stamp.function';
 import stampColor from './datasets/green.colors';
 
 const isVisited = true;
+const cardInterval = 4;
+const screenWidth = Dimensions.get('window').width;
+const cardViewWidth = (screenWidth - cardInterval*6)/2;
+const stampRadius = 120;
+const cardViewRadius = 3;
 
 export default class StampList extends React.Component {
     constructor(props) {
@@ -132,23 +138,29 @@ export default class StampList extends React.Component {
 
     renderStampRowItem(row){
         return(
-            <View style={{height:150, flex:1, flexDirection:'row', margin:8}}>
+            <View style={{height: cardViewWidth, flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
                 <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[0]);}}>
-                    <View style={[styles.stampViewContainer, {backgroundColor:row[0].coursecolor, borderRadius:10}]}>
-                    <View style={[styles.stampViewContainer, {backgroundColor:'white', alignItems:'center', marginHorizontal:0, marginBottom:4, marginRight:4, borderRadius:6}]}>
-                        <View style={styles.stampIconWrap}>
-                            <Image source={StampIconFunc(row[0].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#D1D1D1'}]}/>
+                    <View style={[styles.stampViewContainer, {backgroundColor: row[0].coursecolor, opacity:0.7}]}>
+                        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                            <View style={styles.stampIconWrap}>
+                                <Image source={StampIconFunc(row[0].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#E1E1E1'}]}/>
+                            </View>
                         </View>
-                    </View>
+                        <View style={styles.stampNameView}>
+                            <Text style={styles.stampNameText}>{row[0].NAME}</Text>
+                        </View>
                     </View>
                 </TouchableNativeFeedback>
                 <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[1]);}}>
-                    <View style={[styles.stampViewContainer, {backgroundColor:row[1].coursecolor, borderRadius:10}]}>
-                    <View style={[styles.stampViewContainer, {backgroundColor:'white', alignItems:'center', marginHorizontal:0, marginBottom:4, marginRight:4, borderRadius:6}]}>
-                        <View style={styles.stampIconWrap}>
-                            <Image source={StampIconFunc(row[1].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor:'#D1D1D1'}]}/>
+                    <View style={[styles.stampViewContainer, {backgroundColor: row[1].coursecolor, opacity: row[1].INDEX === 2 || row[1].INDEX == 5 ? 0.7 : 1}]}>
+                        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                            <View style={styles.stampIconWrap}>
+                                <Image source={StampIconFunc(row[1].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#E1E1E1'}]}/>
+                            </View>
                         </View>
-                    </View>
+                        <View style={styles.stampNameView}>
+                            <Text style={styles.stampNameText}>{row[1].NAME}</Text>
+                        </View>
                     </View>
                 </TouchableNativeFeedback>
             </View>
@@ -158,12 +170,11 @@ export default class StampList extends React.Component {
     render() {
 
         return (
-            <View style={{flex:1}}>
+            <View style={{flex:1, paddingVertical:cardInterval}}>
                 <ListView
                     style={{flex: 1}}
                     dataSource={this.state.stampdata}
                     enableEmptySections={true}
-
                     renderRow={this.renderStampRowItem}
                 />
                 <Modal
@@ -215,33 +226,41 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: 'black',
     },
-    container:{
-        borderColor: "#FAFAFA",
-        borderWidth:1,
-        margin:15,
-        backgroundColor:'green',
-    },
     stampViewContainer: {
         flex:1,
-        marginHorizontal:8,
-        justifyContent:'center',
-        elevation:3,
+        marginHorizontal: cardInterval,
+        elevation:2,
         borderWidth:0,
+        backgroundColor:'white',
+        borderRadius:cardViewRadius,
     },
     stampIconWrap: {
         justifyContent:'center',
         alignItems:'center',
-        height:121,
-        width:121,
-        borderColor:'gray',
-        borderRadius:121,
+        height: stampRadius+1,
+        width:stampRadius+1,
+        borderColor:'#E1E1E1',
+        borderRadius:stampRadius+1,
         borderWidth:1,
         borderStyle: 'dashed',
-        borderColor:'#D1D1D1'
     },
     stampIcon:{
-        width:120,
-        height:120
+        width:stampRadius,
+        height:stampRadius,
+    },
+    stampNameView:{
+        height:50,
+        backgroundColor:'black',
+        opacity:0.5,
+        justifyContent:'center',
+        alignItems:'center',
+        borderBottomLeftRadius:cardViewRadius,
+        borderBottomRightRadius:cardViewRadius
+    },
+    stampNameText:{
+        fontSize:17,
+        fontWeight:'bold',
+        color:'white'
     }
 });
 

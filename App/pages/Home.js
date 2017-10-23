@@ -99,7 +99,7 @@ export default class Home extends React.Component {
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
-                    initialPage={0}
+                    initialPage={2}
                 >
                     <MyRecord tabLabel="내 기록" />
                     <ListView
