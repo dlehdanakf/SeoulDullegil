@@ -15,8 +15,8 @@ import Main from './pages/Main.page';
 const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
-            <Scene key="guide" component={Guide} />
             <Scene key="notice" component={Notice} />
+            <Scene key="guide" component={Guide} />
             <Scene key="home" component={Home} />
             <Scene key="tracking" component={Tracking} />
             <Scene key="course_map" component={CourseMap} />
