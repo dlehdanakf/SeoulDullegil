@@ -6,11 +6,9 @@ import {
 import CourseInfo from './pages/CourseInfo.page';
 import CourseMap from './pages/CourseMap.page';
 import Tracking from './pages/Tracking';
-import Home from './pages/Home';
 import Notice from './pages/Notice.page';
 import CourseList from './pages/CourseList.page';
 import Guide from './pages/Guide.page';
-import Main from './pages/Main.page';
 
 const MyNavigator = () => (
     <Router>
