@@ -18,6 +18,7 @@ export default class Notice extends React.Component {
 
         this.state = {
             pageNum: 1,
+            hasMore: true,
             noticeList: [],
             noticeListDataSource: this.ds.cloneWithRows([]),
             showInitialLoading: true,
@@ -28,10 +29,8 @@ export default class Notice extends React.Component {
         this.onPressNoticeItem = this.onPressNoticeItem.bind(this);
     }
 
-    fetchNoticeListFromServer(page, clear){
+    fetchNoticeListFromServer(page){
         page = parseInt(page) > 0 ? parseInt(page) : 1;
-        clear = !!clear;
-
         fetch('https://mplatform.seoul.go.kr/api/dule/noticeList.do?pagenum=' + page, {
             method: 'GET',
             headers: {
@@ -47,15 +46,13 @@ export default class Notice extends React.Component {
 
                 }
 
-                let list = this.state.noticeList;
-                if(clear) list = [];
-
-                list = list.concat(data.list);
+                const list = this.state.noticeList.concat(data.list);
                 this.setState({
                     noticeList: list,
                     noticeListDataSource: this.ds.cloneWithRows(list),
                     showInitialLoading: false,
                     pageNum: this.state.pageNum + 1,
+                    hasMore: data.list.length > 0
                 });
             });
     }
@@ -84,7 +81,7 @@ export default class Notice extends React.Component {
 
 
     componentDidMount(){
-        this.fetchNoticeListFromServer(this.state.pageNum, false);
+        this.fetchNoticeListFromServer(this.state.pageNum);
     }
 
     render(){
@@ -114,6 +111,20 @@ export default class Notice extends React.Component {
                             enableEmptySections={true}
                             renderRow={this.renderNoticeItem}
                             renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#e2e2e2'}} />}
+                            onEndReached={()=>this.fetchNoticeListFromServer(this.state.pageNum)}
+                            renderFooter={()=>{
+                                if(!this.state.hasMore) return null;
+
+                                return (
+                                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 14}}>
+                                        <ActivityIndicator
+                                            animating={true}
+                                            size="large"
+                                            color="#a0b145"
+                                        />
+                                    </View>
+                                );
+                            }}
                         />
                     }
                 </View>
