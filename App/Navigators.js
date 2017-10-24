@@ -14,14 +14,14 @@ import Main from './pages/Main.page';
 
 const MyNavigator = () => (
     <Router>
-            <Scene key="home" component={Home} />
+        <Scene key="root" headerMode="none">
             <Scene key="notice" component={Notice} />
             <Scene key="guide" component={Guide} />
-                <Scene key="notice" component={Notice} />
-                <Scene key="tracking" component={Tracking} />
-                <Scene key="course_map" component={CourseMap} />
-                <Scene key="course_info" component={CourseInfo} />
-                <Scene key="course_list" component={CourseList} />
+            <Scene key="notice" component={Notice} />
+            <Scene key="tracking" component={Tracking} />
+            <Scene key="course_map" component={CourseMap} />
+            <Scene key="course_info" component={CourseInfo} />
+            <Scene key="course_list" component={CourseList} />
         </Scene>
     </Router>
 );
