@@ -106,6 +106,7 @@ export default class Home extends React.Component {
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
+                    prerenderingSiblingsNumber={Infinity}
                     initialPage={2}
                 >
                     <MyRecord tabLabel="내 기록" />
@@ -119,7 +120,6 @@ export default class Home extends React.Component {
                     />
                     <StampList tabLabel="스탬프 북" />
                 </ScrollableTabView>
-
             </View>
         );
     }

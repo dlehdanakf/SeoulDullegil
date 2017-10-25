@@ -3809,7 +3809,7 @@ export default {
             COT_VALUE_01: "스탬프 시설 위치 (1개 우체통에 2개 스탬프 시설)",
             COT_MASTER_NO: "283-4",
             COT_LINE_WEIGHT: "4",
-            COT_CONTS_NAME: "[1코스/2코스] 화랑대 4번 출구 앞 공원",
+            COT_CONTS_NAME: "화랑대 4번 출구 앞 공원",
             COT_STAMP_ICON: "stamp04.png",
         },
         {
