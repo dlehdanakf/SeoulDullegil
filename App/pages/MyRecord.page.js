@@ -12,6 +12,10 @@ import {
 
 import {Actions} from 'react-native-router-flux';
 import {Bar, SmoothLine} from 'react-native-pathjs-charts';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 class Emergency extends React.Component {
     constructor(props) {
@@ -20,7 +24,7 @@ class Emergency extends React.Component {
 
     render(){
         return(
-            <View style={{flex:1, backgroundColor:'white'}}>
+            <View style={styles.innerContainer}>
                 <View style={{height:30, borderBottomWidth:1, borderColor:'#d1d1d1', paddingLeft:5}}>
                     <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>응급전화</Text>
                 </View>
@@ -35,10 +39,47 @@ class WeatherInfo extends React.Component {
     }
 
     render(){
+        //#614FD4
         return(
-            <View style={{flex:1, backgroundColor:'white'}}>
-                <View style={{height:30, borderBottomWidth:1, borderColor:'#d1d1d1', paddingLeft:5}}>
-                    <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>날씨</Text>
+            <View style={[styles.innerContainer, {flexDirection:'row', paddingHorizontal:12}]}>
+                <View style={{flex:1, paddingHorizontal:20, paddingVertical:10}}>
+                    <View style={{flex:1, flexDirection:'row'}}>
+                        <Text style={{fontSize:70, color:'black'}}>25</Text>
+                        <IconFontAwesome name="circle-o" size={14} style={{color:'black', marginTop:12, marginLeft:5}} />
+                        <View style={{alignItems:'flex-end', justifyContent:'center', marginLeft:10}}>
+                            <View style={{flexDirection:'row'}}>
+                                <Text style={{fontSize:25, color:'black'}}>30</Text>
+                                <IconFontAwesome name="circle-o" size={7} style={{color:'black', marginTop:4}} />
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <Text style={{fontSize:25, color:'black'}}>19</Text>
+                                <IconFontAwesome name="circle-o" size={7} style={{color:'black', marginTop:4}} />
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{flex:1, justifyContent:'center'}}>
+                        <View style={{flex:1}}>
+                            <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
+                                <Text style={{fontSize:18, color:'black', marginRight:10}}>미세 먼지</Text>
+                                <View style={{borderWidth:2, borderColor:'orange', borderRadius: 4, width: 40, height: 25, justifyContent:'center', alignItems:'center'}}>
+                                    <Text style={{fontSize:18, color:'orange', fontWeight:'bold'}}>나쁨</Text>
+                                </View>
+                            </View>
+                            <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
+                                <Text style={{fontSize:18, color:'black', marginRight:10}}>강수 확률</Text>
+                                <View style={{width: 40, height: 25, justifyContent:'center', alignItems:'center'}}>
+                                    <Text style={{fontSize:18, color:'black', fontWeight:'bold'}}>30%</Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View style={{width:170, alignItems:'center'}}>
+                    <IconIonicons name="ios-partly-sunny-outline" size={150} style={{color:'black'}} />
+                    <View style={{flexDirection:'row'}}>
+                        <IconEntypo name="location-pin" size={24} />
+                        <Text style={{fontSize:20, color:'black', fontWeight:'bold'}}>광진구</Text>
+                    </View>
                 </View>
             </View>
         );
@@ -52,7 +93,7 @@ class CurrnetTrackingInfo extends React.Component {
 
     render(){
         return(
-            <View style={{flex:1, backgroundColor:'white'}}>
+            <View style={styles.innerContainer}>
                 <View style={{height:30, borderBottomWidth:1, borderColor:'#d1d1d1', paddingLeft:5}}>
                     <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>트래킹 정보</Text>
                 </View>
@@ -68,7 +109,7 @@ class StatusView extends React.Component {
 
     render(){
         return(
-            <View style={{flex:1, backgroundColor:'white'}}>
+            <View style={styles.innerContainer}>
                 <View style={{height:30, borderBottomWidth:1, borderColor:'#d1d1d1', paddingLeft:5}}>
                     <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>상태창</Text>
                 </View>
@@ -136,7 +177,7 @@ class ExerciseChart extends React.Component {
         }
 
         return (
-            <View style={{flex:1, backgroundColor:'white'}}>
+            <View style={styles.innerContainer}>
                 <View style={{height:30}}>
                     <View style={{height:30, paddingLeft:5}}>
                         <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>주간 정보</Text>
@@ -164,7 +205,7 @@ export default class MyRecord extends React.Component {
 
     renderViewRowItem(row){
         return (
-            <View style={{height: 200, backgroundColor: 'white', marginHorizontal:5, marginTop:5, paddingHorizontal:10, paddingVertical:5}}>
+            <View style={styles.container}>
                 {row}
             </View>
         );
@@ -199,8 +240,18 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     container: {
-        justifyContent: 'center',
-        alignItems: 'center'
+        height: 200,
+        marginHorizontal:5,
+        marginTop:5,
+        borderRadius:6,
+        borderWidth:0,
+        elevation:1
+    },
+    innerContainer:{
+        flex:1,
+        backgroundColor:'white',
+        borderRadius:6,
+        padding:5
     }
 
 });
