@@ -51,7 +51,7 @@ export default class Notice extends React.Component {
                     noticeList: list,
                     noticeListDataSource: this.ds.cloneWithRows(list),
                     showInitialLoading: false,
-                    pageNum: this.state.pageNum + 1,
+                    pageNum: parseInt(this.state.pageNum) + 1,
                     hasMore: data.list.length > 0
                 });
             });
@@ -107,6 +107,8 @@ export default class Notice extends React.Component {
                         :
                         <ListView
                             style={{flex: 1}}
+                            initialListSize={20}
+                            pageSize={10}
                             dataSource={this.state.noticeListDataSource}
                             enableEmptySections={true}
                             renderRow={this.renderNoticeItem}
