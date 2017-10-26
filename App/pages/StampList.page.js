@@ -145,34 +145,29 @@ export default class StampList extends React.Component {
     }
 
     renderStampRowItem(row){
-        return(
+        return (
             <View style={{flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
-                <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[0]);}}>
-                    <View style={styles.stampViewContainer}>
-                        <Text style={{paddingTop: 10, paddingLeft: 10, color: '#bebebe', fontSize: 13}}>{row[0].NAME}</Text>
-                        <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingTop: 14, paddingBottom: 20}}>
-                            <View style={styles.stampIconWrap}>
-                                <Image source={StampIconFunc(row[0].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#bebebe'}]}/>
+                {row.map((v, i)=>{
+                    const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
+                    const stampColor = isActive ? '#f49805' : v.color;
+                    const stampStyle = isActive ? { borderColor: '#f49805', borderStyle: 'solid' } : { borderColor: stampColor };
+
+                    return (
+                        <TouchableNativeFeedback key={i} onPress={()=>this.showStampRecord(v)}>
+                            <View style={styles.stampViewContainer}>
+                                <Text style={{paddingTop: 10, paddingLeft: 10, color: '#A3A3A3', fontSize: 13}}>{v.NAME}</Text>
+                                <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingTop: 14, paddingBottom: 20}}>
+                                    <View style={[styles.stampIconWrap, stampStyle]}>
+                                        <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: stampColor}]}/>
+                                    </View>
+                                </View>
+                                <View style={styles.stampNameView}>
+                                    <Text style={[styles.stampNameText, { color: v.color, borderColor: v.color }]}>{v.COT_CONTS_NAME}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.stampNameView}>
-                            <Text style={[styles.stampNameText, { color: row[0].color, borderColor: row[0].color }]}>{row[0].COT_CONTS_NAME}</Text>
-                        </View>
-                    </View>
-                </TouchableNativeFeedback>
-                <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[1]);}}>
-                    <View style={styles.stampViewContainer}>
-                        <Text style={{paddingTop: 10, paddingLeft: 10, color: '#bebebe', fontSize: 13}}>{row[1].NAME}</Text>
-                        <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingTop: 14, paddingBottom: 20}}>
-                            <View style={styles.stampIconWrap}>
-                                <Image source={StampIconFunc(row[1].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#bebebe'}]}/>
-                            </View>
-                        </View>
-                        <View style={styles.stampNameView}>
-                            <Text style={[styles.stampNameText, { color: row[1].color, borderColor: row[1].color }]}>{row[1].COT_CONTS_NAME}</Text>
-                        </View>
-                    </View>
-                </TouchableNativeFeedback>
+                        </TouchableNativeFeedback>
+                    );
+                })}
             </View>
         );
     }
