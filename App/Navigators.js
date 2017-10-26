@@ -10,11 +10,13 @@ import Notice from './pages/Notice.page';
 import CourseList from './pages/CourseList.page';
 import Guide from './pages/Guide.page';
 import Home from './pages/Home.page';
+import Event from './pages/Event.page';
 
 const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
             <Scene key="notice" component={Notice} />
+            <Scene key="event" component={Event} />
             <Scene key="home" component={Home} />
             <Scene key="guide" component={Guide} />
             <Scene key="notice" component={Notice} />
