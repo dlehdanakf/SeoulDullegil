@@ -1,13 +1,7 @@
 import React, {Component} from 'React'
 import {
-    Image,
-    StyleSheet,
-    Text,
-    View,
-    TouchableNativeFeedback,
-    TouchableHighlight,
-    ListView,
-    Dimensions
+    Image, StyleSheet, Text, View, TouchableNativeFeedback,
+    TouchableHighlight, ListView, Dimensions
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -151,32 +145,29 @@ export default class StampList extends React.Component {
     }
 
     renderStampRowItem(row){
-        return(
-            <View style={{height: cardViewWidth, flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
-                <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[0]);}}>
-                    <View style={[styles.stampViewContainer, {backgroundColor: row[0].coursecolor, opacity:0.7}]}>
-                        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                            <View style={styles.stampIconWrap}>
-                                <Image source={StampIconFunc(row[0].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#E1E1E1'}]}/>
+        return (
+            <View style={{flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
+                {row.map((v, i)=>{
+                    const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
+                    const stampColor = isActive ? '#f49805' : v.color;
+                    const stampStyle = isActive ? { borderColor: '#f49805', borderStyle: 'solid' } : { borderColor: stampColor };
+
+                    return (
+                        <TouchableNativeFeedback key={i} onPress={()=>this.showStampRecord(v)}>
+                            <View style={styles.stampViewContainer}>
+                                <Text style={{paddingTop: 10, paddingLeft: 10, color: '#A3A3A3', fontSize: 13}}>{v.NAME}</Text>
+                                <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingTop: 14, paddingBottom: 20}}>
+                                    <View style={[styles.stampIconWrap, stampStyle]}>
+                                        <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: stampColor}]}/>
+                                    </View>
+                                </View>
+                                <View style={styles.stampNameView}>
+                                    <Text style={[styles.stampNameText, { color: v.color, borderColor: v.color }]}>{v.COT_CONTS_NAME}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.stampNameView}>
-                            <Text style={styles.stampNameText}>{row[0].NAME}</Text>
-                        </View>
-                    </View>
-                </TouchableNativeFeedback>
-                <TouchableNativeFeedback onPress={()=>{this.showStampRecord(row[1]);}}>
-                    <View style={[styles.stampViewContainer, {backgroundColor: row[1].coursecolor, opacity: 0.7}]}>
-                        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                            <View style={styles.stampIconWrap}>
-                                <Image source={StampIconFunc(row[1].COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: '#E1E1E1'}]}/>
-                            </View>
-                        </View>
-                        <View style={styles.stampNameView}>
-                            <Text style={styles.stampNameText}>{row[1].NAME}</Text>
-                        </View>
-                    </View>
-                </TouchableNativeFeedback>
+                        </TouchableNativeFeedback>
+                    );
+                })}
             </View>
         );
     }
@@ -184,7 +175,7 @@ export default class StampList extends React.Component {
     render() {
 
         return (
-            <View style={{flex:1, paddingVertical:cardInterval}}>
+            <View style={{flex:1, paddingVertical:cardInterval, backgroundColor: '#efefef'}}>
                 <ListView
                     style={{flex: 1}}
                     dataSource={this.state.stampdata}
@@ -193,10 +184,10 @@ export default class StampList extends React.Component {
                 />
                 <Modal
                     isVisible={this.state.isModalVisible}
-                    animationIn="slideInUp"
-                    animationOut="slideOutDown"
-                    animationInTiming={300}
-                    animationOutTiming={150}
+                    animationIn="fadeIn"
+                    animationOut="fadeOut"
+                    animationInTiming={100}
+                    animationOutTiming={100}
                     backdropOpacity={0.5}
                     onBackButtonPress={()=>this.setState({isModalVisible: false})}
                     onBackdropPress={()=>this.setState({isModalVisible: false})}
@@ -231,21 +222,21 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     stampViewContainer: {
-        flex:1,
+        flex: 1,
         marginHorizontal: cardInterval,
-        elevation:2,
-        borderWidth:0,
-        backgroundColor:'white',
-        borderRadius:cardViewRadius,
+        elevation: 1,
+        borderWidth: 0,
+        backgroundColor: 'white',
+        borderRadius: cardViewRadius,
     },
     stampIconWrap: {
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         height: stampRadius+1,
-        width:stampRadius+1,
-        borderColor:'#E1E1E1',
-        borderRadius:stampRadius+1,
-        borderWidth:1,
+        width: stampRadius+1,
+        borderColor: '#E1E1E1',
+        borderRadius: stampRadius+1,
+        borderWidth: 1,
         borderStyle: 'dashed',
     },
     stampIcon:{
@@ -253,24 +244,30 @@ const styles = StyleSheet.create({
         height:stampRadius,
     },
     stampNameView:{
-        height:50,
-        backgroundColor:'black',
-        opacity:0.5,
         justifyContent:'center',
         alignItems:'center',
+        paddingBottom: 20,
+        paddingHorizontal: 20,
         borderBottomLeftRadius:cardViewRadius,
         borderBottomRightRadius:cardViewRadius
     },
     stampNameText:{
-        fontSize:17,
-        fontWeight:'bold',
-        color:'white'
+        fontSize:13,
+        fontWeight:'normal',
+        color:'#CCC',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        borderRadius: 2,
+        paddingTop: 3,
+        paddingBottom: 2,
+        paddingHorizontal: 8,
+        textAlign: 'center',
     }
 });
 
 const modalStyles = StyleSheet.create({
     modalWrap: {
-        padding:10,justifyContent:'flex-end',
+        padding:10,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 6
