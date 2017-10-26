@@ -18,6 +18,7 @@ import courseListData from './datasets/course.list';
 
 import StampList from './StampList.page';
 import MyRecord from './MyRecord.page';
+import Summary from './Summary.page';
 
 const navBarStyles = navBarStylesModule("white");
 
@@ -30,7 +31,7 @@ export default class Home extends React.Component {
 
         this.state = {
             list: this.ds.cloneWithRows(courseListData),
-            activeCourseNum: 2,
+            activeCourseNum: 8,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -38,7 +39,7 @@ export default class Home extends React.Component {
 
     renderCourseRowItem(rowData){
         const green = greenColors[parseInt(rowData.COURSE_NO) - 1];
-        const level = ['', '초급', '중급', '상급'];
+        const level = ['', '초급', '중급', '고급'];
         const levelColor = ['', '#398b88', '#fe6d02', '#fb535c'];
         const isActiveCourse = this.state.activeCourseNum.toString() === rowData.COURSE_NO;
 
@@ -85,17 +86,17 @@ export default class Home extends React.Component {
                         <NavGroup style={{marginRight: -20,}}>
                             <NavButton style={{marginLeft: 1,}}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
-                                    <IconOcticons name="megaphone" size={26} style={menuStyles.iconStyle}/>
+                                    <IconOcticons name="megaphone" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
                             </NavButton>
                             <NavButton style={{marginLeft: 1,}}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
-                                    <IconMaterialCommunityIcons name="information-outline" size={26} style={menuStyles.iconStyle}/>
+                                    <IconMaterialIcons name="dvr" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
                             </NavButton>
                             <NavButton style={{marginLeft: 1,}}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 16}]}>
-                                    <IconMaterialIcons name="more-vert" size={26} style={menuStyles.iconStyle}/>
+                                    <IconMaterialCommunityIcons name="information-outline" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
                             </NavButton>
                         </NavGroup>
@@ -106,9 +107,13 @@ export default class Home extends React.Component {
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
+                    prerenderingSiblingsNumber={Infinity}
                     initialPage={0}
                 >
-                    <MyRecord tabLabel="내 기록" />
+                    <Summary
+                        tabLabel="내 기록"
+                        activeCourseNum={this.state.activeCourseNum}
+                    />
                     <ListView
                         tabLabel="둘레길"
                         style={{flex: 1}}
@@ -119,7 +124,6 @@ export default class Home extends React.Component {
                     />
                     <StampList tabLabel="스탬프 북" />
                 </ScrollableTabView>
-
             </View>
         );
     }

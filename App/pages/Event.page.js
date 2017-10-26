@@ -1,7 +1,7 @@
 import React, {Component} from 'React';
 import {
     View, StyleSheet, ActivityIndicator, Text, Linking,
-    ListView, TouchableNativeFeedback, ToastAndroid
+    ListView, TouchableNativeFeedback, ToastAndroid, WebView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav';
@@ -31,7 +31,7 @@ export default class Notice extends React.Component {
 
     fetchNoticeListFromServer(page){
         page = parseInt(page) > 0 ? parseInt(page) : 1;
-        fetch('https://mplatform.seoul.go.kr/api/dule/noticeList.do?pagenum=' + page, {
+        fetch('https://mplatform.seoul.go.kr/api/dule/eventList.do?pagenum=' + page, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -59,14 +59,28 @@ export default class Notice extends React.Component {
             });
     }
     renderNoticeItem(rowData){
+        const myRegex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/i;
+        const imgSrc = myRegex.exec(rowData.IMG)[1];
+        const html =
+            "<html style='margin: 0; padding: 0;'>" +
+                "<body style='margin: 0; padding: 0;'>" +
+                    "<div style='width: 100%; height: 100%; background: #AAA no-repeat center; background-size: cover; background-image: url(" + imgSrc + ");'></div>" +
+                "</body>" +
+            "</html>";
+
         return (
-            <TouchableNativeFeedback onPress={() => this.onPressNoticeItem(rowData.ORGN_LINK)} key={rowData.IDX}>
+            <TouchableNativeFeedback onPress={() => this.onPressNoticeItem(rowData.LINK)} key={rowData.IDX}>
                 <View style={styles.noticeItemWrap}>
+                    <View style={{width: 100, height: 60, margin: 10}}>
+                        <WebView
+                            source={{html: html}}
+                            style={{width: 100, height: 60}}
+                        />
+                    </View>
                     <View style={styles.noticeItem}>
                         <Text style={styles.noticeTitle}>{rowData.TITLE}</Text>
                         <View style={styles.noticeItemWrap}>
-                            <Text style={styles.noticeDate}>게시일 : {rowData.REG_DATE}</Text>
-                            <Text style={[styles.noticeDate, {marginLeft: 6}]}>조회수 : {rowData.HIT_CNT}</Text>
+                            <Text style={styles.noticeDate}>기간 : {rowData.REG_DATE}</Text>
                         </View>
                     </View>
                     <View style={styles.noticeItemAngle}>
@@ -94,7 +108,7 @@ export default class Notice extends React.Component {
                         <NavButton style={{marginHorizontal: 14}} onPress={()=>{}}>
                             <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
                         </NavButton>
-                        <NavTitle style={navBarStyles.title}>공지사항</NavTitle>
+                        <NavTitle style={navBarStyles.title}>행사안내</NavTitle>
                     </View>
                 </NavBar>
                 <View style={{flex: 1}}>
@@ -167,7 +181,8 @@ const styles = StyleSheet.create({
     },
     noticeItem: {
         flex: 1,
-        padding: 10,
+        padding: 12,
+        paddingLeft: 2,
     },
     noticeTitle: {
         fontSize: 15,
