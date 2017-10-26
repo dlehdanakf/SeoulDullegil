@@ -106,12 +106,8 @@ export default class Home extends React.Component {
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
-<<<<<<< HEAD:App/pages/Home.js
-                    initialPage={0}
-=======
                     prerenderingSiblingsNumber={Infinity}
                     initialPage={2}
->>>>>>> dhDevelop:App/pages/Home.page.js
                 >
                     <MyRecord tabLabel="내 기록" />
                     <ListView
