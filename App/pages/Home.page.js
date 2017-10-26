@@ -18,6 +18,7 @@ import courseListData from './datasets/course.list';
 
 import StampList from './StampList.page';
 import MyRecord from './MyRecord.page';
+import Summary from './Summary.page';
 
 const navBarStyles = navBarStylesModule("white");
 
@@ -30,7 +31,7 @@ export default class Home extends React.Component {
 
         this.state = {
             list: this.ds.cloneWithRows(courseListData),
-            activeCourseNum: 2,
+            activeCourseNum: 8,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -107,9 +108,12 @@ export default class Home extends React.Component {
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
                     renderTabBar={()=> <DefaultTabBar />}
                     prerenderingSiblingsNumber={Infinity}
-                    initialPage={2}
+                    initialPage={0}
                 >
-                    <MyRecord tabLabel="내 기록" />
+                    <Summary
+                        tabLabel="내 기록"
+                        activeCourseNum={this.state.activeCourseNum}
+                    />
                     <ListView
                         tabLabel="둘레길"
                         style={{flex: 1}}
