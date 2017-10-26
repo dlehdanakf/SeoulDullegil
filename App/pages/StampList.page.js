@@ -89,8 +89,8 @@ export default class StampList extends React.Component {
                                     <IconFontAwesome name='close' size={54} style={{color:'#FF6244'}}/>
                                 </View>
                             </View>
-                            <View style={{paddingVertical: 20, justifyContent:'center', alignItems:'center'}}>
-                                <Text style={{color: '#5F6364', fontSize:16}}>{v.COT_CONTS_NAME}</Text>
+                            <View style={{paddingVertical: 20, paddingHorizontal: 10, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color: '#5F6364', fontSize:16, textAlign: 'center'}}>{v.COT_CONTS_NAME}</Text>
                                 <Text style={{color: '#BBC0C4', fontSize:13}}>{v.NAME}</Text>
                             </View>
                         </View>
@@ -113,8 +113,8 @@ export default class StampList extends React.Component {
                                     <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={{height: 115, width:115, tintColor:'#f49805'}} />
                                 </View>
                             </View>
-                            <View style={{paddingVertical: 20, justifyContent:'center', alignItems:'center'}}>
-                                <Text style={{color: '#5F6364', fontSize:16}}>{v.COT_CONTS_NAME}</Text>
+                            <View style={{paddingVertical: 20, paddingHorizontal: 10, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color: '#5F6364', fontSize:16, textAlign: 'center'}}>{v.COT_CONTS_NAME}</Text>
                                 <Text style={{color: '#BBC0C4', fontSize:13}}>{v.NAME}</Text>
                             </View>
                         </View>

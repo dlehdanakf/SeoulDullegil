@@ -15,9 +15,9 @@ import Event from './pages/Event.page';
 const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
+            <Scene key="home" component={Home} />
             <Scene key="notice" component={Notice} />
             <Scene key="event" component={Event} />
-            <Scene key="home" component={Home} />
             <Scene key="guide" component={Guide} />
             <Scene key="notice" component={Notice} />
             <Scene key="tracking" component={Tracking} />
