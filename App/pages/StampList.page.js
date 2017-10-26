@@ -177,9 +177,9 @@ export default class StampList extends React.Component {
     render() {
 
         return (
-            <View style={{flex:1, paddingVertical:cardInterval, backgroundColor: '#efefef'}}>
+            <View style={{flex:1, backgroundColor: '#efefef'}}>
                 <ListView
-                    style={{flex: 1}}
+                    style={{flex: 1, paddingVertical:cardInterval}}
                     dataSource={this.state.stampdata}
                     enableEmptySections={true}
                     renderRow={this.renderStampRowItem}
