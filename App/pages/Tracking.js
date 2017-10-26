@@ -78,6 +78,7 @@ export default class Tracking extends React.Component {
             pinTitle: '',
             pinDesc: '',
 
+            retValueWatchPosition: null,
             burnKcal: 0,
         }
     }
@@ -211,6 +212,12 @@ export default class Tracking extends React.Component {
                     this.searchStamp(this.majorPinData);
                 }
             });
+
+            this.setState({
+                retValueWatchPosition: location,
+            })
+
+            console.log(location);
         }
     }
 
@@ -232,7 +239,7 @@ export default class Tracking extends React.Component {
                 nearSpotDist = pointDist;
             }
             if (pointDist <= errorRange) {
-                Notifications.presentLocalNotificationAsync({title: '스템프 발견', body: this.majorPinData[pin].COT_CONTS_NAME});
+                Notifications.presentLocalNotificationAsync({title: '스탬프 발견', body: this.majorPinData[pin].COT_CONTS_NAME});
             }
         }
         this.setState({
@@ -250,6 +257,8 @@ export default class Tracking extends React.Component {
         if(!(await this.isGpsAvailable()).gpsAvailable)
             ToastAndroid.show("GPS를 켜주세요", ToastAndroid.SHORT);
         else{
+            if(this.state.retValueWatchPosition === null)
+                this._getLocationAsync();
             Notifications.presentLocalNotificationAsync({
                 title: '트래킹 시작',
                 body: this.state.mapData.NAME + ' 트래킹 진행중~.',
@@ -273,7 +282,17 @@ export default class Tracking extends React.Component {
 
     stopTracking() {
         Notifications.dismissAllNotificationsAsync();
-        this.setState({isStartTracking: false, trackingFunc: this.startTracking.bind(this), trackingButtonMsg: '트래킹 시작하기'});
+        this.state.retValueWatchPosition.remove();
+        this.setState({
+            isStartTracking: false,
+            trackingFunc: this.startTracking.bind(this),
+            trackingButtonMsg: '트래킹 시작하기',
+            retValueWatchPosition: null,
+            location: {
+                latitude: 0,
+                longitude: 0,
+            },
+        });
         Timer.clearInterval('walkingTime');
     }
 

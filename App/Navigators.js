@@ -13,9 +13,9 @@ import CourseList from './pages/CourseList.page'
 const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
-            <Scene key="home" component={Home} />
+            <Scene key="tracking" component={Tracking} />
                 <Scene key="notice" component={Notice} />
-                <Scene key="tracking" component={Tracking} />
+                <Scene key="home" component={Home} />
                 <Scene key="course_map" component={CourseMap} />
                 <Scene key="course_info" component={CourseInfo} />
                 <Scene key="course_list" component={CourseList} />
