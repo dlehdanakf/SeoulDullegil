@@ -85,17 +85,19 @@ export default class StampList extends React.Component {
                     <View style={{flex:1}}>
                         <View style={{flex:1}}>
                             <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-                                <IconFontAwesome name='close' size={115} style={{color:'#FF6244'}}/>
+                                <View style={[styles.stampIconWrap, {height: 115, width:115, borderColor:'#FF6244'}]}>
+                                    <IconFontAwesome name='close' size={54} style={{color:'#FF6244'}}/>
+                                </View>
                             </View>
-                            <View style={{height:50, justifyContent:'center', alignItems:'center'}}>
-                                <Text style={{color: '#5F6364', fontSize:20}}>{v.NAME}</Text>
-                                <Text style={{color: '#BBC0C4', fontSize:15}}>{v.COT_CONTS_NAME}</Text>
+                            <View style={{paddingVertical: 20, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color: '#5F6364', fontSize:16}}>{v.COT_CONTS_NAME}</Text>
+                                <Text style={{color: '#BBC0C4', fontSize:13}}>{v.NAME}</Text>
                             </View>
                         </View>
-                        <View style={{height: 80, backgroundColor: '#323638', borderBottomLeftRadius: 6, borderBottomRightRadius:6, flexDirection:'row'}}>
+                        <View style={{backgroundColor: '#323638', borderBottomLeftRadius: 3, borderBottomRightRadius:3, flexDirection:'row', paddingVertical: 20}}>
                             <View style={{flex:1, justifyContent:'center', flexDirection:'row'}}>
-                                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', padding:10}}>
-                                    <Text style={{fontSize:18, color:'white', fontWeight:'bold'}}>아직 발견하지 못한 도장입니다</Text>
+                                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', paddingHorizontal: 14}}>
+                                    <Text style={{fontSize:14, color:'white', fontWeight:'bold'}}>아직 도장을 획득하지 못했습니다.</Text>
                                 </View>
                             </View>
                         </View>
@@ -107,23 +109,23 @@ export default class StampList extends React.Component {
                     <View style={{flex:1}}>
                         <View style={{flex:1}}>
                             <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-                                <View style={[styles.stampIconWrap, {height: 115, width:115, borderColor:'#778086'}]}>
-                                    <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={{height: 115, width:115, tintColor:'#778086'}} />
+                                <View style={[styles.stampIconWrap, {height: 115, width:115, borderColor:'#f49805', borderStyle: 'solid'}]}>
+                                    <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={{height: 115, width:115, tintColor:'#f49805'}} />
                                 </View>
                             </View>
-                            <View style={{height:50, justifyContent:'center', alignItems:'center'}}>
-                                <Text style={{color: '#5F6364', fontSize:20}}>{v.NAME}</Text>
-                                <Text style={{color: '#BBC0C4', fontSize:15}}>{v.COT_CONTS_NAME}</Text>
+                            <View style={{paddingVertical: 20, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color: '#5F6364', fontSize:16}}>{v.COT_CONTS_NAME}</Text>
+                                <Text style={{color: '#BBC0C4', fontSize:13}}>{v.NAME}</Text>
                             </View>
                         </View>
-                        <View style={{height: 80, backgroundColor: '#323638', borderBottomLeftRadius: 6, borderBottomRightRadius:6, flexDirection:'row'}}>
+                        <View style={{backgroundColor: '#323638', borderBottomLeftRadius: 3, borderBottomRightRadius:3, flexDirection:'row', paddingVertical: 20}}>
                             <View style={{flex:1, justifyContent:'center', flexDirection:'row'}}>
-                                <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'center', paddingLeft:17}}>
-                                    <IconMaterialIcons name="map" size={16} style={{color:'#51585C', marginBottom:-1}} />
+                                <View style={{flexDirection:'row', marginRight: 20}}>
+                                    <IconMaterialIcons name="map" size={16} style={{color:'#51585C', marginBottom:-1, marginRight: 2}} />
                                     <Text style={{fontSize:15, color:'white', paddingLeft:3}}>{v.COT_GU_NAME}</Text>
                                 </View>
-                                <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'flex-start', padding:0}}>
-                                    <IconMaterialIcons name="access-time" size={16} style={{color:'#626B70', marginBottom:-1}} />
+                                <View style={{flexDirection:'row'}}>
+                                    <IconMaterialIcons name="access-time" size={16} style={{color:'#626B70', marginBottom:-1, marginRight: 2}} />
                                     <Text style={{fontSize:15, color:'white', paddingLeft:3}}>2017-04-11</Text>
                                 </View>
                             </View>
