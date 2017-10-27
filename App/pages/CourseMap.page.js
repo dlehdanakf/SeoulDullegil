@@ -11,7 +11,6 @@ import { WebView } from 'react-native-webview-messaging/WebView';
 
 import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
-
 import MapData from './datasets/courseinfo.list';
 
 const navBarStyles = navBarStylesModule("#a0b145");
