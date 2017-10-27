@@ -2,7 +2,7 @@ import React, { Component } from 'React'
 import {
     Animated, Image, ScrollView,
     StyleSheet, Text, View, TouchableHighlight,
-    Platform
+    Platform, Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-native-nav'
@@ -13,6 +13,9 @@ import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 
 import MapData from './datasets/courseinfo.list';
+
+
+import {NetworkInfo} from 'react-native-network-info';
 
 const navBarStyles = navBarStylesModule("#a0b145");
 const mapData = MapData[0];
@@ -106,8 +109,10 @@ export default class CourseMap extends React.Component {
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
-                        <NavButton style={{marginHorizontal: 14}} onPress={this.getMapCenter}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} onPress={()=>Actions.pop()} />
+                        <NavButton style={{marginHorizontal: 14}} onPress={()=>{
+                                this.webview.emit('getIPAddress');
+                            }}>
+                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             지도보기

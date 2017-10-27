@@ -9,7 +9,7 @@ import NavBar, {NavButton, NavTitle} from 'react-native-nav';
 import {Actions} from 'react-native-router-flux';
 
 import navBarStylesModule from './assets/navbar.styles';
-const navBarStyles = navBarStylesModule("#a0b145");
+const navBarStyles = navBarStylesModule("#568f4a");
 
 export default class Notice extends React.Component {
     constructor(props){
@@ -94,7 +94,7 @@ export default class Notice extends React.Component {
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
-                        <NavButton style={{marginHorizontal: 14}} onPress={()=>{}}>
+                        <NavButton style={{marginHorizontal: 14}} onPress={()=>{Actions.pop()}}>
                             <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>공지사항</NavTitle>

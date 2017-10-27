@@ -9,7 +9,7 @@ import NavBar, {NavButton, NavTitle} from 'react-native-nav';
 import {Actions} from 'react-native-router-flux';
 
 import navBarStylesModule from './assets/navbar.styles';
-const navBarStyles = navBarStylesModule("#a0b145");
+const navBarStyles = navBarStylesModule("#568f4a");
 
 export default class Event extends React.Component {
     constructor(props){
@@ -103,16 +103,6 @@ export default class Event extends React.Component {
         Linking.openURL(link);
     }
 
-
-<<<<<<< HEAD
-    componentWillMount(){
-        this.fetchNoticeListFromServer(this.state.pageNum);
-    }
-    componentWillUnmount(){
-    }
-
-=======
->>>>>>> 09971eb91cf10214a1c1b78e53f6c6bb72671144
     render(){
         return (
             <View style={styles.fill}>

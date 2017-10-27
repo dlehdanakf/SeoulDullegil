@@ -150,6 +150,8 @@ export default class Home extends React.Component {
                         enableEmptySections={true}
                         renderRow={this.renderCourseRowItem}
                         renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
+                        funcInsertStamp={this.props.funcInsertStamp}
+                        funcInsertRecord={this.props.funcInsertRecord}
                     />
                     <StampList tabLabel="스탬프 북" />
                 </ScrollableTabView>

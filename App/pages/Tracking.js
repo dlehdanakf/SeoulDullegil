@@ -84,6 +84,7 @@ export default class Tracking extends React.Component {
     }
 
     componentWillMount() {
+        console.log(this.props.funcInsertStamp);
         if (Platform.OS === 'android' && !Constants.isDevice) {
             this.setState({errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'});
         } else {

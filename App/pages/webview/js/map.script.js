@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", function(){
         zoom: 8
     });
 
+    window.RNMessagesChannel.on('getIPAddress', e => {
+        alert('hello~');
+    });
+
     window.RNMessagesChannel.on('setMyLocationPin', e => {
         //if(myLocationMarker !== null) myLocationMarker.setMap(null);
         if(myLocationMarker !== null)
