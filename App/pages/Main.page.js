@@ -56,7 +56,7 @@ export default class Main extends React.Component {
             });
         }, 200);
 
-        // this.sqLiteInsertStamp("stamp01.png");
+        //this.sqLiteInsertStamp("stamp01.png");
     }
 
     sqLiteInitialize(){
@@ -99,6 +99,8 @@ export default class Main extends React.Component {
                 list.push(item);
             }
 
+            console.log(list);
+
             if(callback) callback(list);
         });
     }
@@ -108,8 +110,11 @@ export default class Main extends React.Component {
         });
     }
     async sqLiteInsertStamp(name){
+        console.log("test");
         await this.db.transaction((tx)=> {
+            console.log('inner');
             tx.executeSql("INSERT INTO stamp (name) VALUES (?)", [name], (tx, result)=>{
+                console.log('inner2');
                 this.sqLiteSelectStamp(tx);
             });
         });
