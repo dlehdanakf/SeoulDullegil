@@ -49,7 +49,6 @@ export default class StampList extends React.Component {
                 tmp.color = stampColor[v.INDEX-1];
                 tmp.INDEX = v.INDEX;
                 tmp.NAME = v.NAME;
-                tmp.COT_GU_NAME = v.COT_GU_NAME;
                 tmp.coursecolor = v.COLOR;
                 tmp_stamp.push(tmp);
             })
@@ -276,7 +275,7 @@ const modalStyles = StyleSheet.create({
     },
     modal: {
         justifyContent:'center',
-        backgroundColor:'#F0F8F9',
+        backgroundColor:'#FFF',
         elevation: 3,
         height: 280,
         width: 230,

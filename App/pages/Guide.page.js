@@ -38,6 +38,7 @@ export default class Guide extends React.Component {
                 <ScrollableTabView
                     tabBarActiveTextColor='#568f4a'
                     renderTabBar={()=> <DefaultTabBar />}
+                    prerenderingSiblingsNumber={Infinity}
                 >
                     <View tabLabel="소개" style={styles.fill}>
                         <WebView source={gilIntro} />
