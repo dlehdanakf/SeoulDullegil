@@ -17,7 +17,7 @@ export default {
     COT_GU_NAME: "관악구",
     DISTANCE: "12.7km",
     TIME: "5시간 50분",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [126.9420488, 37.463999],
     COORD_DATA: [
         [
             [

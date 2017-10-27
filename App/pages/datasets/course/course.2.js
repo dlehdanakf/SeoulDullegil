@@ -21,7 +21,7 @@ export default {
     COT_GU_NAME: "노원구",
     DISTANCE: "12.6km",
     TIME: "5시간 10분",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [127.0981068, 37.5838059],
     COORD_DATA: [
         [
             [

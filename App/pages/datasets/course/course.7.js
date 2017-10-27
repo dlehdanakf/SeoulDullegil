@@ -25,7 +25,7 @@ export default {
     COT_GU_NAME: "강서구",
     DISTANCE: "16.6km",
     TIME: "6시간 10분",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [126.8902928, 37.5977459],
     COORD_DATA: [
         [
             [

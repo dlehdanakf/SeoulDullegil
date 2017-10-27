@@ -29,7 +29,7 @@ export default {
     COT_GU_NAME: "강서구, 구로구, 금천구, 영등포구",
     DISTANCE: "18km",
     TIME: "4시간 30분",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [126.8858829, 37.5005161],
     COORD_DATA: [
         [
             [

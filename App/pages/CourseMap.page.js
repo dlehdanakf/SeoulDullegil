@@ -14,14 +14,15 @@ import navBarStylesModule from './assets/navbar.styles';
 
 import MapData from './datasets/courseinfo.list';
 
-const navBarStyles = navBarStylesModule("#564339");
+const navBarStyles = navBarStylesModule("#a0b145");
 const mapData = MapData[0];
 
 export default class CourseMap extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            mapData: mapData,
+            //mapData: mapData,
+            mapData: MapData[props.mapIndex],
             activeMapButton: '',
             activeMapPinIndex: -1,
 
@@ -106,7 +107,7 @@ export default class CourseMap extends React.Component {
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
                         <NavButton style={{marginHorizontal: 14}} onPress={this.getMapCenter}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
+                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} onPress={()=>Actions.pop()} />
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             지도보기
@@ -198,8 +199,6 @@ export default class CourseMap extends React.Component {
                         </View>
                     </View>
                 }
-
-                <MessageBar ref="alert" />
             </View>
         );
     }

@@ -21,7 +21,7 @@ export default {
     COT_GU_NAME: "서초구",
     DISTANCE: "17.9km",
     TIME: "8시간",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [127.0475606, 37.4759958],
     COORD_DATA: [
         [
             [

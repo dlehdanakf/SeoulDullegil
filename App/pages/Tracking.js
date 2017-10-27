@@ -44,7 +44,7 @@ export default class Tracking extends React.Component {
     constructor(props) {
         super(props);
 
-        this.majorPinData = MapData[COURSE_INDEX].STAMP_DATA;
+        this.majorPinData = MapData[props.COURSE_INDEX].STAMP_DATA;
 
         this.onWebViewLoaded = this.onWebViewLoaded.bind(this);
         this.getMapCenter = this.getMapCenter.bind(this);
@@ -69,8 +69,8 @@ export default class Tracking extends React.Component {
                 name: '트래킹을 시작해주세요',
                 stamp: '',
             },
-            courseData: CourseData[COURSE_INDEX],
-            mapData: MapData[COURSE_INDEX],
+            courseData: CourseData[props.COURSE_INDEX],
+            mapData: MapData[props.COURSE_INDEX],
 
             drawerOpen: false,
             drawerDisabled: false,
@@ -318,7 +318,7 @@ export default class Tracking extends React.Component {
                         <NavButton style={{
                             marginHorizontal: 14
                         }}>
-                            <IconMaterialIcons name="arrow-back" onPress={Actions.pop} size={24} style={navBarStyles.backIcon}/>
+                            <IconMaterialIcons name="arrow-back" onPress={()=>Actions.pop()} size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             {this.state.mapData.NAME}

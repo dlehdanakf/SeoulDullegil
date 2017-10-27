@@ -161,7 +161,7 @@ export default class CourseInfo extends React.Component{
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
                         <NavButton style={{marginHorizontal: 14}}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
+                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon}  onPress={()=>Actions.pop()}/>
                         </NavButton>
                         <Animated.Text accessibilityTraits="header" style={[navBarStyles.title, {opacity: actionBarOpacity}]}>
                             {this.state.courseData.COURSE_NM}
@@ -169,13 +169,13 @@ export default class CourseInfo extends React.Component{
                     </View>
                     <Animated.View style={{opacity: actionBarOpacity}}>
                         <NavGroup>
-                            <NavButton onPress={() => {alert('AAA')}}>
+                            <NavButton onPress={()=>Actions.course_map({mapIndex: this.state.courseIndex})}>
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="map" size={24} color="#FFF" style={{marginRight: 4,}} />
                                     <Text style={{color: '#FFF', fontSize: 13}}>지도</Text>
                                 </View>
                             </NavButton>
-                            <NavButton onPress={() => {}}>
+                            <NavButton onPress={() => {Actions.tracking({COURSE_INDEX: this.state.courseIndex})}}>
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="transfer-within-a-station" size={24} color="#FFF" style={{marginRight: 4,}} />
                                     <Text style={{color: '#FFF', fontSize: 13}}>코스지정</Text>
@@ -300,9 +300,9 @@ export default class CourseInfo extends React.Component{
                             </View>
                             <View style={headerStyles.buttons}>
                                 <View style={{marginRight: 12}}>
-                                    <Button title="지도" icon="map" btnStyle={headerStyles.mapButton} borderRadius={24} />
+                                    <Button title="지도" icon="map" btnStyle={headerStyles.mapButton} borderRadius={24} onPress={()=>Actions.course_map({mapIndex: this.state.courseIndex})}/>
                                 </View>
-                                <Button title="코스지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24} />
+                                <Button title="코스지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24} onPress={()=>Actions.tracking({COURSE_INDEX: this.state.courseIndex})}/>
                             </View>
                         </Animated.View>
                     </Animated.View>

@@ -27,8 +27,8 @@ export default class Guide extends React.Component {
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
-                        <NavButton style={{marginHorizontal: 14}} onPress={this.getMapCenter}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
+                        <NavButton style={{marginHorizontal: 14}} onPress={()=>Actions.pop()}>
+                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             이용 가이드

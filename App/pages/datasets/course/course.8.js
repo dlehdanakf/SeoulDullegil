@@ -17,7 +17,7 @@ export default {
     COT_GU_NAME: "강북구, 도봉구, 성북구, 은평구, 종로구",
     DISTANCE: "34.5km",
     TIME: "17시간",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [126.9845601, 37.6514832],
     COORD_DATA: [
         [
             [

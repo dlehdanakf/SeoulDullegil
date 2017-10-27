@@ -17,11 +17,12 @@ const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
             <Scene key="main" component={Main} />
-            <Scene key="home" component={Home} />
-            <Scene key="course_info" component={CourseInfo} />
+                <Scene key="event" component={Event} />
+                <Scene key="guide" component={Guide} />
+                <Scene key="course_info" component={CourseInfo} />
+                    <Scene key="course_map" component={CourseMap} />
             <Scene key="tracking" component={Tracking} />
             <Scene key="notice" component={Notice} />
-            <Scene key="course_map" component={CourseMap} />
             <Scene key="course_list" component={CourseList} />
         </Scene>
     </Router>

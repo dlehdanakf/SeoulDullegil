@@ -62,6 +62,9 @@ export default class Event extends React.Component {
 
                 //if(this.state.pageNum < 3) this.fetchNoticeListFromServer(this.state.pageNum);
 
+            })
+            .catch((err) => {
+                console.log("catch: ", err);
             });
     }
     renderNoticeItem(rowData){
@@ -106,8 +109,6 @@ export default class Event extends React.Component {
         this.fetchNoticeListFromServer(this.state.pageNum);
     }
     componentWillUnmount(){
-
-        fetch.abort(1);
     }
 
     render(){

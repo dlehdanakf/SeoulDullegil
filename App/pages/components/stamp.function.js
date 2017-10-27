@@ -28,6 +28,6 @@ export default function(name){
         case 'stamp26.png': return require('../assets/stamps/stamp26.png');
         case 'stamp27.png': return require('../assets/stamps/stamp27.png');
         case 'stamp28.png': return require('../assets/stamps/stamp28.png');
-        default: return require('../assets/stamps/stamp01.png');
+        default: return null;
     }
 }

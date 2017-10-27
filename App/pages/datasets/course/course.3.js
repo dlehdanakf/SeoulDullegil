@@ -21,7 +21,7 @@ export default {
     COT_GU_NAME: "광진구",
     DISTANCE: "26.1km",
     TIME: "9시간",
-    COORD_CENTER: [127.0677877, 37.6560945],
+    COORD_CENTER: [127.1316674, 37.5202156],
     COORD_DATA: [
         [
             [
