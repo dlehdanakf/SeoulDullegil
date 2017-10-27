@@ -178,7 +178,7 @@ export default class CourseInfo extends React.Component{
                             <NavButton onPress={() => {Actions.tracking({COURSE_INDEX: this.state.courseIndex})}}>
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="transfer-within-a-station" size={24} color="#FFF" style={{marginRight: 4,}} />
-                                    <Text style={{color: '#FFF', fontSize: 13}}>코스지정</Text>
+                                    <Text style={{color: '#FFF', fontSize: 13}}>트래킹 코스 지정</Text>
                                 </View>
                             </NavButton>
                         </NavGroup>
@@ -302,7 +302,7 @@ export default class CourseInfo extends React.Component{
                                 <View style={{marginRight: 12}}>
                                     <Button title="지도" icon="map" btnStyle={headerStyles.mapButton} borderRadius={24} onPress={()=>Actions.course_map({mapIndex: this.state.courseIndex})}/>
                                 </View>
-                                <Button title="코스지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24}
+                                <Button title="트래킹 코스 지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24}
                                     onPress={()=>Actions.tracking({COURSE_INDEX: this.state.courseIndex, funcInsertStamp: this.props.funcInsertStamp,
                                     funcInsertRecord: this.props.funcInsertRecord})}/>
                             </View>

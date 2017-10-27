@@ -83,8 +83,9 @@ export default class Tracking extends React.Component {
         }
     }
 
+    //funcInsertStamp={this.props.funcInsertStamp}
+    //funcInsertRecord={this.props.funcInsertRecord}
     componentWillMount() {
-        console.log(this.props.funcInsertStamp);
         if (Platform.OS === 'android' && !Constants.isDevice) {
             this.setState({errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'});
         } else {
@@ -240,6 +241,8 @@ export default class Tracking extends React.Component {
                 nearSpotDist = pointDist;
             }
             if (pointDist <= errorRange) {
+                console.log("stamp: " + this.majorPinData[pin].COT_STAMP_ICON);
+                this.props.funcInsertStamp(this.majorPinData[pin].COT_STAMP_ICON);
                 Notifications.presentLocalNotificationAsync({title: '스탬프 발견', body: this.majorPinData[pin].COT_CONTS_NAME});
             }
         }
