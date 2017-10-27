@@ -102,17 +102,7 @@ export default class Event extends React.Component {
         let d = this.state.pageNum;
         Linking.openURL(link);
     }
-
-
-<<<<<<< HEAD
-    componentWillMount(){
-        this.fetchNoticeListFromServer(this.state.pageNum);
-    }
-    componentWillUnmount(){
-    }
-
-=======
->>>>>>> 09971eb91cf10214a1c1b78e53f6c6bb72671144
+    
     render(){
         return (
             <View style={styles.fill}>
