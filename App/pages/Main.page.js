@@ -55,6 +55,8 @@ export default class Main extends React.Component {
                 timeoutSplash: true
             });
         }, 200);
+
+        // this.sqLiteInsertStamp("stamp01.png");
     }
 
     sqLiteInitialize(){
@@ -62,9 +64,12 @@ export default class Main extends React.Component {
             "CREATE TABLE IF NOT EXISTS record (idx INT PRIMARY KEY, course INT, week INT, distance FLOAT," +
             " time INT, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
         const queryCreateStampTable =
-            "CREATE TABLE IF NOT EXISTS stamp (idx INT PRIMARY KEY, rnum INT UNIQUE, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
+            "CREATE TABLE IF NOT EXISTS stamp (idx INT PRIMARY KEY, name VARCHAR UNIQUE, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
 
         this.db.transaction((tx)=> {
+            // tx.executeSql("DROP TABLE record");
+            // tx.executeSql("DROP TABLE stamp");
+
             tx.executeSql(queryCreateRecordTable, [], (tx)=>{
                 this.sqLiteSelectRecord(tx, ()=>{
                     this.setState({
@@ -94,7 +99,7 @@ export default class Main extends React.Component {
                 list.push(item);
             }
 
-            callback(list);
+            if(callback) callback(list);
         });
     }
     async sqLiteInsertRecord(c, w, d, t){
@@ -102,9 +107,9 @@ export default class Main extends React.Component {
             tx.executeSql("INSERT INTO record (course, week, distance, time) VALUE (?, ?, ?, ?)", [c, w, d, t]);
         });
     }
-    async sqLiteInsertStamp(rnum){
+    async sqLiteInsertStamp(name){
         await this.db.transaction((tx)=> {
-            tx.executeSql("INSERT INTO record (rnum) VALUE (?)", [rnum], (tx, result)=>{
+            tx.executeSql("INSERT INTO stamp (name) VALUES (?)", [name], (tx, result)=>{
                 this.sqLiteSelectStamp(tx);
             });
         });

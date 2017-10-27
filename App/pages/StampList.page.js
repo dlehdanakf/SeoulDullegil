@@ -10,6 +10,7 @@ import Modal from 'react-native-modal';
 
 import MapData from './datasets/courseinfo.list';
 import StampIconFunc from './components/stamp.function';
+import StampCheckFunc from './components/stamp.check.function';
 import stampColor from './datasets/green.colors';
 
 const isVisited = true;
@@ -29,6 +30,7 @@ export default class StampList extends React.Component {
         });
 
         this.state = {
+            activeStampList: props.activeStampList,
             stampdata: this.ds.cloneWithRows([]),
             isModalVisible: false,
             modalHeaderColor: 'white',
@@ -39,7 +41,6 @@ export default class StampList extends React.Component {
             },
         };
     }
-
     componentDidMount(){
         let tmp_stamp = [];
         let stampdata = [];
@@ -73,13 +74,18 @@ export default class StampList extends React.Component {
         this.renderStampRowItem = this.renderStampRowItem.bind(this);
         this.showStampRecord = this.showStampRecord.bind(this);
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            activeStampList: nextProps.activeStampList,
+        });
+    }
 
 
     showStampRecord(stamp){
+        function modalContent(v, list){
+            const isChecked = StampCheckFunc(v.COT_STAMP_ICON, list);
 
-        function modalContent(v){
-            //나중에 바꿔야 할부분
-            if(v.INDEX % 2 == 1){
+            if(isChecked === null){
                 return(
                     <View style={{flex:1}}>
                         <View style={{flex:1}}>
@@ -102,8 +108,7 @@ export default class StampList extends React.Component {
                         </View>
                     </View>
                 );
-            }
-            else {
+            } else {
                 return(
                     <View style={{flex:1}}>
                         <View style={{flex:1}}>
@@ -125,7 +130,7 @@ export default class StampList extends React.Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <IconMaterialIcons name="access-time" size={16} style={{color:'#626B70', marginBottom:-1, marginRight: 2}} />
-                                    <Text style={{fontSize:15, color:'white', paddingLeft:3}}>2017-04-11</Text>
+                                    <Text style={{fontSize:15, color:'white', paddingLeft:3}}>{isChecked.substring(0, 10)}</Text>
                                 </View>
                             </View>
                         </View>
@@ -138,7 +143,7 @@ export default class StampList extends React.Component {
             isModalVisible: true,
             modalHeaderColor: stamp.color,
             modalData:{
-                content: modalContent(stamp),
+                content: modalContent(stamp, this.state.activeStampList),
                 title: stamp.NAME,
                 subTitle: stamp.COT_GU_NAME,
             }
@@ -149,7 +154,7 @@ export default class StampList extends React.Component {
         return (
             <View style={{flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
                 {row.map((v, i)=>{
-                    const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
+                    const isActive = StampCheckFunc(v.COT_STAMP_ICON, this.state.activeStampList) !== null;
                     const stampColor = isActive ? '#f49805' : v.color;
                     const stampStyle = isActive ? { borderColor: '#f49805', borderStyle: 'solid' } : { borderColor: stampColor };
 
