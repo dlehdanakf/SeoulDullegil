@@ -55,6 +55,8 @@ export default class Main extends React.Component {
                 timeoutSplash: true
             });
         }, 200);
+
+        // this.sqLiteInsertStamp(14);
     }
 
     sqLiteInitialize(){
@@ -94,7 +96,9 @@ export default class Main extends React.Component {
                 list.push(item);
             }
 
-            callback(list);
+            console.log(list);
+
+            if(callback) callback(list);
         });
     }
     async sqLiteInsertRecord(c, w, d, t){
@@ -104,7 +108,7 @@ export default class Main extends React.Component {
     }
     async sqLiteInsertStamp(rnum){
         await this.db.transaction((tx)=> {
-            tx.executeSql("INSERT INTO record (rnum) VALUE (?)", [rnum], (tx, result)=>{
+            tx.executeSql("INSERT INTO stamp (rnum) VALUES (?)", [rnum], (tx, result)=>{
                 this.sqLiteSelectStamp(tx);
             });
         });
