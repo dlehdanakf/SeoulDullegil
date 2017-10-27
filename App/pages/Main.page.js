@@ -46,32 +46,39 @@ export default class Main extends React.Component {
             this.setState({
                 timeoutSplash: true
             });
-        }, 500);
+        }, 200);
     }
 
     sqLiteInitialize(){
         const queryCreateRecordTable =
-            "CREATE TABLE IF NOT EXISTS course (idx INT PRIMARY KEY, course INT, week INT, distance FLOAT," +
+            "CREATE TABLE IF NOT EXISTS record (idx INT PRIMARY KEY, course INT, week INT, distance FLOAT," +
             " time INT, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
         const queryCreateStampTable =
-            "CREATE TABLE IF NOT EXISTS stamp (rnum INT UNIQUE, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
+            "CREATE TABLE IF NOT EXISTS stamp (idx INT PRIMARY KEY, rnum INT UNIQUE, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
 
         this.db.transaction((tx)=> {
             tx.executeSql(queryCreateRecordTable, [], (tx)=>{
-                this.sqLiteSelectRecord(tx);
+                this.sqLiteSelectRecord(tx, ()=>{
+                    this.setState({
+                        completeFetchRecordTable: true,
+                        recordList: []
+                    });
+                });
             });
             tx.executeSql(queryCreateStampTable, [], (tx)=>{
-                this.sqLiteSelectStamp(tx);
+                this.sqLiteSelectStamp(tx, (list)=>{
+                    this.setState({
+                        completeFetchStampTable: true,
+                        ownedStampList: list
+                    });
+                });
             });
         });
     }
-    sqLiteSelectRecord(tx){
-        this.setState({
-            completeFetchRecordTable: true,
-            recordList: []
-        });
+    sqLiteSelectRecord(tx, callback){
+        callback();
     }
-    sqLiteSelectStamp(tx){
+    sqLiteSelectStamp(tx, callback){
         tx.executeSql("SELECT * FROM stamp WHERE 1", [], (tx, result)=>{
             let list = [];
             for(let i = 0; i < result.rows.length; i++){
@@ -79,14 +86,21 @@ export default class Main extends React.Component {
                 list.push(item);
             }
 
-            this.setState({
-                completeFetchStampTable: true,
-                ownedStampList: list
+            callback(list);
+        });
+    }
+    async sqLiteInsertRecord(c, w, d, t){
+        await this.db.transaction((tx)=> {
+            tx.executeSql("INSERT INTO record (course, week, distance, time) VALUE (?, ?, ?, ?)", [c, w, d, t]);
+        });
+    }
+    async sqLiteInsertStamp(rnum){
+        await this.db.transaction((tx)=> {
+            tx.executeSql("INSERT INTO record (rnum) VALUE (?)", [rnum], (tx, result)=>{
+                this.sqLiteSelectStamp(tx);
             });
         });
     }
-    sqLiteInsertRecord(){}
-    sqLiteInsertStamp(){}
 
     render(){
         const isShowSplash = !(
@@ -97,7 +111,16 @@ export default class Main extends React.Component {
 
         return (
             <View style={{flex: 1}}>
-                {isShowSplash ? <Splash /> : <HomePage /> }
+                {isShowSplash ?
+                    <Splash />
+                    :
+                    <HomePage
+                        stampList={this.state.ownedStampList}
+                        recordList={this.state.recordList}
+                        funcInsertStamp={this.sqLiteInsertStamp}
+                        funcInsertRecord={this.sqLiteInsertRecord}
+                    />
+                }
             </View>
         );
     }
