@@ -49,7 +49,6 @@ export default class StampList extends React.Component {
                 tmp.color = stampColor[v.INDEX-1];
                 tmp.INDEX = v.INDEX;
                 tmp.NAME = v.NAME;
-                tmp.COT_GU_NAME = v.COT_GU_NAME;
                 tmp.coursecolor = v.COLOR;
                 tmp_stamp.push(tmp);
             })
