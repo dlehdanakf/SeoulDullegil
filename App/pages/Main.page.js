@@ -1,7 +1,5 @@
 import React from 'React'
-import {
-    Image, StyleSheet, Text, View
-} from 'react-native';
+import { Image, View, AsyncStorage } from 'react-native';
 import { SQLite } from 'expo';
 
 import HomePage from './Home.page';
@@ -27,9 +25,11 @@ export default class Main extends React.Component {
             timeoutSplash: false,
             completeFetchStampTable: false,
             completeFetchRecordTable: false,
+            completeFetchActiveCourse: false,
 
             ownedStampList: [],
             recordList: [],
+            courseNum: 0,
         };
 
         this.sqLiteInitialize = this.sqLiteInitialize.bind(this);
@@ -37,9 +37,17 @@ export default class Main extends React.Component {
         this.sqLiteSelectStamp = this.sqLiteSelectStamp.bind(this);
         this.sqLiteInsertRecord = this.sqLiteInsertRecord.bind(this);
         this.sqLiteSelectRecord = this.sqLiteSelectRecord.bind(this);
+        this.getActiveCourse = this.getActiveCourse.bind(this);
+        this.setActiveCourse = this.setActiveCourse.bind(this);
     }
     componentWillMount(){
         this.sqLiteInitialize();
+        this.getActiveCourse().then((x)=>{
+            this.setState({
+                completeFetchActiveCourse: true,
+                courseNum: x
+            });
+        });
     }
     componentDidMount(){
         setTimeout(()=>{
@@ -101,12 +109,15 @@ export default class Main extends React.Component {
             });
         });
     }
+    async getActiveCourse(){ return parseInt(await AsyncStorage.getItem('active_course')) || 0 }
+    async setActiveCourse(num){ await AsyncStorage.setItem('active_course', num); }
 
     render(){
         const isShowSplash = !(
             this.state.timeoutSplash &&
             this.state.completeFetchStampTable &&
-            this.state.completeFetchRecordTable
+            this.state.completeFetchRecordTable &&
+            this.state.completeFetchActiveCourse
         );
 
         return (
@@ -117,8 +128,10 @@ export default class Main extends React.Component {
                     <HomePage
                         stampList={this.state.ownedStampList}
                         recordList={this.state.recordList}
+                        activeCourseNum={this.state.courseNum}
                         funcInsertStamp={this.sqLiteInsertStamp}
                         funcInsertRecord={this.sqLiteInsertRecord}
+                        funcSetActiveCourse={this.setActiveCourse}
                     />
                 }
             </View>
