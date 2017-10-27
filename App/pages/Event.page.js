@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fetch from 'react-native-cancelable-fetch';
-import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav';
+import NavBar, {NavButton, NavTitle} from 'react-native-nav';
 import {Actions} from 'react-native-router-flux';
 
 import navBarStylesModule from './assets/navbar.styles';
@@ -48,29 +48,22 @@ export default class Event extends React.Component {
                 'Content-Type': 'application/json',
             }
         })
-            .then((response) => {
-                return response.json();
-
-            })
+            .then((response) => response.json())
             .then((data) => {
                 if(data.result !== 'success'){
                     ToastAndroid.show('서버로부터 데이터를 받아오는데 오류가 발생했습니다.', ToastAndroid.SHORT);
                     return;
-
                 }
 
                 const list = this.state.noticeList.concat(data.list);
-                    this.setState({
-                        isFetching: false,
-                        noticeList: list,
-                        noticeListDataSource: this.ds.cloneWithRows(list),
-                        showInitialLoading: false,
-                        pageNum: parseInt(this.state.pageNum) + 1,
-                        hasMore: data.list.length > 0
-                    });
-
-                //if(this.state.pageNum < 3) this.fetchNoticeListFromServer(this.state.pageNum);
-
+                this.setState({
+                    isFetching: false,
+                    noticeList: list,
+                    noticeListDataSource: this.ds.cloneWithRows(list),
+                    showInitialLoading: false,
+                    pageNum: parseInt(this.state.pageNum) + 1,
+                    hasMore: data.list.length > 0
+                });
             });
     }
     renderNoticeItem(rowData){
