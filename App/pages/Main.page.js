@@ -1,5 +1,5 @@
 import React from 'React'
-import { Image, View, AsyncStorage } from 'react-native';
+import { Image, View, AsyncStorage, ToastAndroid } from 'react-native';
 import { SQLite } from 'expo';
 
 import HomePage from './Home.page';
@@ -109,8 +109,16 @@ export default class Main extends React.Component {
             });
         });
     }
-    async getActiveCourse(){ return parseInt(await AsyncStorage.getItem('active_course')) || 0 }
-    async setActiveCourse(num){ await AsyncStorage.setItem('active_course', num); }
+    async getActiveCourse(){
+        return parseInt(await AsyncStorage.getItem('active_course')) || 0;
+    }
+    async setActiveCourse(num){
+        await AsyncStorage.setItem('active_course', num.toString());
+        ToastAndroid.show(num + '번 코스를 선택하셨습니다.', ToastAndroid.SHORT);
+        this.setState({
+            courseNum: num
+        });
+    }
 
     render(){
         const isShowSplash = !(

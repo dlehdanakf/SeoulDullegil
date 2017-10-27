@@ -30,38 +30,42 @@ export default class Summary extends React.Component {
     render(){
         return (
             <View style={styles.componentWrap}>
-                <View style={[styles.currentCourseWrap, {backgroundColor: greenColors[this.state.activeCourseNum]}]}>
-                    <View style={{padding: 10}}>
-                        <Text style={{color: 'rgba(255,255,255,.8)'}}>현재 주행중인 코스</Text>
-                    </View>
-                    <View style={{alignItems: 'center', paddingHorizontal: 20, paddingVertical: 10}}>
-                        <Text style={{color: '#FFF', fontSize: 24, fontWeight: 'bold', marginTop: 4}}>{courseListData[this.state.activeCourseNum].COURSE_NM}</Text>
-                        <View style={{flexDirection: 'row', marginTop: 2}}>
-                            <Text style={{fontSize: 13, color: 'rgba(255,255,255,.6)'}}>코스길이 : {courseListData[this.state.activeCourseNum].DISTANCE}</Text>
-                            <Text style={{fontSize: 13, color: 'rgba(255,255,255,.6)', marginLeft: 10}}>소요시간 : {courseListData[this.state.activeCourseNum].WALK_TIME}</Text>
+                {this.state.activeCourseNum > -1 ?
+                    <View style={[styles.currentCourseWrap, {backgroundColor: greenColors[this.state.activeCourseNum]}]}>
+                        <View style={{padding: 10}}>
+                            <Text style={{color: 'rgba(255,255,255,.8)'}}>현재 주행중인 코스</Text>
+                        </View>
+                        <View style={{alignItems: 'center', paddingHorizontal: 20, paddingVertical: 10}}>
+                            <Text style={{color: '#FFF', fontSize: 24, fontWeight: 'bold', marginTop: 4}}>{courseListData[this.state.activeCourseNum].COURSE_NM}</Text>
+                            <View style={{flexDirection: 'row', marginTop: 2}}>
+                                <Text style={{fontSize: 13, color: 'rgba(255,255,255,.6)'}}>코스길이 : {courseListData[this.state.activeCourseNum].DISTANCE}</Text>
+                                <Text style={{fontSize: 13, color: 'rgba(255,255,255,.6)', marginLeft: 10}}>소요시간 : {courseListData[this.state.activeCourseNum].WALK_TIME}</Text>
+                            </View>
+                        </View>
+                        <View style={{alignItems: 'center'}}>
+                            <ScrollView
+                                contentContainerStyle={styles.stampList}
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                            >
+                                {courseInfoData[this.state.activeCourseNum].STAMP_DATA.map((v, i)=>{
+                                    // const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
+                                    const isActive = i === 0;
+                                    const stampColor = isActive ? '#FFF' : 'rgba(255,255,255,.4)';
+                                    const stampStyle = isActive ? { borderColor: stampColor, borderStyle: 'solid' } : { borderColor: 'rgba(255,255,255,.4)' };
+
+                                    return (
+                                        <View style={[styles.stampIconWrap, stampStyle]} key={v.COT_STAMP_ICON}>
+                                            <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: stampColor}]}/>
+                                        </View>
+                                    );
+                                })}
+                            </ScrollView>
                         </View>
                     </View>
-                    <View style={{alignItems: 'center'}}>
-                        <ScrollView
-                            contentContainerStyle={styles.stampList}
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                        >
-                            {courseInfoData[this.state.activeCourseNum].STAMP_DATA.map((v, i)=>{
-                                // const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
-                                const isActive = i === 0;
-                                const stampColor = isActive ? '#FFF' : 'rgba(255,255,255,.4)';
-                                const stampStyle = isActive ? { borderColor: stampColor, borderStyle: 'solid' } : { borderColor: 'rgba(255,255,255,.4)' };
-
-                                return (
-                                    <View style={[styles.stampIconWrap, stampStyle]} key={v.COT_STAMP_ICON}>
-                                        <Image source={StampIconFunc(v.COT_STAMP_ICON)} style={[styles.stampIcon, {tintColor: stampColor}]}/>
-                                    </View>
-                                );
-                            })}
-                        </ScrollView>
-                    </View>
-                </View>
+                    :
+                    <View><Text>선택된 코스 없음</Text></View>
+                }
             </View>
         );
     }

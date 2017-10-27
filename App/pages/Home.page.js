@@ -31,10 +31,15 @@ export default class Home extends React.Component {
 
         this.state = {
             list: this.ds.cloneWithRows(courseListData),
-            activeCourseNum: 8,
+            activeCourseNum: props.activeCourseNum
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
+    }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            activeCourseNum: nextProps.activeCourseNum
+        });
     }
 
     renderCourseRowItem(rowData){
@@ -84,6 +89,11 @@ export default class Home extends React.Component {
                     </View>
                     <View style={{flex:1, flexDirection: 'row', justifyContent:'flex-end'}}>
                         <NavGroup style={{marginRight: -20,}}>
+                            <NavButton style={{marginLeft: 1,}} onPress={()=>this.props.funcSetActiveCourse(2)}>
+                                <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
+                                    <IconOcticons name="megaphone" size={25} style={menuStyles.iconStyle}/>
+                                </NavButtonText>
+                            </NavButton>
                             <NavButton style={{marginLeft: 1,}} onPress={()=>Actions.notice()}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
                                     <IconOcticons name="megaphone" size={25} style={menuStyles.iconStyle}/>
