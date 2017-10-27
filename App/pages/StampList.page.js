@@ -1,7 +1,7 @@
 import React, {Component} from 'React'
 import {
     Image, StyleSheet, Text, View, TouchableNativeFeedback,
-    TouchableHighlight, ListView, Dimensions
+    RefreshControl, ListView, Dimensions
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -31,8 +31,10 @@ export default class StampList extends React.Component {
 
         this.state = {
             activeStampList: props.activeStampList,
+            rawStampData: [],
             stampdata: this.ds.cloneWithRows([]),
             isModalVisible: false,
+            showRefreshControl: false,
             modalHeaderColor: 'white',
             modalData: {
                 title: null,
@@ -69,6 +71,7 @@ export default class StampList extends React.Component {
         });
 
         this.setState({
+            rawStampData: stampdata,
             stampdata: this.ds.cloneWithRows(stampdata)
         });
         this.renderStampRowItem = this.renderStampRowItem.bind(this);
@@ -77,6 +80,7 @@ export default class StampList extends React.Component {
     componentWillReceiveProps(nextProps){
         this.setState({
             activeStampList: nextProps.activeStampList,
+            stampdata: this.ds.cloneWithRows(this.state.rawStampData)
         });
     }
 
@@ -187,6 +191,20 @@ export default class StampList extends React.Component {
                     dataSource={this.state.stampdata}
                     enableEmptySections={true}
                     renderRow={this.renderStampRowItem}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.showRefreshControl}
+                            onRefresh={()=>{
+                                this.setState({showRefreshControl: true});
+
+                                setTimeout(()=>this.setState({
+                                    stampdata: this.ds.cloneWithRows(this.state.rawStampData),
+                                    showRefreshControl: false
+                                }), 400)
+                            }}
+                            colors={['#f49805']}
+                        />
+                    }
                 />
                 <Modal
                     isVisible={this.state.isModalVisible}
