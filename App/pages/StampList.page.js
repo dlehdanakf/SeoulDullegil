@@ -10,6 +10,7 @@ import Modal from 'react-native-modal';
 
 import MapData from './datasets/courseinfo.list';
 import StampIconFunc from './components/stamp.function';
+import StampCheckFunc from './components/stamp.check.function';
 import stampColor from './datasets/green.colors';
 
 const isVisited = true;
@@ -29,6 +30,7 @@ export default class StampList extends React.Component {
         });
 
         this.state = {
+            activeStampList: props.activeStampList,
             stampdata: this.ds.cloneWithRows([]),
             isModalVisible: false,
             modalHeaderColor: 'white',
@@ -39,7 +41,6 @@ export default class StampList extends React.Component {
             },
         };
     }
-
     componentDidMount(){
         let tmp_stamp = [];
         let stampdata = [];
@@ -73,13 +74,18 @@ export default class StampList extends React.Component {
         this.renderStampRowItem = this.renderStampRowItem.bind(this);
         this.showStampRecord = this.showStampRecord.bind(this);
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            activeStampList: nextProps.activeStampList,
+        });
+    }
 
 
     showStampRecord(stamp){
 
         function modalContent(v){
-            //나중에 바꿔야 할부분
-            if(v.INDEX % 2 == 1){
+            const isChecked = StampCheckFunc(v.RNUM);
+            if(isChecked === null){
                 return(
                     <View style={{flex:1}}>
                         <View style={{flex:1}}>
@@ -149,7 +155,8 @@ export default class StampList extends React.Component {
         return (
             <View style={{flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
                 {row.map((v, i)=>{
-                    const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
+                    console.log(v.RNUM, StampCheckFunc(v.RNUM, this.state.activeStampList));
+                    const isActive = StampCheckFunc(v.RNUM, this.state.activeStampList) !== null;
                     const stampColor = isActive ? '#f49805' : v.color;
                     const stampStyle = isActive ? { borderColor: '#f49805', borderStyle: 'solid' } : { borderColor: stampColor };
 

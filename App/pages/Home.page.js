@@ -32,7 +32,8 @@ export default class Home extends React.Component {
         this.state = {
             rawList: courseListData,
             list: this.ds.cloneWithRows(courseListData),
-            activeCourseNum: props.activeCourseNum
+            activeCourseNum: props.activeCourseNum,
+            activeStampList: props.stampList,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -40,7 +41,8 @@ export default class Home extends React.Component {
     }
     componentWillReceiveProps(nextProps){
         this.setState({
-            activeCourseNum: nextProps.activeCourseNum
+            activeCourseNum: nextProps.activeCourseNum,
+            activeStampList: nextProps.stampList,
         });
     }
 
@@ -151,7 +153,10 @@ export default class Home extends React.Component {
                         renderRow={this.renderCourseRowItem}
                         renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
                     />
-                    <StampList tabLabel="스탬프 북" />
+                    <StampList
+                        tabLabel="스탬프 북"
+                        activeStampList={this.state.activeStampList}
+                    />
                 </ScrollableTabView>
             </View>
         );
