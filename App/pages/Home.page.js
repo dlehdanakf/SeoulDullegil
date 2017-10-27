@@ -44,7 +44,7 @@ export default class Home extends React.Component {
         const isActiveCourse = this.state.activeCourseNum.toString() === rowData.COURSE_NO;
 
         return (
-            <TouchableHighlight onPress={()=>{}} underlayColor="#FAFAFA">
+            <TouchableHighlight onPress={()=>Actions.course_info({COURSE_INDEX: rowData.COURSE_NO})} underlayColor="#FAFAFA">
                 <View key={rowData.COURSE_NO} style={{flex: 1, flexDirection: 'row', paddingVertical: 12, paddingHorizontal: 8}}>
                     <View style={{width: 60, justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{width: 50, height: 50, borderWidth: 3, borderColor: green, backgroundColor: green, borderRadius: 60, alignItems: 'center', justifyContent: 'center',}}>
@@ -84,17 +84,17 @@ export default class Home extends React.Component {
                     </View>
                     <View style={{flex:1, flexDirection: 'row', justifyContent:'flex-end'}}>
                         <NavGroup style={{marginRight: -20,}}>
-                            <NavButton style={{marginLeft: 1,}}>
+                            <NavButton style={{marginLeft: 1,}} onPress={()=>Actions.notice()}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
                                     <IconOcticons name="megaphone" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
                             </NavButton>
-                            <NavButton style={{marginLeft: 1,}}>
+                            <NavButton style={{marginLeft: 1,}} onPress={()=>Actions.event()}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
                                     <IconMaterialIcons name="dvr" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
                             </NavButton>
-                            <NavButton style={{marginLeft: 1,}}>
+                            <NavButton style={{marginLeft: 1,}} onPress={()=>Actions.guide()}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 16}]}>
                                     <IconMaterialCommunityIcons name="information-outline" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>

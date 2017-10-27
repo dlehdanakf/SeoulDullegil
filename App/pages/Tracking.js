@@ -26,7 +26,7 @@ import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 import trakingStyles from './assets/TrackingComponent.styles';
 
-import {Constants, Location, Permissions, Notifications} from 'expo';
+import {Constants, Location, Permissions, Notifications, SQLite} from 'expo';
 import Geolib from 'geolib';
 
 import Timer from 'react-native-timer';
@@ -87,7 +87,7 @@ export default class Tracking extends React.Component {
         if (Platform.OS === 'android' && !Constants.isDevice) {
             this.setState({errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'});
         } else {
-            this._getLocationAsync();
+            //this._getLocationAsync();
         }
         this.setState({trackingFunc: this.startTracking.bind(this), trackingButtonMsg: '트래킹 시작하기', isStartTracking: false})
     }
@@ -178,7 +178,7 @@ export default class Tracking extends React.Component {
                 enableHighAccuracy: true,
                 distanceInterval: 1
             }, (location) => {
-
+                console.log("Hello?");
                 let walkingForMin = 0;
 
                 if(this.state.location.latitude != 0 && this.state.location.longitude != 0)
@@ -282,7 +282,8 @@ export default class Tracking extends React.Component {
 
     stopTracking() {
         Notifications.dismissAllNotificationsAsync();
-        this.state.retValueWatchPosition.remove();
+        this.state.retValueWatchPosition && this.state.retValueWatchPosition.remove();
+
         this.setState({
             isStartTracking: false,
             trackingFunc: this.startTracking.bind(this),

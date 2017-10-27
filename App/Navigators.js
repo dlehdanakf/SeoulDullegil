@@ -15,11 +15,12 @@ import Event from './pages/Event.page';
 const MyNavigator = () => (
     <Router>
         <Scene key="root" headerMode="none">
-            <Scene key="tracking" component={Tracking} />
-                <Scene key="notice" component={Notice} />
-                <Scene key="home" component={Home} />
-                <Scene key="course_map" component={CourseMap} />
+            <Scene key="home" component={Home} />
+                <Scene key="event" component={Event} />
+                <Scene key="guide" component={Guide} />
                 <Scene key="course_info" component={CourseInfo} />
+                <Scene key="tracking" component={Tracking} />
+                <Scene key="course_map" component={CourseMap} />
                 <Scene key="course_list" component={CourseList} />
         </Scene>
     </Router>

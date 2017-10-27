@@ -19,8 +19,6 @@ import SubwayColors from './datasets/subway.colors';
 
 import StampIconFunc from './components/stamp.function';
 
-const COURSE_INDEX = 7;
-
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
@@ -31,9 +29,11 @@ export default class CourseInfo extends React.Component{
     constructor(props) {
         super(props);
 
+        const courseIndex = parseInt(props.COURSE_INDEX) - 1;
         this.state = {
-            courseData: CourseData[COURSE_INDEX],
-            mapData: MapData[COURSE_INDEX],
+            courseData: CourseData[courseIndex],
+            courseIndex: courseIndex,
+            mapData: MapData[courseIndex],
             scrollY: new Animated.Value(0),
             showModal: false,
             modalData: {
@@ -109,8 +109,8 @@ export default class CourseInfo extends React.Component{
         );
     }
     onPressRoadItem(data){
-        function takeModalDataFromPoint(e){
-            const data = e.TYPE === 'S' ? MapData[COURSE_INDEX].STAMP_DATA : MapData[COURSE_INDEX].POINT_DATA;
+        function takeModalDataFromPoint(e, courseIndex){
+            const data = e.TYPE === 'S' ? MapData[courseIndex].STAMP_DATA : MapData[courseIndex].POINT_DATA;
             for(let i = 0; i < data.length; i++){
                 if(data[i].RNUM === e.RNUM){
                     return {
@@ -128,7 +128,7 @@ export default class CourseInfo extends React.Component{
             case 'M':
             case 'T': ToastAndroid.show('해당 지점에 대한 상세정보가 없습니다.', ToastAndroid.SHORT); return; break;
             case 'S':
-            case 'P': modal_data = takeModalDataFromPoint(data); break;
+            case 'P': modal_data = takeModalDataFromPoint(data, this.state.courseIndex); break;
         }
 
         this.setState({

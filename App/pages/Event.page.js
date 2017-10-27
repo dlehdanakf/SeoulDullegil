@@ -5,11 +5,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav';
+import {Actions} from 'react-native-router-flux';
 
 import navBarStylesModule from './assets/navbar.styles';
 const navBarStyles = navBarStylesModule("#a0b145");
 
-export default class Notice extends React.Component {
+export default class Event extends React.Component {
     constructor(props){
         super(props);
         this.ds = new ListView.DataSource({
@@ -17,6 +18,7 @@ export default class Notice extends React.Component {
         });
 
         this.state = {
+            isMount: true,
             pageNum: 1,
             hasMore: true,
             noticeList: [],
@@ -38,7 +40,10 @@ export default class Notice extends React.Component {
                 'Content-Type': 'application/json',
             }
         })
-            .then((response) => response.json())
+            .then((response) => {
+                return response.json();
+
+            })
             .then((data) => {
                 if(data.result !== 'success'){
                     ToastAndroid.show('서버로부터 데이터를 받아오는데 오류가 발생했습니다.', ToastAndroid.SHORT);
@@ -47,15 +52,16 @@ export default class Notice extends React.Component {
                 }
 
                 const list = this.state.noticeList.concat(data.list);
-                this.setState({
-                    noticeList: list,
-                    noticeListDataSource: this.ds.cloneWithRows(list),
-                    showInitialLoading: false,
-                    pageNum: parseInt(this.state.pageNum) + 1,
-                    hasMore: data.list.length > 0
-                });
+                    this.setState({
+                        noticeList: list,
+                        noticeListDataSource: this.ds.cloneWithRows(list),
+                        showInitialLoading: false,
+                        pageNum: parseInt(this.state.pageNum) + 1,
+                        hasMore: data.list.length > 0
+                    });
 
-                if(this.state.pageNum < 3) this.fetchNoticeListFromServer(this.state.pageNum);
+                //if(this.state.pageNum < 3) this.fetchNoticeListFromServer(this.state.pageNum);
+
             });
     }
     renderNoticeItem(rowData){
@@ -96,8 +102,12 @@ export default class Notice extends React.Component {
     }
 
 
-    componentDidMount(){
+    componentWillMount(){
         this.fetchNoticeListFromServer(this.state.pageNum);
+    }
+    componentWillUnmount(){
+
+        fetch.abort(1);
     }
 
     render(){
@@ -106,7 +116,7 @@ export default class Notice extends React.Component {
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
                         <NavButton style={{marginHorizontal: 14}} onPress={()=>{}}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} />
+                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} onPress={()=>Actions.pop()}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>행사안내</NavTitle>
                     </View>
