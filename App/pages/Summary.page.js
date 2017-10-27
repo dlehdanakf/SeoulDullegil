@@ -35,10 +35,10 @@ export default class Summary extends React.Component {
                         <Text style={{color: 'rgba(255,255,255,.8)'}}>현재 주행중인 코스</Text>
                     </View>
                     <View style={{alignItems: 'center', paddingHorizontal: 20, paddingVertical: 10}}>
-                        <Text style={{color: '#FFF', fontSize: 22, fontWeight: 'bold', marginTop: 4}}>{courseListData[this.state.activeCourseNum].COURSE_NM}</Text>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontSize: 12, color: 'rgba(255,255,255,.4)'}}>코스길이 : {courseListData[this.state.activeCourseNum].DISTANCE}</Text>
-                            <Text style={{fontSize: 12, color: 'rgba(255,255,255,.4)', marginLeft: 10}}>소요시간 : {courseListData[this.state.activeCourseNum].WALK_TIME}</Text>
+                        <Text style={{color: '#FFF', fontSize: 24, fontWeight: 'bold', marginTop: 4}}>{courseListData[this.state.activeCourseNum].COURSE_NM}</Text>
+                        <View style={{flexDirection: 'row', marginTop: 2}}>
+                            <Text style={{fontSize: 13, color: 'rgba(255,255,255,.6)'}}>코스길이 : {courseListData[this.state.activeCourseNum].DISTANCE}</Text>
+                            <Text style={{fontSize: 13, color: 'rgba(255,255,255,.6)', marginLeft: 10}}>소요시간 : {courseListData[this.state.activeCourseNum].WALK_TIME}</Text>
                         </View>
                     </View>
                     <View style={{alignItems: 'center'}}>
