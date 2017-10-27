@@ -155,8 +155,7 @@ export default class StampList extends React.Component {
         return (
             <View style={{flex:1, flexDirection:'row', marginHorizontal:cardInterval, marginTop:cardInterval, marginBottom:cardInterval}}>
                 {row.map((v, i)=>{
-                    console.log(v.RNUM, StampCheckFunc(v.RNUM, this.state.activeStampList));
-                    const isActive = StampCheckFunc(v.RNUM, this.state.activeStampList) !== null;
+                    const isActive = StampCheckFunc(v.COT_STAMP_ICON, this.state.activeStampList) !== null;
                     const stampColor = isActive ? '#f49805' : v.color;
                     const stampStyle = isActive ? { borderColor: '#f49805', borderStyle: 'solid' } : { borderColor: stampColor };
 

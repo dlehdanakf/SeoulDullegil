@@ -1,6 +1,6 @@
-export default function(rnum, list){
+export default function(name, list){
     for(let i = 0; i < list.length; i++){
-        if(list[i].rnum.toString() === rnum.toString()){
+        if(list[i].name.toString() === name.toString()){
             return list[i].reg_date;
         }
     }
