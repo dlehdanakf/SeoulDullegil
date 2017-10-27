@@ -82,9 +82,9 @@ export default class StampList extends React.Component {
 
 
     showStampRecord(stamp){
+        function modalContent(v, list){
+            const isChecked = StampCheckFunc(v.COT_STAMP_ICON, list);
 
-        function modalContent(v){
-            const isChecked = StampCheckFunc(v.RNUM);
             if(isChecked === null){
                 return(
                     <View style={{flex:1}}>
@@ -108,8 +108,7 @@ export default class StampList extends React.Component {
                         </View>
                     </View>
                 );
-            }
-            else {
+            } else {
                 return(
                     <View style={{flex:1}}>
                         <View style={{flex:1}}>
@@ -131,7 +130,7 @@ export default class StampList extends React.Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <IconMaterialIcons name="access-time" size={16} style={{color:'#626B70', marginBottom:-1, marginRight: 2}} />
-                                    <Text style={{fontSize:15, color:'white', paddingLeft:3}}>2017-04-11</Text>
+                                    <Text style={{fontSize:15, color:'white', paddingLeft:3}}>{isChecked.substring(0, 10)}</Text>
                                 </View>
                             </View>
                         </View>
@@ -144,7 +143,7 @@ export default class StampList extends React.Component {
             isModalVisible: true,
             modalHeaderColor: stamp.color,
             modalData:{
-                content: modalContent(stamp),
+                content: modalContent(stamp, this.state.activeStampList),
                 title: stamp.NAME,
                 subTitle: stamp.COT_GU_NAME,
             }
