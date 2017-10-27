@@ -276,7 +276,7 @@ const modalStyles = StyleSheet.create({
     },
     modal: {
         justifyContent:'center',
-        backgroundColor:'#F0F8F9',
+        backgroundColor:'#FFF',
         elevation: 3,
         height: 280,
         width: 230,

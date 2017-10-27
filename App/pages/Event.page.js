@@ -1,9 +1,10 @@
-import React, {Component} from 'React';
+import React from 'React';
 import {
     View, StyleSheet, ActivityIndicator, Text, Linking,
     ListView, TouchableNativeFeedback, ToastAndroid, WebView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import fetch from 'react-native-cancelable-fetch';
 import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav';
 import {Actions} from 'react-native-router-flux';
 
@@ -18,7 +19,7 @@ export default class Event extends React.Component {
         });
 
         this.state = {
-            isMount: true,
+            isFetching: false,
             pageNum: 1,
             hasMore: true,
             noticeList: [],
@@ -30,9 +31,16 @@ export default class Event extends React.Component {
         this.renderNoticeItem = this.renderNoticeItem.bind(this);
         this.onPressNoticeItem = this.onPressNoticeItem.bind(this);
     }
+    componentWillMount(){
+        this.fetchNoticeListFromServer(this.state.pageNum);
+    }
+    componentWillUnmount(){
+        fetch.abort(1);
+    }
 
     fetchNoticeListFromServer(page){
         page = parseInt(page) > 0 ? parseInt(page) : 1;
+        this.setState({isFetching: true});
         fetch('https://mplatform.seoul.go.kr/api/dule/eventList.do?pagenum=' + page, {
             method: 'GET',
             headers: {
@@ -53,6 +61,7 @@ export default class Event extends React.Component {
 
                 const list = this.state.noticeList.concat(data.list);
                     this.setState({
+                        isFetching: false,
                         noticeList: list,
                         noticeListDataSource: this.ds.cloneWithRows(list),
                         showInitialLoading: false,
@@ -102,14 +111,6 @@ export default class Event extends React.Component {
     }
 
 
-    componentWillMount(){
-        this.fetchNoticeListFromServer(this.state.pageNum);
-    }
-    componentWillUnmount(){
-
-        fetch.abort(1);
-    }
-
     render(){
         return (
             <View style={styles.fill}>
@@ -121,7 +122,7 @@ export default class Event extends React.Component {
                         <NavTitle style={navBarStyles.title}>행사안내</NavTitle>
                     </View>
                 </NavBar>
-                <View style={{flex: 1}}>
+                <View style={{flex: 1, backgroundColor: '#efefef'}}>
                     {this.state.showInitialLoading ?
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <ActivityIndicator
@@ -139,17 +140,23 @@ export default class Event extends React.Component {
                             enableEmptySections={true}
                             renderRow={this.renderNoticeItem}
                             renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#e2e2e2'}} />}
-                            onEndReached={()=>this.fetchNoticeListFromServer(this.state.pageNum)}
+                            // onEndReached={()=>this.fetchNoticeListFromServer(this.state.pageNum)}
                             renderFooter={()=>{
                                 if(!this.state.hasMore) return null;
 
                                 return (
-                                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 14}}>
-                                        <ActivityIndicator
-                                            animating={true}
-                                            size="large"
-                                            color="#a0b145"
-                                        />
+                                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', height: 54}}>
+                                        {this.state.isFetching ?
+                                            <ActivityIndicator
+                                                animating={true}
+                                                size="large"
+                                                color="#a0b145"
+                                            />
+                                            :
+                                            <TouchableNativeFeedback onPress={()=>this.fetchNoticeListFromServer(this.state.pageNum)}>
+                                                <Text style={{fontSize: 14, color: '#999'}}>더보기</Text>
+                                            </TouchableNativeFeedback>
+                                        }
                                     </View>
                                 );
                             }}
@@ -180,6 +187,7 @@ const styles = StyleSheet.create({
     },
     noticeItemWrap: {
         flexDirection: 'row',
+        backgroundColor: '#FFF'
     },
     noticeItemAngle: {
         width: 50,
