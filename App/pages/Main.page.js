@@ -114,8 +114,7 @@ export default class Main extends React.Component {
         await this.db.transaction((tx)=> {
             console.log('inner');
             tx.executeSql("INSERT INTO stamp (name) VALUES (?)", [name], (tx, result)=>{
-                console.log('inner2');
-                this.sqLiteSelectStamp(tx);
+                this.sqLiteSelectStamp(tx, (list)=>this.setState({ownedStampList: list}));
             });
         });
     }
