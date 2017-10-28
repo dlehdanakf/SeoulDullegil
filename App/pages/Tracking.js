@@ -10,7 +10,9 @@ import {
     Platform,
     TouchableNativeFeedback,
     Dimensions,
-    ToastAndroid
+    ToastAndroid,
+    Alert,
+    BackHandler,
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav'
@@ -50,6 +52,10 @@ export default class Tracking extends React.Component {
         this.getMapCenter = this.getMapCenter.bind(this);
         this.onPressMapButton = this.onPressMapButton.bind(this);
 
+        this.onPressBackButton = this.onPressBackButton.bind(this);
+
+        BackHandler.addEventListener('hardwareBackPress', this.onPressBackButton);
+
         this.kcalperM = 0.0476;
 
         this.state = {
@@ -57,11 +63,7 @@ export default class Tracking extends React.Component {
                 latitude: 0,
                 longitude: 0,
             },
-            errorMessage: null,
-            isStartTracking: null,
-            notificationKey: null,
-            trackingFunc: null,
-            trackingButtonMsg: "",
+            isTracking: null,
             walkingTime: 0,
             walkingDistance: 0.0,
             nearSpot: {
@@ -72,8 +74,6 @@ export default class Tracking extends React.Component {
             courseData: CourseData[props.COURSE_INDEX],
             mapData: MapData[props.COURSE_INDEX],
 
-            drawerOpen: false,
-            drawerDisabled: false,
             activeMapPinIndex: -1,
             pinTitle: '',
             pinDesc: '',
@@ -89,7 +89,7 @@ export default class Tracking extends React.Component {
         } else {
             //this._getLocationAsync();
         }
-        this.setState({trackingFunc: this.startTracking.bind(this), trackingButtonMsg: '트래킹 시작하기', isStartTracking: false})
+        this.setState({trackingFunc: this.startTracking.bind(this), trackingButtonMsg: '트래킹 시작하기', isTracking: false})
     }
 
     componentWillUnMount() {
@@ -203,7 +203,7 @@ export default class Tracking extends React.Component {
                     x: location.coords.longitude
                 });
 
-                if (this.state.isStartTracking) {
+                if (this.state.isTracking) {
                     this.setState({
                         walkingDistance: this.state.walkingDistance + walkingForMin,
                         burnKcal: this.state.burnKcal + this.kcalperM * walkingForMin,
@@ -264,8 +264,7 @@ export default class Tracking extends React.Component {
                 sticky: true
             });
             this.setState({
-                isStartTracking: true,
-                trackingFunc: this.stopTracking.bind(this),
+                isTracking: true,
                 trackingButtonMsg: '트래킹 그만하기',
                 walkingTime: 0,
                 walkingDistance: 0,
@@ -299,8 +298,7 @@ export default class Tracking extends React.Component {
         this.props.funcInsertRecord(this.state.mapData.INDEX, this.ISO8601_week_no(), parseFloat(this.state.walkingDistance), this.state.walkingTime);
 
         this.setState({
-            isStartTracking: false,
-            trackingFunc: this.startTracking.bind(this),
+            isTracking: false,
             trackingButtonMsg: '트래킹 시작하기',
             retValueWatchPosition: null,
             location: {
@@ -321,7 +319,29 @@ export default class Tracking extends React.Component {
         this.webview.emit('center');
     }
 
+    onPressBackButton(){
+        if(this.state.isTracking){
+            Alert.alert("트래킹", "트래킹을 중단하시겠습니까?",
+            [
+                {
+                    text: '네',
+                    onPress: () => {
+                        this.setState({isTracking: false});
+                        this.stopTracking();
+                        Actions.pop();
+                    }
+                },
+                {text: '아니요'},
+            ],
+            )
+        }else{
+            Actions.pop();
+        }
+        return true;
+    }
+
     render() {
+        const buttonMsg = this.state.isTracking ? "트래킹 그만하기" : "트래킹 시작하기";
         return (
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
@@ -332,7 +352,8 @@ export default class Tracking extends React.Component {
                         <NavButton style={{
                             marginHorizontal: 14
                         }}>
-                            <IconMaterialIcons name="arrow-back" onPress={()=>Actions.pop()} size={24} style={navBarStyles.backIcon}/>
+                            <IconMaterialIcons name="arrow-back"
+                                onPress={this.onPressBackButton} size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
                             {this.state.mapData.NAME}
@@ -504,7 +525,12 @@ export default class Tracking extends React.Component {
                 </View>
 
                 <View style={{ height: 60 }}>
-                    <TouchableNativeFeedback onPress={this.state.trackingFunc}>
+                    <TouchableNativeFeedback onPress={() => {
+                            if(this.state.isTracking)
+                                this.stopTracking();
+                            else
+                                this.startTracking();
+                        }}>
                         <View style={{
                             flex: 1,
                             backgroundColor: '#57C968',
@@ -515,7 +541,7 @@ export default class Tracking extends React.Component {
                                 fontSize: 18,
                                 fontWeight: 'bold',
                                 color: '#FFF'
-                            }}>{this.state.trackingButtonMsg}</Text>
+                            }}>{buttonMsg}</Text>
                         </View>
                     </TouchableNativeFeedback>
                 </View>
