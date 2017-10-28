@@ -1,6 +1,6 @@
 import React, { Component } from 'React'
 import {
-    Animated, Image, ScrollView, ToastAndroid,
+    Animated, Image, ScrollView, ToastAndroid, ActivityIndicator,
     StyleSheet, Text, View, TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -14,8 +14,8 @@ import Button from './components/button.component';
 import navBarStylesModule from './assets/navbar.styles';
 
 import CourseData from './datasets/course.list';
-import MapData from './datasets/courseinfo.list';
 import SubwayColors from './datasets/subway.colors';
+import greenColors from './datasets/green.colors';
 
 import StampIconFunc from './components/stamp.function';
 
@@ -23,17 +23,16 @@ const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
-const navBarStyles = navBarStylesModule("#a8c99e");
-
 export default class CourseInfo extends React.Component{
     constructor(props) {
         super(props);
 
         const courseIndex = parseInt(props.COURSE_INDEX) - 1;
         this.state = {
+            showCourseInfo: false,
             courseData: CourseData[courseIndex],
             courseIndex: courseIndex,
-            mapData: MapData[courseIndex],
+            mapData: props.mapData,
             scrollY: new Animated.Value(0),
             showModal: false,
             modalData: {
@@ -44,6 +43,11 @@ export default class CourseInfo extends React.Component{
 
         this.renderCourseRoadItem = this.renderCourseRoadItem.bind(this);
         this.onPressRoadItem = this.onPressRoadItem.bind(this);
+    }
+    componentDidMount(){
+        setTimeout(() => this.setState({
+            showCourseInfo: true
+        }), 1);
     }
 
     renderCourseRoadItem(data, index){
@@ -109,8 +113,8 @@ export default class CourseInfo extends React.Component{
         );
     }
     onPressRoadItem(data){
-        function takeModalDataFromPoint(e, courseIndex){
-            const data = e.TYPE === 'S' ? MapData[courseIndex].STAMP_DATA : MapData[courseIndex].POINT_DATA;
+        function takeModalDataFromPoint(e, mapData){
+            const data = e.TYPE === 'S' ? mapData.STAMP_DATA : mapData.POINT_DATA;
             for(let i = 0; i < data.length; i++){
                 if(data[i].RNUM === e.RNUM){
                     return {
@@ -128,7 +132,7 @@ export default class CourseInfo extends React.Component{
             case 'M':
             case 'T': ToastAndroid.show('해당 지점에 대한 상세정보가 없습니다.', ToastAndroid.SHORT); return; break;
             case 'S':
-            case 'P': modal_data = takeModalDataFromPoint(data, this.state.courseIndex); break;
+            case 'P': modal_data = takeModalDataFromPoint(data, this.state.mapData); break;
         }
 
         this.setState({
@@ -155,6 +159,7 @@ export default class CourseInfo extends React.Component{
         });
 
         const courseDifficulty = ['', '초급', '중급', '고급'];
+        const navBarStyles = navBarStylesModule(greenColors[this.state.courseIndex]);
 
         return (
             <View style={styles.fill}>
@@ -190,105 +195,116 @@ export default class CourseInfo extends React.Component{
                         scrollEventThrottle={16}
                         onScroll={Animated.event([{nativeEvent: {contentOffset: {y: this.state.scrollY}}}])}
                     >
-                        <View style={styles.scrollViewContent}>
-                            <View style={contentStyles.section}>
-                                <Text style={contentStyles.sectionTitle}>소개</Text>
-                                <Text style={contentStyles.infoText}>{this.state.mapData.DESCRIPTION}</Text>
-                            </View>
-                            <View style={contentStyles.section}>
-                                <Text style={contentStyles.sectionTitle}>스탬프</Text>
-                            </View>
-                            <View style={{marginTop: -14}}>
-                                <ScrollView
-                                    contentContainerStyle={{padding: 14, paddingRight: 0, flexDirection: 'row'}}
-                                    horizontal={true}
-                                    showsHorizontalScrollIndicator={false}
-                                >
-                                    {/*<View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}}>*/}
-                                        {/*<View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>*/}
-                                            {/*<Image*/}
-                                                {/*style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}*/}
-                                                {/*source={require('./assets/stamps/stamp01.png')}*/}
-                                            {/*/>*/}
+                        {this.state.showCourseInfo ?
+                            <View style={styles.scrollViewContent}>
+                                <View style={contentStyles.section}>
+                                    <Text style={contentStyles.sectionTitle}>소개</Text>
+                                    <Text style={contentStyles.infoText}>{this.state.mapData.DESCRIPTION}</Text>
+                                </View>
+                                <View style={contentStyles.section}>
+                                    <Text style={contentStyles.sectionTitle}>스탬프</Text>
+                                </View>
+                                <View style={{marginTop: -14}}>
+                                    <ScrollView
+                                        contentContainerStyle={{padding: 14, paddingRight: 0, flexDirection: 'row'}}
+                                        horizontal={true}
+                                        showsHorizontalScrollIndicator={false}
+                                    >
+                                        {/*<View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}}>*/}
+                                            {/*<View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>*/}
+                                                {/*<Image*/}
+                                                    {/*style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}*/}
+                                                    {/*source={require('./assets/stamps/stamp01.png')}*/}
+                                                {/*/>*/}
+                                            {/*</View>*/}
+                                            {/*<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>*/}
+                                                {/*<Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>*/}
+                                            {/*</View>*/}
                                         {/*</View>*/}
-                                        {/*<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>*/}
-                                            {/*<Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>*/}
-                                        {/*</View>*/}
-                                    {/*</View>*/}
-                                    {this.state.mapData.STAMP_DATA.map((v, i) => {
-                                        const iconPath = './assets/stamps/stamp01.png';
+                                        {this.state.mapData.STAMP_DATA.map((v, i) => {
+                                            const iconPath = './assets/stamps/stamp01.png';
 
-                                        return (
-                                            <View style={contentStyles.stampItemWrap} key={i}>
-                                                <View style={contentStyles.stampIconWrap}>
-                                                    <Image
-                                                        style={contentStyles.stampIcon}
-                                                        source={StampIconFunc(v.COT_STAMP_ICON)}
-                                                    />
+                                            return (
+                                                <View style={contentStyles.stampItemWrap} key={i}>
+                                                    <View style={contentStyles.stampIconWrap}>
+                                                        <Image
+                                                            style={contentStyles.stampIcon}
+                                                            source={StampIconFunc(v.COT_STAMP_ICON)}
+                                                        />
+                                                    </View>
+                                                    <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+                                                        <Text style={{fontSize: 13, color: '#BBB'}}>미획득</Text>
+                                                    </View>
                                                 </View>
-                                                <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-                                                    <Text style={{fontSize: 13, color: '#BBB'}}>미획득</Text>
+                                            );
+                                        })}
+                                    </ScrollView>
+                                </View>
+                                <View style={contentStyles.section}>
+                                    <Text style={contentStyles.sectionTitle}>교통편</Text>
+                                    {this.state.mapData.TRANSPORT.map((v, i)=>{
+                                        return (
+                                            <View style={{flexDirection: 'row', alignItems: 'center'}} key={v.NAME}>
+                                                <Text style={{width: 70, fontSize: 15, color: '#444'}}>{v.NAME}</Text>
+                                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                                    {v.NUMBER.map((b, j)=>{
+                                                        let num = b, w = 16;
+                                                        switch(num){
+                                                            case 10: num = '경의중앙'; w = 50; break;
+                                                            case 11: num = '분당'; w = 30; break;
+                                                            case 12: num = '신분당'; w = 40; break;
+                                                        }
+
+                                                        return (
+                                                            <Text
+                                                                key={j}
+                                                                style={[{
+                                                                    borderColor: SubwayColors[b - 1],
+                                                                    color: SubwayColors[b - 1],
+                                                                }, {
+                                                                    fontWeight: 'bold',
+                                                                    marginRight: 2,
+                                                                    borderRadius: 16,
+                                                                    borderWidth: 2,
+                                                                    width: w,
+                                                                    height: 16,
+                                                                    alignItems: 'center',
+                                                                    textAlign: 'center',
+                                                                    fontSize: 11
+                                                                }]}
+                                                            >
+                                                                {num}
+                                                            </Text>
+                                                        );
+                                                    })}
+
+                                                    <Text style={{marginLeft: 4, color: '#444', fontSize: 15}}>{v.STATION}</Text>
                                                 </View>
                                             </View>
                                         );
                                     })}
-                                </ScrollView>
+                                </View>
+                                <View style={contentStyles.section}>
+                                    <Text style={contentStyles.sectionTitle}>코스정보</Text>
+                                </View>
+                                <View style={contentStyles.sectionRoad}>
+                                    {this.state.mapData.ROAD_DATA.map((v, i) => {
+                                        return this.renderCourseRoadItem(v, i)
+                                    })}
+                                </View>
                             </View>
-                            <View style={contentStyles.section}>
-                                <Text style={contentStyles.sectionTitle}>교통편</Text>
-                                {this.state.mapData.TRANSPORT.map((v, i)=>{
-                                    return (
-                                        <View style={{flexDirection: 'row', alignItems: 'center'}} key={v.NAME}>
-                                            <Text style={{width: 70, fontSize: 15, color: '#444'}}>{v.NAME}</Text>
-                                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                                {v.NUMBER.map((b, j)=>{
-                                                    let num = b, w = 16;
-                                                    switch(num){
-                                                        case 10: num = '경의중앙'; w = 50; break;
-                                                        case 11: num = '분당'; w = 30; break;
-                                                        case 12: num = '신분당'; w = 40; break;
-                                                    }
-
-                                                    return (
-                                                        <Text
-                                                            key={j}
-                                                            style={[{
-                                                                borderColor: SubwayColors[b - 1],
-                                                                color: SubwayColors[b - 1],
-                                                            }, {
-                                                                fontWeight: 'bold',
-                                                                marginRight: 2,
-                                                                borderRadius: 16,
-                                                                borderWidth: 2,
-                                                                width: w,
-                                                                height: 16,
-                                                                alignItems: 'center',
-                                                                textAlign: 'center',
-                                                                fontSize: 11
-                                                            }]}
-                                                        >
-                                                            {num}
-                                                        </Text>
-                                                    );
-                                                })}
-
-                                                <Text style={{marginLeft: 4, color: '#444', fontSize: 15}}>{v.STATION}</Text>
-                                            </View>
-                                        </View>
-                                    );
-                                })}
+                        :
+                            <View style={[styles.scrollViewContent, {flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
+                                <ActivityIndicator
+                                    animating={true}
+                                    size="large"
+                                    color="#a0b145"
+                                    style={{marginVertical: 30}}
+                                />
                             </View>
-                            <View style={contentStyles.section}>
-                                <Text style={contentStyles.sectionTitle}>코스정보</Text>
-                            </View>
-                            <View style={contentStyles.sectionRoad}>
-                                {this.state.mapData.ROAD_DATA.map((v, i) => {
-                                    return this.renderCourseRoadItem(v, i)
-                                })}
-                            </View>
-                        </View>
+                        }
                     </ScrollView>
-                    <Animated.View style={[headerStyles.container, {height: headerHeight}]}>
+                    <Animated.View style={[headerStyles.container, {height: headerHeight, backgroundColor: greenColors[this.state.courseIndex]}]}>
                         <Animated.View style={[headerStyles.content, {opacity: headerOpacity}]}>
                             <Text style={headerStyles.difficulty}>{courseDifficulty[this.state.courseData.COURSE_LEVEL]}코스</Text>
                             <Text style={headerStyles.title}>{this.state.courseData.COURSE_NM}</Text>
@@ -369,7 +385,6 @@ const headerStyles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#a8c99e',
         overflow: 'hidden',
     },
     content: {
