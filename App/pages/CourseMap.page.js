@@ -13,7 +13,7 @@ import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 import MapData from './datasets/courseinfo.list';
 
-const navBarStyles = navBarStylesModule("#a0b145");
+const navBarStyles = navBarStylesModule("#568f4a");
 const mapData = MapData[0];
 
 export default class CourseMap extends React.Component {
