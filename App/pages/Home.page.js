@@ -53,8 +53,14 @@ export default class Home extends React.Component {
         const isActiveCourse = this.state.activeCourseNum.toString() === rowData.COURSE_NO;
 
         return (
-            <TouchableHighlight onPress={()=>Actions.course_info({COURSE_INDEX: rowData.COURSE_NO, funcInsertStamp: this.props.funcInsertStamp,
-            funcInsertRecord: this.props.funcInsertRecord})} underlayColor="#FAFAFA">
+            <TouchableHighlight
+                onPress={()=>Actions.course_info({
+                    COURSE_INDEX: rowData.COURSE_NO,
+                    funcInsertStamp: this.props.funcInsertStamp,
+                    funcInsertRecord: this.props.funcInsertRecord
+                })}
+                underlayColor="#FAFAFA"
+            >
                 <View key={rowData.COURSE_NO} style={{flex: 1, flexDirection: 'row', paddingVertical: 12, paddingHorizontal: 8}}>
                     <View style={{width: 60, justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{width: 50, height: 50, borderWidth: 3, borderColor: green, backgroundColor: green, borderRadius: 60, alignItems: 'center', justifyContent: 'center',}}>
