@@ -154,6 +154,7 @@ export default class Home extends React.Component {
                     <Summary
                         tabLabel="내 기록"
                         activeCourseNum={this.state.activeCourseNum}
+                        stampList={this.state.activeStampList}
                     />
                     <ListView
                         tabLabel="둘레길"

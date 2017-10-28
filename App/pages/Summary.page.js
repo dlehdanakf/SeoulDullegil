@@ -6,6 +6,8 @@ import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import StampIconFunc from './components/stamp.function';
+import StampCheckFunc from './components/stamp.check.function';
+
 import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
 import courseInfoData from './datasets/courseinfo.list';
@@ -49,8 +51,7 @@ export default class Summary extends React.Component {
                                 showsHorizontalScrollIndicator={false}
                             >
                                 {courseInfoData[this.state.activeCourseNum].STAMP_DATA.map((v, i)=>{
-                                    // const isActive = v.COT_CONTS_NAME === '창포원 관리사무소 앞';
-                                    const isActive = i === 0;
+                                    const isActive = StampCheckFunc(v.COT_STAMP_ICON, this.props.stampList);
                                     const stampColor = isActive ? '#FFF' : 'rgba(255,255,255,.4)';
                                     const stampStyle = isActive ? { borderColor: stampColor, borderStyle: 'solid' } : { borderColor: 'rgba(255,255,255,.4)' };
 
