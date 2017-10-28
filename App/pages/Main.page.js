@@ -110,7 +110,7 @@ export default class Main extends React.Component {
     async sqLiteInsertStamp(name){
         await this.db.transaction((tx)=> {
             tx.executeSql("INSERT INTO stamp (name) VALUES (?)", [name], (tx, result)=>{
-                this.sqLiteSelectStamp(tx);
+                this.sqLiteSelectStamp(tx, (list)=>this.setState({ownedStampList: list}));
             });
         });
     }
