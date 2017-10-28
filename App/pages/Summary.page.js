@@ -23,11 +23,30 @@ export default class Summary extends React.Component {
         this.state = {
             activeCourseNum: props.activeCourseNum - 1,
         };
+
+        this.fetchWeather = this.fetchWeather.bind(this);
+    }
+    componentDidMount(){
+        this.fetchWeather(37.5660649, 126.9826791);
     }
     componentWillReceiveProps(nextProps){
         this.setState({
             activeCourseNum: nextProps.activeCourseNum - 1
         });
+    }
+
+    fetchWeather(latitude, longitude){
+        fetch('https://apis.sktelecom.com/v1/weather/status?latitude=' + latitude + '&longitude=' + longitude, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'TDCProjectKey': '1e209d9a-c86b-4887-9e30-89de4afa4b15'
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
     }
 
     render(){
