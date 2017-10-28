@@ -37,7 +37,7 @@ import Drawer from 'react-native-drawer'
 import CourseData from './datasets/course.list';
 import MapData from './datasets/courseinfo.list';
 
-const navBarStyles = navBarStylesModule("#558F4A");
+const navBarStyles = navBarStylesModule("#568f4a");
 const COURSE_INDEX = 0;
 
 export default class Tracking extends React.Component {
@@ -63,7 +63,7 @@ export default class Tracking extends React.Component {
             trackingFunc: null,
             trackingButtonMsg: "",
             walkingTime: 0,
-            walkingDistance: 0,
+            walkingDistance: 0.0,
             nearSpot: {
                 distance: 0,
                 name: '트래킹을 시작해주세요',
@@ -83,8 +83,6 @@ export default class Tracking extends React.Component {
         }
     }
 
-    //funcInsertStamp={this.props.funcInsertStamp}
-    //funcInsertRecord={this.props.funcInsertRecord}
     componentWillMount() {
         if (Platform.OS === 'android' && !Constants.isDevice) {
             this.setState({errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'});
@@ -180,7 +178,6 @@ export default class Tracking extends React.Component {
                 enableHighAccuracy: true,
                 distanceInterval: 1
             }, (location) => {
-                console.log("Hello?");
                 let walkingForMin = 0;
 
                 if(this.state.location.latitude != 0 && this.state.location.longitude != 0)
@@ -217,9 +214,7 @@ export default class Tracking extends React.Component {
 
             this.setState({
                 retValueWatchPosition: location,
-            })
-
-            console.log(location);
+            });
         }
     }
 
@@ -284,9 +279,24 @@ export default class Tracking extends React.Component {
         }
     }
 
+    ISO8601_week_no(){
+        let dt = new Date();
+        let tdt = new Date(dt.valueOf());
+        let dayn = (dt.getDay() + 6) % 7;
+        tdt.setDate(tdt.getDate() - dayn + 3);
+        var firstThursday = tdt.valueOf();
+        tdt.setMonth(0,1);
+        if(tdt.getDay() !== 4){
+            tdt.setMonth(0,1 + ((4 - tdt.getDay()) +7) % 7);
+        }
+        return 1+ Math.ceil((firstThursday - tdt) / 604800000);
+    }
+
     stopTracking() {
         Notifications.dismissAllNotificationsAsync();
         this.state.retValueWatchPosition && this.state.retValueWatchPosition.remove();
+
+        this.props.funcInsertRecord(this.state.mapData.INDEX, this.ISO8601_week_no(), parseFloat(this.state.walkingDistance), this.state.walkingTime);
 
         this.setState({
             isStartTracking: false,

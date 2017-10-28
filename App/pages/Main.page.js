@@ -67,8 +67,8 @@ export default class Main extends React.Component {
             "CREATE TABLE IF NOT EXISTS stamp (idx INT PRIMARY KEY, name VARCHAR UNIQUE, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
 
         this.db.transaction((tx)=> {
-            // tx.executeSql("DROP TABLE record");
-            // tx.executeSql("DROP TABLE stamp");
+            tx.executeSql("DROP TABLE record");
+            tx.executeSql("DROP TABLE stamp");
 
             tx.executeSql(queryCreateRecordTable, [], (tx)=>{
                 this.sqLiteSelectRecord(tx, ()=>{
@@ -89,9 +89,19 @@ export default class Main extends React.Component {
         });
     }
     sqLiteSelectRecord(tx, callback){
-        callback();
+        tx.executeSql("SELECT * FROM record WHERE 1", [], (tx, result)=>{
+            let list = [];
+            for(let i = 0; i < result.rows.length; i++){
+                let item = result.rows.item(i);
+                list.push(item);
+            }
+            console.log(list);
+
+            if(callback) callback(list);
+        });
     }
-    sqLiteSelectStamp(tx, callback){
+
+    async sqLiteSelectStamp(tx, callback){
         tx.executeSql("SELECT * FROM stamp WHERE 1", [], (tx, result)=>{
             let list = [];
             for(let i = 0; i < result.rows.length; i++){
@@ -104,17 +114,17 @@ export default class Main extends React.Component {
             if(callback) callback(list);
         });
     }
+
     async sqLiteInsertRecord(c, w, d, t){
         await this.db.transaction((tx)=> {
-            tx.executeSql("INSERT INTO record (course, week, distance, time) VALUE (?, ?, ?, ?)", [c, w, d, t]);
+            tx.executeSql("INSERT INTO record (course, week, distance, time) VALUES (?, ?, ?, ?)", [c, w, d, t], (tx, result)=>{
+                this.sqLiteSelectRecord(tx);
+            }, (tx, error) => {console.log(error);});
         });
     }
     async sqLiteInsertStamp(name){
-        console.log("test");
         await this.db.transaction((tx)=> {
-            console.log('inner');
             tx.executeSql("INSERT INTO stamp (name) VALUES (?)", [name], (tx, result)=>{
-                console.log('inner2');
                 this.sqLiteSelectStamp(tx);
             });
         });

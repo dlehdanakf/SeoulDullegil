@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     window.RNMessagesChannel.on('getIPAddress', e => {
-        alert('hello~');
+        alert(location.href);
     });
 
     window.RNMessagesChannel.on('setMyLocationPin', e => {

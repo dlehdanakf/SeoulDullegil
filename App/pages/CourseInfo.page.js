@@ -175,7 +175,7 @@ export default class CourseInfo extends React.Component{
                                     <Text style={{color: '#FFF', fontSize: 13}}>지도</Text>
                                 </View>
                             </NavButton>
-                            <NavButton onPress={() => {Actions.tracking({COURSE_INDEX: this.state.courseIndex})}}>
+                            <NavButton onPress={() => {Actions.tracking({COURSE_INDEX: this.state.courseIndex, funcInsertStamp: this.props.funcInsertStamp, funcInsertRecord: this.props.funcInsertRecord})}}>
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="transfer-within-a-station" size={24} color="#FFF" style={{marginRight: 4,}} />
                                     <Text style={{color: '#FFF', fontSize: 13}}>트래킹 코스 지정</Text>
