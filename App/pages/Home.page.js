@@ -58,6 +58,7 @@ export default class Home extends React.Component {
                 onPress={()=>Actions.course_info({
                     COURSE_INDEX: rowData.COURSE_NO,
                     mapData: courseInfoData[parseInt(rowData.COURSE_NO) - 1],
+                    stampList: this.state.activeStampList,
                     funcInsertStamp: this.props.funcInsertStamp,
                     funcInsertRecord: this.props.funcInsertRecord
                 })}

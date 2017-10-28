@@ -18,6 +18,7 @@ import SubwayColors from './datasets/subway.colors';
 import greenColors from './datasets/green.colors';
 
 import StampIconFunc from './components/stamp.function';
+import StampCheckFunc from './components/stamp.check.function';
 
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 0;
@@ -210,19 +211,23 @@ export default class CourseInfo extends React.Component{
                                         horizontal={true}
                                         showsHorizontalScrollIndicator={false}
                                     >
-                                        {/*<View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}}>*/}
-                                            {/*<View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>*/}
-                                                {/*<Image*/}
-                                                    {/*style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}*/}
-                                                    {/*source={require('./assets/stamps/stamp01.png')}*/}
-                                                {/*/>*/}
-                                            {/*</View>*/}
-                                            {/*<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>*/}
-                                                {/*<Text style={{fontSize: 13, color: '#444'}}>2017년 09월 12일</Text>*/}
-                                            {/*</View>*/}
-                                        {/*</View>*/}
                                         {this.state.mapData.STAMP_DATA.map((v, i) => {
-                                            const iconPath = './assets/stamps/stamp01.png';
+                                            const activeDate = StampCheckFunc(v.COT_STAMP_ICON, this.props.stampList)
+                                            if(activeDate){
+                                                return (
+                                                    <View style={{width: 140, height: 170, backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E3E3E3', borderRadius: 4, marginRight: 14, padding: 14}} key={i}>
+                                                        <View style={[contentStyles.stampIconWrap, {borderColor: '#f9931f', borderStyle: 'solid'}]}>
+                                                            <Image
+                                                                style={[contentStyles.stampIcon, {tintColor: '#f9931f'}]}
+                                                                source={StampIconFunc(v.COT_STAMP_ICON)}
+                                                            />
+                                                        </View>
+                                                        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+                                                            <Text style={{fontSize: 13, color: '#444'}}>{activeDate.substring(0, 10)}</Text>
+                                                        </View>
+                                                    </View>
+                                                );
+                                            }
 
                                             return (
                                                 <View style={contentStyles.stampItemWrap} key={i}>
