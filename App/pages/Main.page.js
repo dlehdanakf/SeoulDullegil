@@ -8,7 +8,7 @@ class Splash extends React.Component {
     render(){
         return (
             <View style={{flex: 1, backgroundColor: '#f49805', justifyContent: 'center', alignItems: 'center'}}>
-                <Image source={require('./assets/bird_logo.png')} style={{height:50, width:62, tintColor: '#FFF'}} />
+                <Image source={require('./assets/bird_logo.png')} style={{height:46, width:57, tintColor: '#FFF'}} />
             </View>
         );
     }
@@ -109,8 +109,6 @@ export default class Main extends React.Component {
                 list.push(item);
             }
 
-            console.log(list);
-
             if(callback) callback(list);
         });
     }
@@ -125,7 +123,7 @@ export default class Main extends React.Component {
     async sqLiteInsertStamp(name){
         await this.db.transaction((tx)=> {
             tx.executeSql("INSERT INTO stamp (name) VALUES (?)", [name], (tx, result)=>{
-                this.sqLiteSelectStamp(tx);
+                this.sqLiteSelectStamp(tx, (list)=>this.setState({ownedStampList: list}));
             });
         });
     }

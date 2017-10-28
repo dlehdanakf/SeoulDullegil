@@ -15,6 +15,7 @@ import DefaultTabBar from './components/tabbar.component';
 
 import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
+import courseInfoData from './datasets/courseinfo.list';
 
 import StampList from './StampList.page';
 import MyRecord from './MyRecord.page';
@@ -38,6 +39,7 @@ export default class Home extends React.Component {
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
         this.changeActiveCourse = this.changeActiveCourse.bind(this);
+        this.changeTabBarPage = this.changeTabBarPage.bind(this);
     }
     componentWillReceiveProps(nextProps){
         this.setState({
@@ -53,8 +55,16 @@ export default class Home extends React.Component {
         const isActiveCourse = this.state.activeCourseNum.toString() === rowData.COURSE_NO;
 
         return (
-            <TouchableHighlight onPress={()=>Actions.course_info({COURSE_INDEX: rowData.COURSE_NO, funcInsertStamp: this.props.funcInsertStamp,
-            funcInsertRecord: this.props.funcInsertRecord})} underlayColor="#FAFAFA">
+            <TouchableHighlight
+                onPress={()=>Actions.course_info({
+                    COURSE_INDEX: rowData.COURSE_NO,
+                    mapData: courseInfoData[parseInt(rowData.COURSE_NO) - 1],
+                    stampList: this.state.activeStampList,
+                    funcInsertStamp: this.props.funcInsertStamp,
+                    funcInsertRecord: this.props.funcInsertRecord
+                })}
+                underlayColor="#FAFAFA"
+            >
                 <View key={rowData.COURSE_NO} style={{flex: 1, flexDirection: 'row', paddingVertical: 12, paddingHorizontal: 8}}>
                     <View style={{width: 60, justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{width: 50, height: 50, borderWidth: 3, borderColor: green, backgroundColor: green, borderRadius: 60, alignItems: 'center', justifyContent: 'center',}}>
@@ -88,6 +98,9 @@ export default class Home extends React.Component {
                 list: this.ds.cloneWithRows(this.state.rawList)
             });
         });
+    }
+    changeTabBarPage(n){
+        this.tabView.goToPage(n);
     }
 
     render() {
@@ -135,6 +148,7 @@ export default class Home extends React.Component {
                     </View>
                 </NavBar>
                 <ScrollableTabView
+                    ref={ tabView => { this.tabView = tabView; }}
                     style={{backgroundColor:'white'}}
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
@@ -145,13 +159,17 @@ export default class Home extends React.Component {
                     <Summary
                         tabLabel="내 기록"
                         activeCourseNum={this.state.activeCourseNum}
+                        stampList={this.state.activeStampList}
+                        changeTabBar={this.changeTabBarPage}
                     />
                     <ListView
                         tabLabel="둘레길"
-                        style={{flex: 1}}
+                        style={{flex: 1, borderLeftWidth: 1, borderLeftColor: '#EFEFEF'}}
                         dataSource={this.state.list}
                         enableEmptySections={true}
                         renderRow={this.renderCourseRowItem}
+                        renderHeader={()=><View style={{height: 11, backgroundColor: '#efefef', borderBottomWidth: 1, borderBottomColor: '#E6E6E6'}} />}
+                        renderFooter={()=><View style={{height: 11, backgroundColor: '#efefef', borderTopWidth: 1, borderTopColor: '#E6E6E6'}} />}
                         renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
                         funcInsertStamp={this.props.funcInsertStamp}
                         funcInsertRecord={this.props.funcInsertRecord}
@@ -159,6 +177,7 @@ export default class Home extends React.Component {
                     <StampList
                         tabLabel="스탬프 북"
                         activeStampList={this.state.activeStampList}
+                        mapData={courseInfoData}
                     />
                 </ScrollableTabView>
             </View>
