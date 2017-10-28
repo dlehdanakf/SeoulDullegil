@@ -93,6 +93,7 @@ export default class Tracking extends React.Component {
     }
 
     componentWillUnMount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.onPressBackButton);
         Timer.clearTimeout(this);
     }
 
