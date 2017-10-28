@@ -185,6 +185,8 @@ export default class StampList extends React.Component {
                     style={{flex: 1, paddingVertical:cardInterval}}
                     dataSource={this.state.stampdata}
                     enableEmptySections={true}
+                    renderHeader={()=><View style={{height: 7, backgroundColor: '#efefef'}} />}
+                    renderFooter={()=><View style={{height: 7, backgroundColor: '#efefef'}} />}
                     renderRow={this.renderStampRowItem}
                     refreshControl={
                         <RefreshControl

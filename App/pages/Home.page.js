@@ -164,10 +164,12 @@ export default class Home extends React.Component {
                     />
                     <ListView
                         tabLabel="둘레길"
-                        style={{flex: 1}}
+                        style={{flex: 1, borderLeftWidth: 1, borderLeftColor: '#EFEFEF'}}
                         dataSource={this.state.list}
                         enableEmptySections={true}
                         renderRow={this.renderCourseRowItem}
+                        renderHeader={()=><View style={{height: 11, backgroundColor: '#efefef', borderBottomWidth: 1, borderBottomColor: '#E6E6E6'}} />}
+                        renderFooter={()=><View style={{height: 11, backgroundColor: '#efefef', borderTopWidth: 1, borderTopColor: '#E6E6E6'}} />}
                         renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
                         funcInsertStamp={this.props.funcInsertStamp}
                         funcInsertRecord={this.props.funcInsertRecord}
