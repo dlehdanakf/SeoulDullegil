@@ -15,6 +15,7 @@ import DefaultTabBar from './components/tabbar.component';
 
 import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
+import courseInfoData from './datasets/courseinfo.list';
 
 import StampList from './StampList.page';
 import MyRecord from './MyRecord.page';
@@ -165,6 +166,7 @@ export default class Home extends React.Component {
                     <StampList
                         tabLabel="스탬프 북"
                         activeStampList={this.state.activeStampList}
+                        mapData={courseInfoData}
                     />
                 </ScrollableTabView>
             </View>

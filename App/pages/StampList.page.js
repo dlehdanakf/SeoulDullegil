@@ -7,7 +7,6 @@ import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal';
 
-import MapData from './datasets/courseinfo.list';
 import StampIconFunc from './components/stamp.function';
 import StampCheckFunc from './components/stamp.check.function';
 import stampColor from './datasets/green.colors';
@@ -19,7 +18,7 @@ const cardViewRadius = 3;
 export default class StampList extends React.Component {
     constructor(props) {
         super(props);
-        this.mapdata = MapData;
+        this.mapdata = props.mapData;
 
         this.ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
