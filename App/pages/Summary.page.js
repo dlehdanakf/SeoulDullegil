@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'React'
 import {
-    Image, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback
+    Image, StyleSheet, Text, View, ScrollView, Linking,
+    TouchableNativeFeedback, ActivityIndicator
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -31,7 +32,7 @@ export default class Summary extends React.Component {
 
     render(){
         return (
-            <View style={styles.componentWrap}>
+            <ScrollView style={styles.componentWrap}>
                 {this.state.activeCourseNum > -1 ?
                     <View style={[styles.currentCourseWrap, {backgroundColor: greenColors[this.state.activeCourseNum]}]}>
                         <View style={{padding: 10}}>
@@ -83,11 +84,10 @@ export default class Summary extends React.Component {
                                 >
                                     <View
                                         style={{
-                                            flex: 1,
                                             backgroundColor: '#568f4a',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            paddingVertical: 16,
+                                            paddingVertical: 8,
                                             borderRadius: 3
                                         }}
                                     >
@@ -98,7 +98,73 @@ export default class Summary extends React.Component {
                         </View>
                     </View>
                 }
-            </View>
+                <View style={[styles.sectionCard, {marginTop: 8}]}>
+                    <View style={{padding: 10}}>
+                        <Text style={{color: '#333'}}>이번 주 활동량</Text>
+                    </View>
+                    <View style={{flexDirection: 'row', paddingBottom: 20}}>
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Icon name="transfer-within-a-station" size={34} style={{marginVertical: 10, color: '#568f4a'}} />
+                            <Text style={{color: '#9d9d9d', fontSize: 13}}>이동거리</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>2km</Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Icon name="whatshot" size={34} style={{marginVertical: 10, color: '#fd556e'}} />
+                            <Text style={{color: '#9d9d9d', fontSize: 13}}>소모 칼로리</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>1842kcal</Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Icon name="timer" size={34} style={{marginVertical: 10, color: '#03a5ef'}} />
+                            <Text style={{color: '#9d9d9d', fontSize: 13}}>러닝시간</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>3시간 23분</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={[styles.sectionCard, {marginTop: 8}]}>
+                    <View style={{padding: 10}}>
+                        <Text style={{color: '#333'}}>2017년 둘레길 이용현황</Text>
+                    </View>
+                    <View style={{height: 120}} />
+                </View>
+                <View style={[styles.sectionCard, {marginTop: 8}]}>
+                    <View style={{padding: 10}}>
+                        <Text style={{color: '#333'}}>00구 날씨</Text>
+                    </View>
+                    <View style={{justifyContent: 'center', alignItems: 'center', padding: 40}}>
+                        <ActivityIndicator
+                            animating={true}
+                            size="large"
+                            color="#a0b145"
+                        />
+                    </View>
+                </View>
+                <View style={{flexDirection: 'row', padding: 6, height: 130}}>
+                    <View style={{flex: 1, padding: 2}}>
+                        <TouchableNativeFeedback onPress={()=>Linking.openURL('tel:119')}>
+                            <View style={{backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E9E9E9', borderRadius: 3, alignItems: 'center', paddingVertical: 20}}>
+                                <Icon name="local-hospital" size={38} style={{marginBottom: 6, color: '#ed1c23'}} />
+                                <Text style={{color: '#9d9d9d', fontSize: 13}}>119 구조대</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                    </View>
+                    <View style={{flex: 1, padding: 2}}>
+                        <TouchableNativeFeedback onPress={()=>Linking.openURL('tel:112')}>
+                            <View style={{backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E9E9E9', borderRadius: 3, alignItems: 'center', paddingVertical: 20}}>
+                                <Icon name="local-taxi" size={38} style={{marginBottom: 6, color: '#202e8c'}} />
+                                <Text style={{color: '#9d9d9d', fontSize: 13}}>112 경찰</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                    </View>
+                    <View style={{flex: 1, padding: 2}}>
+                        <TouchableNativeFeedback onPress={()=>Linking.openURL('tel:070-4465-7905')}>
+                            <View style={{backgroundColor: '#FFF', borderWidth: 1, borderColor: '#E9E9E9', borderRadius: 3, alignItems: 'center', paddingVertical: 20}}>
+                                <Icon name="account-box" size={38} style={{marginBottom: 6, color: '#568f4a'}} />
+                                <Text style={{color: '#9d9d9d', fontSize: 13}}>안내소</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                    </View>
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -136,8 +202,8 @@ const styles = StyleSheet.create({
     sectionCard: {
         backgroundColor: '#FFF',
         borderTopWidth: 1,
-        borderTopColor: '#E6E6E6',
+        borderTopColor: '#E9E9E9',
         borderBottomWidth: 1,
-        borderBottomColor: '#E6E6E6'
+        borderBottomColor: '#E9E9E9'
     }
 });
