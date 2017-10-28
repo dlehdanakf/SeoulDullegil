@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Actions} from 'react-native-router-flux';
 import Modal from 'react-native-modal';
 
 import MapData from './datasets/courseinfo.list';
@@ -13,10 +12,7 @@ import StampIconFunc from './components/stamp.function';
 import StampCheckFunc from './components/stamp.check.function';
 import stampColor from './datasets/green.colors';
 
-const isVisited = true;
 const cardInterval = 4;
-const screenWidth = Dimensions.get('window').width;
-const cardViewWidth = (screenWidth - cardInterval*6)/2;
 const stampRadius = 120;
 const cardViewRadius = 3;
 
