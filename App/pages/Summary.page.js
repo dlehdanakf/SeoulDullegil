@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'React'
 import {
-    Image, StyleSheet, Text, View, ScrollView
+    Image, StyleSheet, Text, View, ScrollView, TouchableNativeFeedback
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -65,7 +65,38 @@ export default class Summary extends React.Component {
                         </View>
                     </View>
                     :
-                    <View><Text>선택된 코스 없음</Text></View>
+                    <View style={styles.sectionCard}>
+                        <View style={{padding: 10}}>
+                            <Text style={{color: 'rgba(0,0,0,.2)'}}>현재 주행중인 코스</Text>
+                        </View>
+                        <View style={{alignItems: 'center', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20}}>
+                            <Text style={{color: '#333', fontSize: 24, fontWeight: 'bold', marginTop: 4}}>환영합니다!</Text>
+                            <View style={{flexDirection: 'row', marginTop: 2}}>
+                                <Text style={{fontSize: 13, color: 'rgba(0,0,0,.4)'}}>둘레길 코스를 선택해주세요</Text>
+                            </View>
+                        </View>
+                        <View style={{alignItems: 'center', paddingBottom: 40}}>
+                            <View style={{width: 90}}>
+                                <TouchableNativeFeedback
+                                    onPress={()=>this.props.changeTabBar(1)}
+                                    background={TouchableNativeFeedback.SelectableBackground()}
+                                >
+                                    <View
+                                        style={{
+                                            flex: 1,
+                                            backgroundColor: '#568f4a',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            paddingVertical: 16,
+                                            borderRadius: 3
+                                        }}
+                                    >
+                                        <Text style={{color: '#FFF'}}>코스선택</Text>
+                                    </View>
+                                </TouchableNativeFeedback>
+                            </View>
+                        </View>
+                    </View>
                 }
             </View>
         );
@@ -101,5 +132,12 @@ const styles = StyleSheet.create({
     stampIcon:{
         width: 60,
         height: 60,
+    },
+    sectionCard: {
+        backgroundColor: '#FFF',
+        borderTopWidth: 1,
+        borderTopColor: '#E6E6E6',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E6E6E6'
     }
 });

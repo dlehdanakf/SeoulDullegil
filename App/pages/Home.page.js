@@ -39,6 +39,7 @@ export default class Home extends React.Component {
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
         this.changeActiveCourse = this.changeActiveCourse.bind(this);
+        this.changeTabBarPage = this.changeTabBarPage.bind(this);
     }
     componentWillReceiveProps(nextProps){
         this.setState({
@@ -98,6 +99,9 @@ export default class Home extends React.Component {
             });
         });
     }
+    changeTabBarPage(n){
+        this.tabView.goToPage(n);
+    }
 
     render() {
         return (
@@ -144,6 +148,7 @@ export default class Home extends React.Component {
                     </View>
                 </NavBar>
                 <ScrollableTabView
+                    ref={ tabView => { this.tabView = tabView; }}
                     style={{backgroundColor:'white'}}
                     tabBarActiveTextColor='#F8931F'
                     tabBarUnderlineStyle={{backgroundColor:'#F8931F'}}
@@ -155,6 +160,7 @@ export default class Home extends React.Component {
                         tabLabel="내 기록"
                         activeCourseNum={this.state.activeCourseNum}
                         stampList={this.state.activeStampList}
+                        changeTabBar={this.changeTabBarPage}
                     />
                     <ListView
                         tabLabel="둘레길"

@@ -14,13 +14,11 @@ import navBarStylesModule from './assets/navbar.styles';
 import MapData from './datasets/courseinfo.list';
 
 const navBarStyles = navBarStylesModule("#568f4a");
-const mapData = MapData[0];
 
 export default class CourseMap extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            //mapData: mapData,
             mapData: MapData[props.mapIndex],
             activeMapButton: '',
             activeMapPinIndex: -1,
