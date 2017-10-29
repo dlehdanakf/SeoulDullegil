@@ -60,7 +60,6 @@ export default class Summary extends React.Component {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 this.setState({
                     isFetchingWeather: false,
                     weatherModifyCode: data.weatherModifyCode,
