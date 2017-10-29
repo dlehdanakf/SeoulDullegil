@@ -194,7 +194,7 @@ export default class Summary extends React.Component {
                 </View>
                 <View style={[styles.sectionCard, {marginTop: 8}]}>
                     <View style={{padding: 10}}>
-                        <Text style={{color: '#333'}}>{(new Date()).getYear()}년 둘레길 이용현황</Text>
+                        <Text style={{color: '#333'}}>{(new Date()).getFullYear()}년 월별 둘레길 이용현황</Text>
                     </View>
                     <View style={{height: 140}}>
                         <WebView

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function(){
             columns: [
                 [
                     "data1",
-                    3, 4, 1, 3,
+                    0, 0, 0, 0,
                     0, 0, 0, 0,
                     0, 0, 0, 0
                 ],
