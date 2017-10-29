@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-
-    var chart = bb.generate({
+    let chart = bb.generate({
         data: {
             x: 'months',
             columns: [
@@ -68,5 +67,14 @@ document.addEventListener('DOMContentLoaded', function(){
             show: false
         },
         bindto: "#graph"
+    });
+
+    window.RNMessagesChannel.on('setGraphData', function(e){
+        let c = ['data1'];
+        c = c.concat(e);
+
+        chart.load({
+            columns: [c]
+        });
     });
 });

@@ -33,6 +33,10 @@ export default class Summary extends React.Component {
         this.fetchWeather = this.fetchWeather.bind(this);
         this.getWeatherIcon = this.getWeatherIcon.bind(this);
         this.getWeatherDescription = this.getWeatherDescription.bind(this);
+        this.drawGraph = this.drawGraph.bind(this);
+    }
+    drawGraph(){
+        this.webview.emit('setGraphData', [100, 104, 130]);
     }
     componentWillMount(){
         if(this.state.activeCourseNum > -1){
@@ -200,6 +204,7 @@ export default class Summary extends React.Component {
                         <WebView
                             ref={ webview => { this.webview = webview; }}
                             source={BillboardHtml}
+                            onLoadEnd={this.drawGraph}
                         />
                     </View>
                 </View>
