@@ -120,7 +120,7 @@ export default class Summary extends React.Component {
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             <Icon name="timer" size={34} style={{marginVertical: 10, color: '#03a5ef'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>러닝시간</Text>
-                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>{parseInt(walkingTime / 60)}시간 {walkingTime % 60}분</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>{parseInt(walkingTime / 3600)}시간 {parseInt((walkingTime % 3600) / 60)}분</Text>
                         </View>
                     </View>
                 </View>

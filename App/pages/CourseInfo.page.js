@@ -46,6 +46,7 @@ export default class CourseInfo extends React.Component{
 
         this.renderCourseRoadItem = this.renderCourseRoadItem.bind(this);
         this.onPressRoadItem = this.onPressRoadItem.bind(this);
+        this.updateStampState = this.updateStampState.bind(this);
     }
     componentDidMount(){
         setTimeout(() => this.setState({
@@ -58,6 +59,14 @@ export default class CourseInfo extends React.Component{
             activeStampList: nextProps.stampList,
         });
         console.log("How are you?");
+    }
+
+    updateStampState(stamp){
+        this.state.activeStampList.push(stamp);
+
+        this.setState({
+            activeStampList: this.state.activeStampList
+        });
     }
 
 
@@ -191,9 +200,18 @@ export default class CourseInfo extends React.Component{
                                     <Text style={{color: '#FFF', fontSize: 13}}>지도</Text>
                                 </View>
                             </NavButton>
-                            <NavButton onPress={() => {Actions.tracking({COURSE_INDEX: this.state.courseIndex, funcInsertStamp: this.props.funcInsertStamp,
-                                    funcInsertRecord: this.props.funcInsertRecord, activeStampList: this.state.activeStampList,
-                                    funcChangeActiveCourse: this.props.funcChangeActiveCourse})}}>
+                            <NavButton
+                                 onPress={() => {
+                                     Actions.tracking({
+                                         COURSE_INDEX: this.state.courseIndex,
+                                         funcInsertStamp: this.props.funcInsertStamp,
+                                         funcInsertRecord: this.props.funcInsertRecord,
+                                         activeStampList: this.state.activeStampList,
+                                         funcChangeActiveCourse: this.props.funcChangeActiveCourse,
+                                         funcUpdateStampState: this.updateStampState,
+                                     })
+                                 }}
+                            >
                                 <View style={styles.actionBarButtons}>
                                     <Icon name="transfer-within-a-station" size={24} color="#FFF" style={{marginRight: 4,}} />
                                     <Text style={{color: '#FFF', fontSize: 13}}>트래킹 코스 지정</Text>
@@ -338,7 +356,7 @@ export default class CourseInfo extends React.Component{
                                 <Button title="트래킹 코스 지정" icon="transfer-within-a-station" btnStyle={headerStyles.mapButton} borderRadius={24}
                                     onPress={()=>Actions.tracking({COURSE_INDEX: this.state.courseIndex, funcInsertStamp: this.props.funcInsertStamp,
                                     funcInsertRecord: this.props.funcInsertRecord, activeStampList: this.state.activeStampList,
-                                    funcChangeActiveCourse: this.props.funcChangeActiveCourse})}/>
+                                    funcChangeActiveCourse: this.props.funcChangeActiveCourse, funcUpdateStampState: this.updateStampState})}/>
                             </View>
                         </Animated.View>
                     </Animated.View>

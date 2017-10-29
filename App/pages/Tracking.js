@@ -81,6 +81,8 @@ export default class Tracking extends React.Component {
             burnKcal: 0,
             activeStampList: props.activeStampList
         }
+
+
     }
 
     componentWillMount() {
@@ -247,6 +249,11 @@ export default class Tracking extends React.Component {
             console.log(this.state.activeStampList);
             if (pointDist <= errorRange) {
                 console.log("stamp: " + this.majorPinData[pin].COT_STAMP_ICON);
+
+                this.props.funcUpdateStampState({
+                    name: this.majorPinData[pin].COT_STAMP_ICON,
+                    reg_date: new Date().toISOString().slice(0,10),
+                });
                 this.props.funcInsertStamp(this.majorPinData[pin].COT_STAMP_ICON);
                 Notifications.presentLocalNotificationAsync({title: '스탬프 발견', body: this.majorPinData[pin].COT_CONTS_NAME});
             }
