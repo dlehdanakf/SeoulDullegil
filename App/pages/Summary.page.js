@@ -3,7 +3,7 @@ import {
     Image, StyleSheet, Text, View, ScrollView, Linking,
     TouchableNativeFeedback, ActivityIndicator
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { WebView } from 'react-native-webview-messaging/WebView';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -13,6 +13,7 @@ import StampCheckFunc from './components/stamp.check.function';
 import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
 import courseInfoData from './datasets/courseinfo.list';
+import BillboardHtml from './webview/billboard.html';
 
 export default class Summary extends React.Component {
     static propTypes = {
@@ -195,7 +196,12 @@ export default class Summary extends React.Component {
                     <View style={{padding: 10}}>
                         <Text style={{color: '#333'}}>{(new Date()).getYear()}년 둘레길 이용현황</Text>
                     </View>
-                    <View style={{height: 120}} />
+                    <View style={{height: 140}}>
+                        <WebView
+                            ref={ webview => { this.webview = webview; }}
+                            source={BillboardHtml}
+                        />
+                    </View>
                 </View>
                 <View style={[styles.sectionCard, {marginTop: 8}]}>
                     {this.state.activeCourseNum.toString() !== '-1' ?
