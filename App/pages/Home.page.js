@@ -36,6 +36,7 @@ export default class Home extends React.Component {
             activeCourseNum: props.activeCourseNum,
             activeStampList: props.stampList,
             thisWeekRecord: props.thisWeekRecord,
+            thisMonthRecord: props.thisMonthRecord,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -47,6 +48,7 @@ export default class Home extends React.Component {
             activeCourseNum: nextProps.activeCourseNum,
             activeStampList: nextProps.stampList,
             thisWeekRecord: nextProps.thisWeekRecord,
+            thisMonthRecord: nextProps.thisMonthRecord,
         });
         console.log("Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
@@ -166,6 +168,7 @@ export default class Home extends React.Component {
                         stampList={this.state.activeStampList}
                         changeTabBar={this.changeTabBarPage}
                         thisWeekRecord={this.state.thisWeekRecord}
+                        thisMonthRecord={this.state.thisMonthRecord}
                     />
                     <ListView
                         tabLabel="둘레길"

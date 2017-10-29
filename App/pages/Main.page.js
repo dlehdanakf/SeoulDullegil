@@ -34,6 +34,7 @@ export default class Main extends React.Component {
             courseNum: 0,
 
             thisWeekRecord: [],
+            thisMonthRecord: [],
         };
 
         this.sqLiteInitialize = this.sqLiteInitialize.bind(this);
@@ -44,6 +45,8 @@ export default class Main extends React.Component {
         this.sqLiteSelectThisWeekRecord = this.sqLiteSelectThisWeekRecord.bind(this);
         this.getActiveCourse = this.getActiveCourse.bind(this);
         this.setActiveCourse = this.setActiveCourse.bind(this);
+
+        this.sqLiteSelectThisMonthRecord = this.sqLiteSelectThisMonthRecord.bind(this);
     }
     componentWillMount(){
         this.sqLiteInitialize();
@@ -99,6 +102,8 @@ export default class Main extends React.Component {
                 })
             });
         });
+
+        this.sqLiteSelectThisMonthRecord();
     }
     sqLiteSelectRecord(tx, callback){
         tx.executeSql("SELECT * FROM record WHERE 1", [], (tx, result)=>{
@@ -136,11 +141,28 @@ export default class Main extends React.Component {
         });
     }
 
+    async sqLiteSelectThisMonthRecord(){
+        let thisYear = new Date().getFullYear();
+        await this.db.transaction((tx)=> {
+            tx.executeSql("SELECT SUM(distance) as distance, SUM(time) as time, MONTH(reg_date) as month" +
+                "FROM record " +
+                "WHERE YEAR(reg_date) = ?"+
+                "GROUP BY MONTH(reg_date)"
+                , [thisYear], (tx, result)=>{
+                    console.log("success/1111");
+                    this.setState({
+                        thisMonthRecord: result.rows.item(0),
+                    })
+                });
+        });
+    }
+
     async sqLiteInsertRecord(c, w, d, t){
         await this.db.transaction((tx)=> {
             tx.executeSql("INSERT INTO record (course, week, distance, time) VALUES (?, ?, ?, ?)", [c, w, d, t], (tx, result)=>{
                 this.sqLiteSelectRecord(tx);
                 this.sqLiteSelectThisWeekRecord();
+                this.sqLiteSelectThisMonthRecord();
             }, (tx, error) => {console.log(error);});
         });
     }
@@ -178,6 +200,9 @@ export default class Main extends React.Component {
                     <Splash />
                     :
                     <HomePage
+                        thisWeekRecord={this.state.thisWeekRecord}
+                        thisMonthRecord={this.state.thisMonthRecord}
+
                         stampList={this.state.ownedStampList}
                         recordList={this.state.recordList}
                         activeCourseNum={this.state.courseNum}
@@ -185,7 +210,7 @@ export default class Main extends React.Component {
                         funcInsertRecord={this.sqLiteInsertRecord}
                         funcSetActiveCourse={this.setActiveCourse}
                         funcSelectThisWeekRecord={this.sqLiteSelectThisWeekRecord}
-                        thisWeekRecord={this.state.thisWeekRecord}
+                        funcSelectThisMonthRecord={this.sqLiteSelectThisMonthRecord}
                     />
                 }
             </View>

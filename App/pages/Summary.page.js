@@ -36,7 +36,8 @@ export default class Summary extends React.Component {
         this.drawGraph = this.drawGraph.bind(this);
     }
     drawGraph(){
-        this.webview.emit('setGraphData', [100, 104, 130]);
+        console.log(this.props.thisMonthRecord);
+        this.webview.emit('setGraphData', this.props.thisMonthRecord);
     }
     componentWillMount(){
         if(this.state.activeCourseNum > -1){
@@ -49,7 +50,8 @@ export default class Summary extends React.Component {
             const center = courseInfoData[this.state.activeCourseNum].COORD_CENTER;
             this.fetchWeather(center[1], center[0]);
         }
-
+        console.log("!!!!!!!!!!!!!")
+        this.drawGraph();
         this.setState({
             activeCourseNum: nextProps.activeCourseNum - 1,
         });
