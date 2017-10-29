@@ -26,11 +26,15 @@ export default class Summary extends React.Component {
     }
     componentWillReceiveProps(nextProps){
         this.setState({
-            activeCourseNum: nextProps.activeCourseNum - 1
+            activeCourseNum: nextProps.activeCourseNum - 1,
         });
     }
 
     render(){
+        const distance = this.props.thisWeekRecord ? (this.props.thisWeekRecord.distance / 1000).toFixed(1) : 0;
+        const kcal = this.props.thisWeekRecord ?  (0.0476 * this.props.thisWeekRecord.distance).toFixed(0) : 0;
+        const walkingTime = this.props.thisWeekRecord ? this.props.thisWeekRecord.time : 0;
+
         return (
             <ScrollView style={styles.componentWrap}>
                 {this.state.activeCourseNum > -1 ?
@@ -106,17 +110,17 @@ export default class Summary extends React.Component {
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             <Icon name="transfer-within-a-station" size={34} style={{marginVertical: 10, color: '#568f4a'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>이동거리</Text>
-                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>2km</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>{distance}km</Text>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             <Icon name="whatshot" size={34} style={{marginVertical: 10, color: '#fd556e'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>소모 칼로리</Text>
-                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>1842kcal</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>{kcal}kcal</Text>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             <Icon name="timer" size={34} style={{marginVertical: 10, color: '#03a5ef'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>러닝시간</Text>
-                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>3시간 23분</Text>
+                            <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>{parseInt(walkingTime / 60)}시간 {walkingTime % 60}분</Text>
                         </View>
                     </View>
                 </View>

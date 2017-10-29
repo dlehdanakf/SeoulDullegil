@@ -19,28 +19,28 @@ import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native
 import {Actions} from 'react-native-router-flux';
 import {WebView} from 'react-native-webview-messaging/WebView';
 
-
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import MapSource from './webview/map.html';
-import navBarStylesModule from './assets/navbar.styles';
-import trakingStyles from './assets/TrackingComponent.styles';
 
 import {Constants, Location, Permissions, Notifications, SQLite} from 'expo';
 import Geolib from 'geolib';
 
 import Timer from 'react-native-timer';
+
+import MapSource from './webview/map.html';
+import navBarStylesModule from './assets/navbar.styles';
+import trakingStyles from './assets/TrackingComponent.styles';
+
 import TrackingInfo from './components/trackingInfo';
 import StampIconFunc from './components/stamp.function';
-import Drawer from 'react-native-drawer'
-
+import StampCheckFunc from './components/stamp.check.function';
 import CourseData from './datasets/course.list';
 import MapData from './datasets/courseinfo.list';
 
+import ThisWeek from './components/thisWeek.component';
+
 const navBarStyles = navBarStylesModule("#568f4a");
-const COURSE_INDEX = 0;
 
 export default class Tracking extends React.Component {
     constructor(props) {
@@ -55,8 +55,6 @@ export default class Tracking extends React.Component {
         this.onPressBackButton = this.onPressBackButton.bind(this);
 
         BackHandler.addEventListener('hardwareBackPress', this.onPressBackButton);
-
-        this.kcalperM = 0.0476;
 
         this.state = {
             location: {
@@ -74,12 +72,14 @@ export default class Tracking extends React.Component {
             courseData: CourseData[props.COURSE_INDEX],
             mapData: MapData[props.COURSE_INDEX],
 
+            activeMapButton: '',
             activeMapPinIndex: -1,
             pinTitle: '',
             pinDesc: '',
 
             retValueWatchPosition: null,
             burnKcal: 0,
+            activeStampList: props.activeStampList
         }
     }
 
@@ -95,6 +95,13 @@ export default class Tracking extends React.Component {
     componentWillUnMount() {
         BackHandler.removeEventListener('hardwareBackPress', this.onPressBackButton);
         Timer.clearTimeout(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            activeStampList: nextProps.activeStampList,
+        });
+        console.log("Thank you");
     }
 
     componentDidMount() {
@@ -207,7 +214,7 @@ export default class Tracking extends React.Component {
                 if (this.state.isTracking) {
                     this.setState({
                         walkingDistance: this.state.walkingDistance + walkingForMin,
-                        burnKcal: this.state.burnKcal + this.kcalperM * walkingForMin,
+                        burnKcal: this.state.burnKcal + 0.0476 * walkingForMin,
                     });
                     this.searchStamp(this.majorPinData);
                 }
@@ -236,6 +243,8 @@ export default class Tracking extends React.Component {
                 nearSpotIdx = pin;
                 nearSpotDist = pointDist;
             }
+            console.log("확인");
+            console.log(this.state.activeStampList);
             if (pointDist <= errorRange) {
                 console.log("stamp: " + this.majorPinData[pin].COT_STAMP_ICON);
                 this.props.funcInsertStamp(this.majorPinData[pin].COT_STAMP_ICON);
@@ -259,6 +268,9 @@ export default class Tracking extends React.Component {
         else{
             if(this.state.retValueWatchPosition === null)
                 this._getLocationAsync();
+
+            this.props.funcChangeActiveCourse(this.props.COURSE_INDEX + 1);
+
             Notifications.presentLocalNotificationAsync({
                 title: '트래킹 시작',
                 body: this.state.mapData.NAME + ' 트래킹 진행중~.',
@@ -279,24 +291,11 @@ export default class Tracking extends React.Component {
         }
     }
 
-    ISO8601_week_no(){
-        let dt = new Date();
-        let tdt = new Date(dt.valueOf());
-        let dayn = (dt.getDay() + 6) % 7;
-        tdt.setDate(tdt.getDate() - dayn + 3);
-        var firstThursday = tdt.valueOf();
-        tdt.setMonth(0,1);
-        if(tdt.getDay() !== 4){
-            tdt.setMonth(0,1 + ((4 - tdt.getDay()) +7) % 7);
-        }
-        return 1+ Math.ceil((firstThursday - tdt) / 604800000);
-    }
-
     stopTracking() {
         Notifications.dismissAllNotificationsAsync();
         this.state.retValueWatchPosition && this.state.retValueWatchPosition.remove();
 
-        this.props.funcInsertRecord(this.state.mapData.INDEX, this.ISO8601_week_no(), parseFloat(this.state.walkingDistance), this.state.walkingTime);
+        this.props.funcInsertRecord(this.state.mapData.INDEX, ThisWeek(), parseFloat(this.state.walkingDistance), this.state.walkingTime);
 
         this.setState({
             isTracking: false,

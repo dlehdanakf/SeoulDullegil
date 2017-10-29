@@ -3,6 +3,7 @@ import { Image, View, AsyncStorage, ToastAndroid } from 'react-native';
 import { SQLite } from 'expo';
 
 import HomePage from './Home.page';
+import ThisWeek from './components/thisWeek.component';
 
 class Splash extends React.Component {
     render(){
@@ -26,10 +27,13 @@ export default class Main extends React.Component {
             completeFetchStampTable: false,
             completeFetchRecordTable: false,
             completeFetchActiveCourse: false,
+            completeFetchThisWeekRecord: false,
 
             ownedStampList: [],
             recordList: [],
             courseNum: 0,
+
+            thisWeekRecord: [],
         };
 
         this.sqLiteInitialize = this.sqLiteInitialize.bind(this);
@@ -37,6 +41,7 @@ export default class Main extends React.Component {
         this.sqLiteSelectStamp = this.sqLiteSelectStamp.bind(this);
         this.sqLiteInsertRecord = this.sqLiteInsertRecord.bind(this);
         this.sqLiteSelectRecord = this.sqLiteSelectRecord.bind(this);
+        this.sqLiteSelectThisWeekRecord = this.sqLiteSelectThisWeekRecord.bind(this);
         this.getActiveCourse = this.getActiveCourse.bind(this);
         this.setActiveCourse = this.setActiveCourse.bind(this);
     }
@@ -86,6 +91,13 @@ export default class Main extends React.Component {
                     });
                 });
             });
+
+            tx.executeSql("SELECT SUM(distance) as distance, SUM(time) as time FROM record GROUP BY (?)", [ThisWeek()], (tx, result)=>{
+                this.setState({
+                    completeFetchThisWeekRecord: true,
+                    thisWeekRecord: result.rows.item(0),
+                })
+            });
         });
     }
     sqLiteSelectRecord(tx, callback){
@@ -113,10 +125,22 @@ export default class Main extends React.Component {
         });
     }
 
+    async sqLiteSelectThisWeekRecord(){
+        let thisWeek = ThisWeek();
+        await this.db.transaction((tx)=> {
+            tx.executeSql("SELECT SUM(distance) as distance, SUM(time) as time FROM record GROUP BY (?)", [thisWeek], (tx, result)=>{
+                this.setState({
+                    thisWeekRecord: result.rows.item(0),
+                })
+            });
+        });
+    }
+
     async sqLiteInsertRecord(c, w, d, t){
         await this.db.transaction((tx)=> {
             tx.executeSql("INSERT INTO record (course, week, distance, time) VALUES (?, ?, ?, ?)", [c, w, d, t], (tx, result)=>{
                 this.sqLiteSelectRecord(tx);
+                this.sqLiteSelectThisWeekRecord();
             }, (tx, error) => {console.log(error);});
         });
     }
@@ -127,6 +151,7 @@ export default class Main extends React.Component {
             });
         });
     }
+
     async getActiveCourse(){
         return parseInt(await AsyncStorage.getItem('active_course')) || 0;
     }
@@ -143,7 +168,8 @@ export default class Main extends React.Component {
             this.state.timeoutSplash &&
             this.state.completeFetchStampTable &&
             this.state.completeFetchRecordTable &&
-            this.state.completeFetchActiveCourse
+            this.state.completeFetchActiveCourse &&
+            this.state.completeFetchThisWeekRecord
         );
 
         return (
@@ -158,6 +184,8 @@ export default class Main extends React.Component {
                         funcInsertStamp={this.sqLiteInsertStamp}
                         funcInsertRecord={this.sqLiteInsertRecord}
                         funcSetActiveCourse={this.setActiveCourse}
+                        funcSelectThisWeekRecord={this.sqLiteSelectThisWeekRecord}
+                        thisWeekRecord={this.state.thisWeekRecord}
                     />
                 }
             </View>

@@ -35,6 +35,7 @@ export default class Home extends React.Component {
             list: this.ds.cloneWithRows(courseListData),
             activeCourseNum: props.activeCourseNum,
             activeStampList: props.stampList,
+            thisWeekRecord: props.thisWeekRecord,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -45,7 +46,9 @@ export default class Home extends React.Component {
         this.setState({
             activeCourseNum: nextProps.activeCourseNum,
             activeStampList: nextProps.stampList,
+            thisWeekRecord: nextProps.thisWeekRecord,
         });
+        console.log("Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
     renderCourseRowItem(rowData){
@@ -61,7 +64,8 @@ export default class Home extends React.Component {
                     mapData: courseInfoData[parseInt(rowData.COURSE_NO) - 1],
                     stampList: this.state.activeStampList,
                     funcInsertStamp: this.props.funcInsertStamp,
-                    funcInsertRecord: this.props.funcInsertRecord
+                    funcInsertRecord: this.props.funcInsertRecord,
+                    funcChangeActiveCourse: this.changeActiveCourse,
                 })}
                 underlayColor="#FAFAFA"
             >
@@ -114,7 +118,7 @@ export default class Home extends React.Component {
                     </View>
                     <View style={{flex:1, flexDirection: 'row', justifyContent:'flex-end'}}>
                         <NavGroup style={{marginRight: -20,}}>
-                            <NavButton style={{marginLeft: 1,}} onPress={()=>this.changeActiveCourse(0)}>
+                            <NavButton style={{marginLeft: 1,}} onPress={()=>this.props.funcSelectThisWeekRecord()}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
                                     <IconMaterialIcons name="android" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
@@ -161,6 +165,7 @@ export default class Home extends React.Component {
                         activeCourseNum={this.state.activeCourseNum}
                         stampList={this.state.activeStampList}
                         changeTabBar={this.changeTabBarPage}
+                        thisWeekRecord={this.state.thisWeekRecord}
                     />
                     <ListView
                         tabLabel="둘레길"
@@ -171,8 +176,7 @@ export default class Home extends React.Component {
                         renderHeader={()=><View style={{height: 11, backgroundColor: '#efefef', borderBottomWidth: 1, borderBottomColor: '#E6E6E6'}} />}
                         renderFooter={()=><View style={{height: 11, backgroundColor: '#efefef', borderTopWidth: 1, borderTopColor: '#E6E6E6'}} />}
                         renderSeparator={()=><View style={{borderBottomWidth: 1, borderBottomColor: '#EFEFEF'}} />}
-                        funcInsertStamp={this.props.funcInsertStamp}
-                        funcInsertRecord={this.props.funcInsertRecord}
+
                     />
                     <StampList
                         tabLabel="스탬프 북"
