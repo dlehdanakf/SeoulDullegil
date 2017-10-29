@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import StampIconFunc from './components/stamp.function';
 import StampCheckFunc from './components/stamp.check.function';
@@ -22,14 +23,28 @@ export default class Summary extends React.Component {
         super(props);
         this.state = {
             activeCourseNum: props.activeCourseNum - 1,
+            isFetchingWeather: true,
+            weatherModifyCode: null,
+            weatherStatusCode: null,
+            weatherStatusDescription: null
         };
 
         this.fetchWeather = this.fetchWeather.bind(this);
+        this.getWeatherIcon = this.getWeatherIcon.bind(this);
+        this.getWeatherDescription = this.getWeatherDescription.bind(this);
     }
-    componentDidMount(){
-        this.fetchWeather(37.5660649, 126.9826791);
+    componentWillMount(){
+        if(this.state.activeCourseNum > -1){
+            const center = courseInfoData[this.state.activeCourseNum].COORD_CENTER;
+            this.fetchWeather(center[1], center[0]);
+        }
     }
     componentWillReceiveProps(nextProps){
+        if(this.state.activeCourseNum > -1){
+            const center = courseInfoData[this.state.activeCourseNum].COORD_CENTER;
+            this.fetchWeather(center[1], center[0]);
+        }
+
         this.setState({
             activeCourseNum: nextProps.activeCourseNum - 1
         });
@@ -46,7 +61,41 @@ export default class Summary extends React.Component {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
+                this.setState({
+                    isFetchingWeather: false,
+                    weatherModifyCode: data.weatherModifyCode,
+                    weatherStatusCode: data.weatherStatusCode,
+                    weatherStatusDescription: data.weatherStatusDescription
+                });
             });
+    }
+    getWeatherIcon(){
+        switch(this.state.weatherStatusCode){
+            case 0: return 'earth-off';
+            case 1: return 'weather-sunny';
+            case 2: return 'weather-cloudy';
+            case 3: return 'weather-fog';
+            case 4: return 'weather-partlycloudy';
+            case 5: return 'weather-pouring';
+            case 6: return 'weather-snowy';
+            case 7: return 'weather-snowy-rainy';
+            case 8: return 'weather-lightning';
+            case 9: return 'weather-hail';
+            case 10: return 'weather-snowy-rainy';
+        }
+    }
+    getWeatherDescription(){
+        switch(this.state.weatherModifyCode){
+            case 0: return '서버로부터 날씨정보를 받아오는데 오류가 발생했습니다.';                 // 오류
+            case 1: return '강추위 (한파)가 예상됩니다. 노약자 및 어린이는 야외활동을 삼가주세요.';   // 한파
+            case 2: return '운동 전 스트래칭을 통해 추위에 움츠렸던 몸을 펴주세요.';
+            case 3: return '기온이 쌀쌀하오니 둘레길 트래킹시 옷 따뜻하게 챙기시기 바랍니다.';        // 쌀쌀
+            case 4:
+            case 5:
+            case 6: return '기온이 포근하거나 따뜻하여 트래킹하기 좋은 기온입니다.';                // 포근, 따뜻, 선선
+            case 7: return '더운 여름에 트래킹 시 똑 물을 챙겨 자주 음용하시기 바랍니다.';           // 더위
+            case 8: return '무더위 (폭염)이 예상됩니다. 노약자 및 어린이는 야외활동을 삼가주세요.';    // 폭염
+        }
     }
 
     render(){
@@ -55,7 +104,7 @@ export default class Summary extends React.Component {
                 {this.state.activeCourseNum > -1 ?
                     <View style={[styles.currentCourseWrap, {backgroundColor: greenColors[this.state.activeCourseNum]}]}>
                         <View style={{padding: 10}}>
-                            <Text style={{color: 'rgba(255,255,255,.8)'}}>현재 주행중인 코스</Text>
+                            <Text style={{color: 'rgba(255,255,255,.8)'}}>현재 트래킹중인 코스</Text>
                         </View>
                         <View style={{alignItems: 'center', paddingHorizontal: 20, paddingVertical: 10}}>
                             <Text style={{color: '#FFF', fontSize: 24, fontWeight: 'bold', marginTop: 4}}>{courseListData[this.state.activeCourseNum].COURSE_NM}</Text>
@@ -87,7 +136,7 @@ export default class Summary extends React.Component {
                     :
                     <View style={styles.sectionCard}>
                         <View style={{padding: 10}}>
-                            <Text style={{color: 'rgba(0,0,0,.2)'}}>현재 주행중인 코스</Text>
+                            <Text style={{color: 'rgba(0,0,0,.2)'}}>현재 트래킹중인 코스</Text>
                         </View>
                         <View style={{alignItems: 'center', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20}}>
                             <Text style={{color: '#333', fontSize: 24, fontWeight: 'bold', marginTop: 4}}>환영합니다!</Text>
@@ -123,17 +172,17 @@ export default class Summary extends React.Component {
                     </View>
                     <View style={{flexDirection: 'row', paddingBottom: 20}}>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Icon name="transfer-within-a-station" size={34} style={{marginVertical: 10, color: '#568f4a'}} />
+                            <Icon name="transfer-within-a-station" size={38} style={{marginVertical: 10, color: '#568f4a'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>이동거리</Text>
                             <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>2km</Text>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Icon name="whatshot" size={34} style={{marginVertical: 10, color: '#fd556e'}} />
+                            <Icon name="whatshot" size={38} style={{marginVertical: 10, color: '#fd556e'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>소모 칼로리</Text>
                             <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>1842kcal</Text>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Icon name="timer" size={34} style={{marginVertical: 10, color: '#03a5ef'}} />
+                            <Icon name="timer" size={38} style={{marginVertical: 10, color: '#03a5ef'}} />
                             <Text style={{color: '#9d9d9d', fontSize: 13}}>러닝시간</Text>
                             <Text style={{color: '#333', fontSize: 20, fontWeight: 'bold'}}>3시간 23분</Text>
                         </View>
@@ -146,16 +195,43 @@ export default class Summary extends React.Component {
                     <View style={{height: 120}} />
                 </View>
                 <View style={[styles.sectionCard, {marginTop: 8}]}>
-                    <View style={{padding: 10}}>
-                        <Text style={{color: '#333'}}>00구 날씨</Text>
-                    </View>
-                    <View style={{justifyContent: 'center', alignItems: 'center', padding: 40}}>
-                        <ActivityIndicator
-                            animating={true}
-                            size="large"
-                            color="#a0b145"
-                        />
-                    </View>
+                    {this.state.activeCourseNum.toString() !== '-1' ?
+                        <View>
+                            <View style={{padding: 10}}>
+                                <Text style={{color: '#333'}}>{courseInfoData[this.state.activeCourseNum].COT_GU_NAME.split(',')[0].trim()} 날씨</Text>
+                            </View>
+                            {this.state.isFetchingWeather ?
+                                <View>
+                                    <View style={{justifyContent: 'center', alignItems: 'center', padding: 40}}>
+                                        <ActivityIndicator
+                                            animating={true}
+                                            size="large"
+                                            color="#a0b145"
+                                        />
+                                    </View>
+                                </View>
+                                :
+                                <View style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 20, paddingHorizontal: 30}}>
+                                    <View style={{width: 80, justifyContent: 'center', alignItems: 'flex-start'}}>
+                                        <IconCommunity name={this.getWeatherIcon()} size={52} style={{color: '#333'}}/>
+                                    </View>
+                                    <View style={{flex: 1}}>
+                                        <Text style={{fontSize: 22, color: '#333', fontWeight: 'bold'}}>{this.state.weatherStatusDescription}</Text>
+                                        <Text style={{fontSize: 13, color: '#AAA', marginTop: 4}}>{this.getWeatherDescription()}</Text>
+                                    </View>
+                                </View>
+                            }
+                        </View>
+                    :
+                        <View>
+                            <View style={{padding: 10}}>
+                                <Text style={{color: 'rgba(0,0,0,.2)'}}>둘레길 날씨</Text>
+                            </View>
+                            <View style={{alignItems: 'center', padding: 20, paddingTop: 10}}>
+                                <Text>코스를 선택하시면 해당 지역 날씨가 표시됩니다.</Text>
+                            </View>
+                        </View>
+                    }
                 </View>
                 <View style={{flexDirection: 'row', padding: 6, height: 130}}>
                     <View style={{flex: 1, padding: 2}}>

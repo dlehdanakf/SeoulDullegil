@@ -84,7 +84,7 @@ export default class Home extends React.Component {
                     {isActiveCourse ?
                         <View style={{width: 50, justifyContent: 'center', alignItems: 'center', paddingRight: 8}}>
                             <IconMaterialIcons name="directions-run" size={28} style={{color: '#f49805'}} />
-                            <Text style={{color: '#f49805', fontSize: 13, marginTop: 2}}>주행중</Text>
+                            <Text style={{color: '#f49805', fontSize: 13, marginTop: 2}}>선택됨</Text>
                         </View>
                         : null
                     }
