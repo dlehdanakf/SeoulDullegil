@@ -218,9 +218,6 @@ export default class Main extends React.Component {
                     <Splash />
                     :
                     <HomePage
-                        thisWeekRecord={this.state.thisWeekRecord}
-                        thisMonthRecord={this.state.thisMonthRecord}
-
                         stampList={this.state.ownedStampList}
                         recordList={this.state.recordList}
                         activeCourseNum={this.state.courseNum}
