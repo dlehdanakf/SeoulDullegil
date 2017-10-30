@@ -28,12 +28,14 @@ export default class Main extends React.Component {
             completeFetchRecordTable: false,
             completeFetchActiveCourse: false,
             completeFetchThisWeekRecord: false,
+            completeFetchThisYearRecord: false,
 
             ownedStampList: [],
             recordList: [],
             courseNum: 0,
 
             thisWeekRecord: [],
+            thisYearRecord: [],
         };
 
         this.sqLiteInitialize = this.sqLiteInitialize.bind(this);
@@ -42,6 +44,7 @@ export default class Main extends React.Component {
         this.sqLiteInsertRecord = this.sqLiteInsertRecord.bind(this);
         this.sqLiteSelectRecord = this.sqLiteSelectRecord.bind(this);
         this.sqLiteSelectThisWeekRecord = this.sqLiteSelectThisWeekRecord.bind(this);
+        this.sqLiteSelectThisYearRecord = this.sqLiteSelectThisYearRecord.bind(this);
         this.getActiveCourse = this.getActiveCourse.bind(this);
         this.setActiveCourse = this.setActiveCourse.bind(this);
     }
@@ -92,13 +95,21 @@ export default class Main extends React.Component {
                 });
             });
 
-            tx.executeSql("SELECT SUM(distance) as distance, SUM(time) as time FROM record GROUP BY (?)", [ThisWeek()], (tx, result)=>{
-                this.setState({
-                    completeFetchThisWeekRecord: true,
-                    thisWeekRecord: result.rows.item(0),
-                })
-            });
+            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 2, 3, 4,"2016-01-30"], (tx, result)=>{
+            }, (tx, error) => {console.log(error);});
+            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [4, 3, 55, 4,"2017-02-14"], (tx, result)=>{
+            }, (tx, error) => {console.log(error);});
+            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 2, 3, 4,"2017-03-30"], (tx, result)=>{
+            }, (tx, error) => {console.log(error);});
+            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 2, 3, 4,"2017-05-30"], (tx, result)=>{
+            }, (tx, error) => {console.log(error);});
+            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 44, 100, 100,"2017-10-30"], (tx, result)=>{
+            }, (tx, error) => {console.log(error);});
+
         });
+
+        this.sqLiteSelectThisWeekRecord();
+        this.sqLiteSelectThisYearRecord();
     }
     sqLiteSelectRecord(tx, callback){
         tx.executeSql("SELECT * FROM record WHERE 1", [], (tx, result)=>{
@@ -128,11 +139,50 @@ export default class Main extends React.Component {
     async sqLiteSelectThisWeekRecord(){
         let thisWeek = ThisWeek();
         await this.db.transaction((tx)=> {
-            tx.executeSql("SELECT SUM(distance) as distance, SUM(time) as time FROM record GROUP BY (?)", [thisWeek], (tx, result)=>{
+            tx.executeSql(
+                "SELECT SUM(distance) as distance, SUM(time) as time" +
+                " FROM record WHERE strftime('%Y', reg_date) = ? and week = ?" +
+                " GROUP BY week", [new Date().getFullYear(), thisWeek], (tx, result)=>{
                 this.setState({
                     thisWeekRecord: result.rows.item(0),
-                })
+                    completeFetchThisWeekRecord: true
+                });
+            }, (tx, error)=>{
+                console.log('error');
+                console.log(error);
             });
+        });
+    }
+
+    async sqLiteSelectThisYearRecord(){
+        await this.db.transaction((tx)=> {
+            tx.executeSql(
+                "SELECT SUM(distance) as distance, strftime('%m', reg_date)  as month" +
+                " FROM record WHERE strftime('%Y', reg_date) = ?" +
+                " GROUP BY strftime('%m', reg_date)" +
+                " ORDER BY month ASC", [new Date().getFullYear()],
+                (tx, result)=>{
+                    let list = [];
+                    let itemIndex = 0;
+                    for(let i=0; i<12; i++){
+                        if(itemIndex >= result.rows.length || result.rows.item(itemIndex).month != i + 1)
+                            list.push(0);
+                        else
+                            list.push(result.rows.item(itemIndex++).distance);
+                    }
+                    console.log("ALL Month");
+                    console.log(list);
+
+                    this.setState({
+                        thisYearRecord: list,
+                        completeFetchThisYearRecord: true
+                    });
+                },
+                (tx, error)=>{
+                    console.log('error');
+                    console.log(error);
+                }
+            );
         });
     }
 
@@ -141,6 +191,7 @@ export default class Main extends React.Component {
             tx.executeSql("INSERT INTO record (course, week, distance, time) VALUES (?, ?, ?, ?)", [c, w, d, t], (tx, result)=>{
                 this.sqLiteSelectRecord(tx);
                 this.sqLiteSelectThisWeekRecord();
+                this.sqLiteSelectThisYearRecord();
             }, (tx, error) => {console.log(error);});
         });
     }
@@ -169,7 +220,8 @@ export default class Main extends React.Component {
             this.state.completeFetchStampTable &&
             this.state.completeFetchRecordTable &&
             this.state.completeFetchActiveCourse &&
-            this.state.completeFetchThisWeekRecord
+            this.state.completeFetchThisWeekRecord &&
+            this.state.completeFetchThisYearRecord
         );
 
         return (
@@ -184,8 +236,8 @@ export default class Main extends React.Component {
                         funcInsertStamp={this.sqLiteInsertStamp}
                         funcInsertRecord={this.sqLiteInsertRecord}
                         funcSetActiveCourse={this.setActiveCourse}
-                        funcSelectThisWeekRecord={this.sqLiteSelectThisWeekRecord}
                         thisWeekRecord={this.state.thisWeekRecord}
+                        thisYearRecord={this.state.thisYearRecord}
                     />
                 }
             </View>

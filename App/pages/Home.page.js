@@ -36,6 +36,7 @@ export default class Home extends React.Component {
             activeCourseNum: props.activeCourseNum,
             activeStampList: props.stampList,
             thisWeekRecord: props.thisWeekRecord,
+            thisYearRecord: props.thisYearRecord,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -47,6 +48,7 @@ export default class Home extends React.Component {
             activeCourseNum: nextProps.activeCourseNum,
             activeStampList: nextProps.stampList,
             thisWeekRecord: nextProps.thisWeekRecord,
+            thisYearRecord: nextProps.thisYearRecord,
         });
         console.log("Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
@@ -118,7 +120,7 @@ export default class Home extends React.Component {
                     </View>
                     <View style={{flex:1, flexDirection: 'row', justifyContent:'flex-end'}}>
                         <NavGroup style={{marginRight: -20,}}>
-                            <NavButton style={{marginLeft: 1,}} onPress={()=>this.props.funcSelectThisWeekRecord()}>
+                            <NavButton style={{marginLeft: 1,}} onPress={()=>this.changeActiveCourse(1)}>
                                 <NavButtonText style={[navBarStyles.navBarButtons, {marginRight: 13}]}>
                                     <IconMaterialIcons name="android" size={25} style={menuStyles.iconStyle}/>
                                 </NavButtonText>
@@ -166,6 +168,7 @@ export default class Home extends React.Component {
                         stampList={this.state.activeStampList}
                         changeTabBar={this.changeTabBarPage}
                         thisWeekRecord={this.state.thisWeekRecord}
+                        thisYearRecord={this.state.thisYearRecord}
                     />
                     <ListView
                         tabLabel="둘레길"

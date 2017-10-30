@@ -54,13 +54,6 @@ export default class CourseInfo extends React.Component{
         }), 1);
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            activeStampList: nextProps.stampList,
-        });
-        console.log("How are you?");
-    }
-
     updateStampState(stamp){
         this.state.activeStampList.push(stamp);
 
