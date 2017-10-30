@@ -9,10 +9,6 @@ import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-nati
 import { Actions } from 'react-native-router-flux';
 import { WebView } from 'react-native-webview-messaging/WebView';
 
-import gilIntro from './webview/gil.introduce.html';
-import roadIntro from './webview/tour.introduce.html';
-import safetyIntro from './webview/safety.introduce.html';
-
 import navBarStylesModule from './assets/navbar.styles';
 const navBarStyles = navBarStylesModule("#568f4a");
 
@@ -41,13 +37,13 @@ export default class Guide extends React.Component {
                     prerenderingSiblingsNumber={Infinity}
                 >
                     <View tabLabel="소개" style={styles.fill}>
-                        <WebView source={gilIntro} />
+                        <WebView source={{uri: 'http://kung.kr/seoulapp/gil.introduce.html'}} />
                     </View>
                     <View tabLabel="둘레길" style={styles.fill}>
-                        <WebView source={roadIntro} />
+                        <WebView source={{uri: 'http://kung.kr/seoulapp/tour.introduce.html'}} />
                     </View>
                     <View tabLabel="안전수칙" style={styles.fill}>
-                        <WebView source={safetyIntro} />
+                        <WebView source={{uri: 'http://kung.kr/seoulapp/safety.introduce.html'}} />
                     </View>
                 </ScrollableTabView>
             </View>

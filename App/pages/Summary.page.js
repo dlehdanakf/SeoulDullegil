@@ -209,7 +209,7 @@ export default class Summary extends React.Component {
                         <View style={{height: 140}}>
                             <WebView
                                 ref={ webview => { this.webview = webview; }}
-                                source={BillboardHtml}
+                                source={{uri: 'http://kung.kr/seoulapp/billboard.html'}}
                                 onLoadEnd={this.drawGraph}
                             />
                         </View>

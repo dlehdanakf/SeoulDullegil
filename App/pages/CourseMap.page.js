@@ -9,7 +9,6 @@ import NavBar, { NavButton, NavButtonText, NavTitle, NavGroup } from 'react-nati
 import { Actions } from 'react-native-router-flux';
 import { WebView } from 'react-native-webview-messaging/WebView';
 
-import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 import MapData from './datasets/courseinfo.list';
 
@@ -103,9 +102,12 @@ export default class CourseMap extends React.Component {
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
-                        <NavButton style={{marginHorizontal: 14}} onPress={()=>{
-                                this.webview.emit('getIPAddress');
-                            }}>
+                        <NavButton
+                            style={{marginHorizontal: 14}}
+                            onPress={()=>{
+                                Actions.pop();
+                            }}
+                        >
                             <Icon name="arrow-back" size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>
@@ -122,7 +124,7 @@ export default class CourseMap extends React.Component {
                 <View style={styles.fill}>
                     <WebView
                         ref={ webview => { this.webview = webview; }}
-                        source={MapSource}
+                        source={{uri: 'http://kung.kr/seoulapp/map.html'}}
                         onLoadEnd={this.onWebViewLoaded}
                     />
                     <View style={{position: 'absolute', top: 14, right: 14}}>

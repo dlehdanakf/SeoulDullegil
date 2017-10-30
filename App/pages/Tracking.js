@@ -1,34 +1,22 @@
 import React, {Component} from 'React'
 import {
-    Animated,
-    Image,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-    TouchableHighlight,
-    Platform,
-    TouchableNativeFeedback,
-    Dimensions,
-    ToastAndroid,
-    Alert,
-    BackHandler,
+    Image, StyleSheet, Text, View,
+    TouchableHighlight, TouchableNativeFeedback,
+    ToastAndroid, Alert, BackHandler,
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NavBar, {NavButton, NavButtonText, NavTitle, NavGroup} from 'react-native-nav'
 import {Actions} from 'react-native-router-flux';
 import {WebView} from 'react-native-webview-messaging/WebView';
 
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Constants, Location, Permissions, Notifications, SQLite} from 'expo';
+import {Location, Permissions, Notifications} from 'expo';
 import Geolib from 'geolib';
 
 import Timer from 'react-native-timer';
 
-import MapSource from './webview/map.html';
 import navBarStylesModule from './assets/navbar.styles';
 import trakingStyles from './assets/TrackingComponent.styles';
 
@@ -379,7 +367,11 @@ export default class Tracking extends React.Component {
 
                 <View style={{flex:1, backgroundColor: 'rgba(20,39,46,0.9)'}}>
                     <View style={{flex: 1}}>
-                        <WebView ref={webview => {this.webview = webview;}} source={MapSource} onLoadEnd={this.onWebViewLoaded}/>
+                        <WebView
+                            ref={webview => {this.webview = webview;}}
+                            source={{uri: 'http://kung.kr/seoulapp/map.html'}}
+                            onLoadEnd={this.onWebViewLoaded}
+                        />
                         <View style={{position: 'absolute',top: 14,right: 14}}>
                             <TouchableHighlight underlayColor={this.state.activeMapButton === 'stamp'
                                 ? '#4388ff'
