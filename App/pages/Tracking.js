@@ -61,7 +61,7 @@ export default class Tracking extends React.Component {
                 latitude: 0,
                 longitude: 0,
             },
-            isTracking: null,
+            isTracking: false,
             walkingTime: 0,
             walkingDistance: 0.0,
             nearSpot: {
@@ -79,19 +79,16 @@ export default class Tracking extends React.Component {
 
             retValueWatchPosition: null,
             burnKcal: 0,
-            activeStampList: props.activeStampList
+            activeStampList: props.activeStampList,
+            trackingButtonMsg: '트래킹 시작하기',
+
+            lastTimeStamp: null,
         }
 
 
     }
 
     componentWillMount() {
-        if (Platform.OS === 'android' && !Constants.isDevice) {
-            this.setState({errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'});
-        } else {
-            //this._getLocationAsync();
-        }
-        this.setState({trackingFunc: this.startTracking.bind(this), trackingButtonMsg: '트래킹 시작하기', isTracking: false})
     }
 
     componentWillUnMount() {
@@ -186,7 +183,8 @@ export default class Tracking extends React.Component {
             console.log('gps : true');
             const location = await Location.watchPositionAsync({
                 enableHighAccuracy: true,
-                distanceInterval: 1
+                distanceInterval: 1,
+                timeInterval: 1,
             }, (location) => {
                 let walkingForMin = 0;
 
@@ -213,13 +211,11 @@ export default class Tracking extends React.Component {
                     x: location.coords.longitude
                 });
 
-                if (this.state.isTracking) {
-                    this.setState({
-                        walkingDistance: this.state.walkingDistance + walkingForMin,
-                        burnKcal: this.state.burnKcal + 0.0476 * walkingForMin,
-                    });
-                    this.searchStamp(this.majorPinData);
-                }
+                this.setState({
+                    walkingDistance: this.state.walkingDistance + walkingForMin,
+                    burnKcal: this.state.burnKcal + 0.0476 * walkingForMin,
+                });
+                this.searchStamp(this.majorPinData);
             });
 
             this.setState({
@@ -312,14 +308,25 @@ export default class Tracking extends React.Component {
                 latitude: 0,
                 longitude: 0,
             },
+            lastTimeStamp: null,
         });
         Timer.clearInterval('walkingTime');
     }
 
     async setWalkingTime() {
-        Timer.setInterval('walkingTime', () => this.setState({
-            walkingTime: this.state.walkingTime + 1
-        }), 1000);
+        Timer.setInterval('walkingTime', () =>
+        {
+            let time = (new Date()).getTime();
+            let lastTimeStamp = this.state.lastTimeStamp;
+            if(lastTimeStamp === null){
+                lastTimeStamp = (new Date()).getTime();
+            }
+
+            this.setState({
+                walkingTime: this.state.walkingTime + parseInt((time - lastTimeStamp) / 1000),
+                lastTimeStamp: time
+            })
+        }, 1000);
     }
 
     getMapCenter() {
@@ -369,7 +376,12 @@ export default class Tracking extends React.Component {
                             flex: 1,
                             alignItems: 'flex-end'
                         }}>
-                            <NavButton onPress={this.state.trackingFunc}>
+                            <NavButton onPress={()=>{
+                                if(this.state.isTracking)
+                                    this.stopTracking();
+                                else
+                                    this.startTracking();
+                                }}>
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 17
