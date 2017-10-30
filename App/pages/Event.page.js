@@ -108,8 +108,8 @@ export default class Event extends React.Component {
             <View style={styles.fill}>
                 <NavBar style={navBarStyles}>
                     <View style={{flexDirection: 'row', marginLeft: -16}}>
-                        <NavButton style={{marginHorizontal: 14}} onPress={()=>{}}>
-                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon} onPress={()=>Actions.pop()}/>
+                        <NavButton style={{marginHorizontal: 14}} onPress={()=>Actions.pop()}>
+                            <Icon name="arrow-back" size={24} style={navBarStyles.backIcon}/>
                         </NavButton>
                         <NavTitle style={navBarStyles.title}>행사안내</NavTitle>
                     </View>

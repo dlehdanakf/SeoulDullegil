@@ -37,6 +37,8 @@ export default class Home extends React.Component {
             activeStampList: props.stampList,
             thisWeekRecord: props.thisWeekRecord,
             thisYearRecord: props.thisYearRecord,
+
+            pageNum: 0,
         };
 
         this.renderCourseRowItem = this.renderCourseRowItem.bind(this);
@@ -153,6 +155,10 @@ export default class Home extends React.Component {
                         changeTabBar={this.changeTabBarPage}
                         thisWeekRecord={this.state.thisWeekRecord}
                         thisYearRecord={this.state.thisYearRecord}
+
+                        funcInsertStamp={this.props.funcInsertStamp}
+                        funcInsertRecord={this.props.funcInsertRecord}
+                        funcChangeActiveCourse={this.changeActiveCourse}
                     />
                     <ListView
                         tabLabel="둘레길"
