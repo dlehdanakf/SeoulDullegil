@@ -100,7 +100,6 @@ export default class Tracking extends React.Component {
         this.setState({
             activeStampList: nextProps.activeStampList,
         });
-        console.log("Thank you");
     }
 
     componentDidMount() {
@@ -180,7 +179,6 @@ export default class Tracking extends React.Component {
         if (!(await this.isGpsAvailable()).gpsAvailable) {
             ToastAndroid.show("GPS를 켜주세요", ToastAndroid.SHORT);
         } else {
-            console.log('gps : true');
             const location = await Location.watchPositionAsync({
                 enableHighAccuracy: true,
                 distanceInterval: 1,
@@ -241,11 +239,7 @@ export default class Tracking extends React.Component {
                 nearSpotIdx = pin;
                 nearSpotDist = pointDist;
             }
-            console.log("확인");
-            console.log(this.state.activeStampList);
             if (pointDist <= errorRange) {
-                console.log("stamp: " + this.majorPinData[pin].COT_STAMP_ICON);
-
                 this.props.funcUpdateStampState({
                     name: this.majorPinData[pin].COT_STAMP_ICON,
                     reg_date: new Date().toISOString().slice(0,10),
@@ -261,8 +255,6 @@ export default class Tracking extends React.Component {
                 stamp: this.majorPinData[nearSpotIdx].COT_STAMP_ICON,
             }
         });
-        console.log('가까운 지점 : ' + this.state.nearSpot.name);
-        console.log('Distance : ' + this.state.nearSpot.distance);
     }
 
     async startTracking() {

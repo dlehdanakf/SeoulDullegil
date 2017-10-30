@@ -50,7 +50,6 @@ export default class Home extends React.Component {
             thisWeekRecord: nextProps.thisWeekRecord,
             thisYearRecord: nextProps.thisYearRecord,
         });
-        console.log("Hello>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
     renderCourseRowItem(rowData){

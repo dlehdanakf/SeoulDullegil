@@ -33,14 +33,12 @@ export default class PopUpNotification extends Component {
   );
 
   componentWillMount(){
-    console.log('this.props.visible: ' + this.props.visible);
     this.setState({
       isVisible: this.props.visible
     })
   }
 
   render() {
-    console.log('isVisible' + this.state.isVisible);
     return (
       <Modal isVisible={this.state.isVisible} style={styles.bottomModal}
         animationIn={'slideInDown'}

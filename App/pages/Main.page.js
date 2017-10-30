@@ -106,7 +106,6 @@ export default class Main extends React.Component {
                 let item = result.rows.item(i);
                 list.push(item);
             }
-            console.log(list);
 
             if(callback) callback(list);
         });
@@ -135,9 +134,6 @@ export default class Main extends React.Component {
                     thisWeekRecord: result.rows.item(0),
                     completeFetchThisWeekRecord: true
                 });
-            }, (tx, error)=>{
-                console.log('error');
-                console.log(error);
             });
         });
     }
@@ -158,19 +154,12 @@ export default class Main extends React.Component {
                         else
                             list.push(result.rows.item(itemIndex++).distance);
                     }
-                    console.log("ALL Month");
-                    console.log(list);
 
                     this.setState({
                         thisYearRecord: list,
                         completeFetchThisYearRecord: true
                     });
-                },
-                (tx, error)=>{
-                    console.log('error');
-                    console.log(error);
-                }
-            );
+                });
         });
     }
 
@@ -180,7 +169,7 @@ export default class Main extends React.Component {
                 this.sqLiteSelectRecord(tx);
                 this.sqLiteSelectThisWeekRecord();
                 this.sqLiteSelectThisYearRecord();
-            }, (tx, error) => {console.log(error);});
+            });
         });
     }
     async sqLiteInsertStamp(name){

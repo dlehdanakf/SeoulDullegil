@@ -50,8 +50,6 @@ export default class MessageBars extends React.Component {
   }
 
   customCallback() {
-    console.log('Alert Tapped. Triggered as a callback');
-
     this.setState({
       callbackButton: 'Alert Tapped. Triggered as a callback',
     });
