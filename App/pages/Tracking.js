@@ -179,6 +179,13 @@ export default class Tracking extends React.Component {
         if (!(await this.isGpsAvailable()).gpsAvailable) {
             ToastAndroid.show("GPS를 켜주세요", ToastAndroid.SHORT);
         } else {
+            const firstLocation = await Location.getCurrentPositionAsync({});
+
+            this.webview.emit('moveMapCenter', [
+                firstLocation.coords.longitude,
+                firstLocation.coords.latitude,
+            ]);
+
             const location = await Location.watchPositionAsync({
                 enableHighAccuracy: true,
                 distanceInterval: 1,
@@ -201,7 +208,9 @@ export default class Tracking extends React.Component {
                     location: {
                         latitude: location.coords.latitude,
                         longitude: location.coords.longitude,
-                    }
+                    },
+                    walkingDistance: this.state.walkingDistance + walkingForMin,
+                    burnKcal: this.state.burnKcal + 0.0476 * walkingForMin,
                 });
 
                 this.webview.emit('setMyLocationPin', {
@@ -209,10 +218,6 @@ export default class Tracking extends React.Component {
                     x: location.coords.longitude
                 });
 
-                this.setState({
-                    walkingDistance: this.state.walkingDistance + walkingForMin,
-                    burnKcal: this.state.burnKcal + 0.0476 * walkingForMin,
-                });
                 this.searchStamp(this.majorPinData);
             });
 
@@ -368,17 +373,6 @@ export default class Tracking extends React.Component {
                             flex: 1,
                             alignItems: 'flex-end'
                         }}>
-                            <NavButton onPress={()=>{
-                                if(this.state.isTracking)
-                                    this.stopTracking();
-                                else
-                                    this.startTracking();
-                                }}>
-                                <Text style={{
-                                    color: 'white',
-                                    fontSize: 17
-                                }}>{this.state.trackingButtonMsg}</Text>
-                            </NavButton>
                         </View>
                     </View>
                 </NavBar>
