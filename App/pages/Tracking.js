@@ -167,13 +167,6 @@ export default class Tracking extends React.Component {
         if (!(await this.isGpsAvailable()).gpsAvailable) {
             ToastAndroid.show("GPS를 켜주세요", ToastAndroid.SHORT);
         } else {
-            const firstLocation = await Location.getCurrentPositionAsync({});
-
-            this.webview.emit('moveMapCenter', [
-                firstLocation.coords.longitude,
-                firstLocation.coords.latitude,
-            ]);
-
             const location = await Location.watchPositionAsync({
                 enableHighAccuracy: true,
                 distanceInterval: 1,

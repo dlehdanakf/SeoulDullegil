@@ -181,7 +181,7 @@ export default class Main extends React.Component {
     }
 
     async getActiveCourse(){
-        return 0;
+        return parseInt(await AsyncStorage.getItem('active_course')) || 0;;
     }
     async setActiveCourse(num){
         await AsyncStorage.setItem('active_course', num.toString());

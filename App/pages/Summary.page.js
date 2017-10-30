@@ -115,7 +115,7 @@ export default class Summary extends React.Component {
         return (
             <View style={{flex:1, paddingBottom: 60, backgroundColor: '#efefef',}}>
                 <ScrollView style={styles.componentWrap}>
-                    {this.state.activeCourseNum > 0 ?
+                    {this.state.activeCourseNum > -1 ?
                         <View style={[styles.currentCourseWrap, {backgroundColor: greenColors[this.state.activeCourseNum]}]}>
                             <View style={{padding: 10}}>
                                 <Text style={{color: 'rgba(255,255,255,.8)'}}>현재 트래킹중인 코스</Text>
