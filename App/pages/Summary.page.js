@@ -3,7 +3,7 @@ import {
     Image, StyleSheet, Text, View, ScrollView, Linking,
     TouchableNativeFeedback, ActivityIndicator
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { WebView } from 'react-native-webview-messaging/WebView';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -13,6 +13,7 @@ import StampCheckFunc from './components/stamp.check.function';
 import greenColors from './datasets/green.colors';
 import courseListData from './datasets/course.list';
 import courseInfoData from './datasets/courseinfo.list';
+import BillboardHtml from './webview/billboard.html';
 
 export default class Summary extends React.Component {
     static propTypes = {
@@ -32,6 +33,11 @@ export default class Summary extends React.Component {
         this.fetchWeather = this.fetchWeather.bind(this);
         this.getWeatherIcon = this.getWeatherIcon.bind(this);
         this.getWeatherDescription = this.getWeatherDescription.bind(this);
+        this.drawGraph = this.drawGraph.bind(this);
+    }
+    drawGraph(){
+        console.log(this.props.thisYearRecord);
+        this.webview.emit('setGraphData', this.props.thisYearRecord);
     }
     componentWillMount(){
         if(this.state.activeCourseNum > -1){
@@ -44,7 +50,8 @@ export default class Summary extends React.Component {
             const center = courseInfoData[this.state.activeCourseNum].COORD_CENTER;
             this.fetchWeather(center[1], center[0]);
         }
-
+        console.log("!!!!!!!!!!!!!")
+        this.drawGraph();
         this.setState({
             activeCourseNum: nextProps.activeCourseNum - 1,
         });
@@ -193,9 +200,15 @@ export default class Summary extends React.Component {
                 </View>
                 <View style={[styles.sectionCard, {marginTop: 8}]}>
                     <View style={{padding: 10}}>
-                        <Text style={{color: '#333'}}>{(new Date()).getYear()}년 둘레길 이용현황</Text>
+                        <Text style={{color: '#333'}}>{(new Date()).getFullYear()}년 월별 둘레길 이용현황</Text>
                     </View>
-                    <View style={{height: 120}} />
+                    <View style={{height: 140}}>
+                        <WebView
+                            ref={ webview => { this.webview = webview; }}
+                            source={BillboardHtml}
+                            onLoadEnd={this.drawGraph}
+                        />
+                    </View>
                 </View>
                 <View style={[styles.sectionCard, {marginTop: 8}]}>
                     {this.state.activeCourseNum.toString() !== '-1' ?

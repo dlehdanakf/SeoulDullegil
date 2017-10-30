@@ -75,8 +75,8 @@ export default class Main extends React.Component {
             "CREATE TABLE IF NOT EXISTS stamp (idx INT PRIMARY KEY, name VARCHAR UNIQUE, reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
 
         this.db.transaction((tx)=> {
-            tx.executeSql("DROP TABLE record");
-            tx.executeSql("DROP TABLE stamp");
+            //tx.executeSql("DROP TABLE record");
+            //tx.executeSql("DROP TABLE stamp");
 
             tx.executeSql(queryCreateRecordTable, [], (tx)=>{
                 this.sqLiteSelectRecord(tx, ()=>{
@@ -94,18 +94,6 @@ export default class Main extends React.Component {
                     });
                 });
             });
-
-            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 2, 3, 4,"2016-01-30"], (tx, result)=>{
-            }, (tx, error) => {console.log(error);});
-            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [4, 3, 55, 4,"2017-02-14"], (tx, result)=>{
-            }, (tx, error) => {console.log(error);});
-            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 2, 3, 4,"2017-03-30"], (tx, result)=>{
-            }, (tx, error) => {console.log(error);});
-            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 2, 3, 4,"2017-05-30"], (tx, result)=>{
-            }, (tx, error) => {console.log(error);});
-            tx.executeSql("INSERT INTO record (course, week, distance, time, reg_date) VALUES (?, ?, ?, ?,?)", [1, 44, 100, 100,"2017-10-30"], (tx, result)=>{
-            }, (tx, error) => {console.log(error);});
-
         });
 
         this.sqLiteSelectThisWeekRecord();
@@ -230,6 +218,9 @@ export default class Main extends React.Component {
                     <Splash />
                     :
                     <HomePage
+                        thisWeekRecord={this.state.thisWeekRecord}
+                        thisMonthRecord={this.state.thisMonthRecord}
+
                         stampList={this.state.ownedStampList}
                         recordList={this.state.recordList}
                         activeCourseNum={this.state.courseNum}
