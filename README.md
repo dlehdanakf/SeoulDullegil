@@ -3,4 +3,4 @@
 
 ### 개발팀
 - 이동현(dlehdanakf@konkuk.ac.kr)
-- 김태우(viodle@naver.com)
+- 김태우(viodle238@naver.com)
